@@ -1,7 +1,7 @@
 
 
-# Authomize-ITDR
-<img src="https://github.com/authomize/Authomize-ITDR/blob/main/authomize.png" width="40" height="40" alt="Authomize"> Authomize open solutions for partners and customers
+<img src="https://github.com/authomize/Authomize-ITDR/blob/main/authomize.png" width="40" height="40" alt="Authomize"># Authomize-ITDR
+Authomize open solutions for partners and customers
 # Video Demonstration
 Coming soon - Video to demonstrate integrations and solution. Check out each solution under the directory structures to see demos and find documentation for install and configuration options.
 
