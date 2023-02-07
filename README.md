@@ -1,4 +1,6 @@
 ![alt text](https://github.com/authomize/Authomize-ITDR/blob/main/authomize.png width="200" height="40")
+<img src="(https://github.com/authomize/Authomize-ITDR/blob/main/authomize.png" width="200" height="40" alt="Computer Hope">
+
 # Authomize-ITDR
  Authomize open solutions for partners and customers
 # Video Demonstration
