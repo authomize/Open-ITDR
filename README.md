@@ -1,4 +1,4 @@
-![alt text](https://github.com/authomize/Authomize-ITDR/DeepInSight-Documentation/images/authomize.png?raw=true)
+![alt text](https://github.com/authomize/Authomize-ITDR/main/DeepInSight-Documentation/images/authomize.png?raw=true)
 # Authomize-ITDR
  Authomize open solutions for partners and customers
 # Video Demonstration
