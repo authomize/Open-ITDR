@@ -8,8 +8,8 @@ Authomize is commited to providing open solutions for partners and customers. Th
 # Licensing
 Be aware of the licensing model used here, the data we share on this site is public and as such ensure anything you provide or share here does not contain any personal or corporate information. Liability for any of the code here is limited as all code here is open source and allowed to be used in anyway needed. Please review the [license agreement](./LICENSE) before you continue to use any applications found here within any of the directory structures. Licensing for any other products are detailed within those products themselves and do not necessarily supercede this license.
 
-# Video Demonstration
-Coming soon - Video to demonstrate integrations and solution. Check out each solution under the directory structures to see demos and find documentation for install and configuration options.
+# Video Demonstrations
+Coming soon - Videos to demonstrate integrations and solutions. Check out each solution under the directory structures to see demos and find documentation for install and configuration options. We plan on referencing existing places to understand and gain knowledge around our product
 
 # Support
 As an open source project this software is not officially supported by Authomize. As such we ask that you please refrain from sending inquiries to the Authomize support team. The project maintainers will be working with active community contributors to address bugs and supply new features. If you have identified a bug please submit an issue through GitHub by following the [contribution guidelines](./contribute.md) and then going to the [Issues Pages](https://github.com/authomize/Authomize-ITDR/issues). [~~You can also post questions or start conversations on the project through our community forums page.~~ ]
