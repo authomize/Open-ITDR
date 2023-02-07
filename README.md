@@ -15,7 +15,7 @@ As an open source project this software is not officially supported by Authomize
 If you are really stuck then try and email  [open-itdr](mailto:open-itdr@authomize.com) and at some point somone will respond to you, although please use this as a last resort.
 
 # Getting Started
-Please refer to the Wiki page <DO WE NEED A WIKI> for instructions on installing and configuring each application, check out the solution documentation in the directory.
+Please refer to the Wiki [page] (https://github.com/authomize/Authomize-ITDR/wiki) for instructions on installing and configuring each application, check out the solution documentation in the directory.
 
 # Development
 This is pythin and javascript, you can do anything you like in terms of devcelopment :-)
