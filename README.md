@@ -1,4 +1,4 @@
-![alt text](https://github.com/authomize/Authomize-ITDR/blob/main/authomize.png?raw=true)
+![alt text](https://github.com/authomize/Authomize-ITDR/blob/main/authomize.png width="200" height="40")
 # Authomize-ITDR
  Authomize open solutions for partners and customers
 # Video Demonstration
