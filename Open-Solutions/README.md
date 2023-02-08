@@ -7,7 +7,7 @@ This area will contain solutions that provide value to developers and companies 
 *NOTE: Partner integrations will be placed under Partner-Solutions branch, for example all Microsoft Solutions not placed on the microsoft marketplace will be located under Partner-Solutions branch.*
 
 ## Authomize Python Code
-Authomize provides code that can be used within yur projects, this can be found [here](https://github.com/authomize/authomize-python-provider-template), also API calls 
+Authomize provides code that can be used within your python projects, this can be found [here](https://pypi.org/project/authomize-rest-api-client/).
 
 ## Get Postman OpenAPI Specifications
 To help with any code you may be creating please download the specifications from the [Authomize API reference page](https://api.authomize.com/documentation). This will assist you with writing code against the API stack that Authomize provides.
