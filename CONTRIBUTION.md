@@ -2,7 +2,14 @@
 
 This project welcomes contributions and suggestions. Contributions in most cases grant us and anyone else the rights to to use your contribution under the MIT License as defined within this site.
 
-# General Steps for all Solutions
+## Valid Contributions
+Often it isn't clear what a valid contribution is. To help solve this each area you can publish to will contain a contribution file with any specifics you will need to do to make the contribution valid. At a minumum for any solution you provide the following items should be included:
+ - Installation documentation if needed
+ - Solution overview describing the use case, what the solution does
+ - Any special instructions for deploying and running your solution
+ - The pythonn or JavaScript files needed along with any technical details about running the scripts
+
+## General Steps for all Solutions
 Use this methods for a brand new or update to an existing contribution:
 - Submit for review directly on GitHub website
   - Browse to the folder you want to upload your file to
@@ -16,7 +23,7 @@ Use this methods for a brand new or update to an existing contribution:
   - Be sure to merge master back to your branch before you push
   - [Push your changes to github](https://help.github.com/en/github/using-git/pushing-commits-to-a-remote-repository)
 
-# Pull Request
+## Pull Request
 After you push your changes, you will need to submit the [Pull Request (PR)](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests)
 - _Note:_ Details about the Proposed Changes are required, be sure to include a minimal level of detail so a review can clearly understand the reason for the change and what he change is related to he code or update.
 
