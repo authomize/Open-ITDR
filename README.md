@@ -33,7 +33,7 @@ In some casesd third party libraries may be used, these will be documented in th
 High level details on how to contribute to the projects can be found [here](./CONTRIBUTION.md), please follow the process as outlined.
 
 ## General Folder Details
-The following detail outlines the folder name and then goes into some detail around what the folder is for and what you would expect to find in each. ***Please note the folders listed for Public use***, this is where you will be posted your code, find the applicable folder for what you have created.
+The following detail outlines the folder name and then goes into some detail around what the folder is for and what you would expect to find in each. ***Please note the folders listed for Public use***, this is where you will post your code, find the applicable folder for what you have created.
 
 | Folder           | Description                               | Public(P) |
 | ---------------- | ----------------------------------------- | --------- |
