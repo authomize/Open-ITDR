@@ -1,8 +1,10 @@
 
 ** NOTE requirements.txt is just a dump - check py scripts for specifics (but a pip install of the requirements will get you all that you need)
-
+***************************************
 ************NEEDS UPDATE***************
-DO NOT JUST GIVE TO CUSTOMER
+***************************************
+
+DO NOT JUST GIVE AWAY!!!
 CHECK the parameters.json file it has private Tokens - don't release to public without removing
 - How it works
 1) Create App in Authomize
