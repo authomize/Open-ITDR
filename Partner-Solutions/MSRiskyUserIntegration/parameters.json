@@ -1,0 +1,10 @@
+{
+  "authority": "https://login.microsoftonline.com/41a02547-7c44-453e-83ce-3ff3843e97c6",
+  "client_id": "dfe9b8ed-7c39-49c0-944a-c16d9823fb1b",
+  "scope": ["https://graph.microsoft.com/.default"],
+  "secret": "meQ8Q~1cVRsGkEZTS5cAwBypL6_DQC~VHinZFcUC",
+  "endpoint": "https://graph.microsoft.com/v1.0/identityProtection/riskDetections",
+  "authomizeAPIkey": "atmzNzQ3MjkyMDUyMjA6RkRVUUxTRFpTWEVDTUNGV01QSVFJR0NXUUhQUFBTMjRTSDdfTDRNRFNIMA==",
+  "authomizeBaseURL": "https://api.authomize.com/v2/apps/",
+  "authomizeRestAPIid": "7afc0ec3-b86c-40fe-80d0-8d2b42f16e8e"
+}
