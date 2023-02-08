@@ -1,3 +1,2 @@
-This is going to have JSON files from nodeRed
-Expect nodeRed implementations here
-Further documentation will follow
+# Documentation
+Documents with deep technicall content coming soon from our researchers, stay tuned as we start bringing in the detail.
