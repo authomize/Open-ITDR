@@ -11,8 +11,10 @@ Be aware of the licensing model used here, the data we share on this site is pub
 ## Video Demonstrations
 Coming soon - Videos to demonstrate integrations and solutions. Check out each solution under the directory structures to see demos and find documentation for install and configuration options. We plan on referencing existing places to understand and gain knowledge around our product
 
-## Support
-As an open source project this software is not officially supported by Authomize. As such we ask that you please refrain from sending inquiries to the Authomize support team. The project maintainers will be working with active community contributors to address bugs and supply new features. If you have identified a bug please submit an issue through GitHub by following the [contribution guidelines](./contribute.md) and then going to the [Issues Pages](https://github.com/authomize/Authomize-ITDR/issues). [~~You can also post questions or start conversations on the project through our community forums page.~~ ]
+## Support for Bugs and Features
+As an open source project this software is not officially supported by Authomize. As such we ask that you please refrain from sending inquiries to the Authomize support team. The project maintainers will be working with active community contributors to address bugs and supply new features. If you have identified a bug or an issue, or simply want to submit a feature request then do this through the issues pages [Issues Pages](https://github.com/authomize/Authomize-ITDR/issues). [~~You can also post questions or start conversations on the project through our community forums page.~~ ]
+
+Please use the 
 
 ~~You can also join the project chat room to discuss in greater detail, click Slack to sign up. Please note that the email you sign up with will be viewable by other users. If you wish to keep your company name anonymous you should use a personal email that holds no affiliation.~~
 
