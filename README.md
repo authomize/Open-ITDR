@@ -21,7 +21,7 @@ If you are really stuck then try and email [open-itdr](mailto:open-itdr@authomiz
 Just so we are clear, we are not all knowledgable as some may think, however, we will do our best to help resolve issues as you tell us about them. If you are asking direct coding questions we would recommend you first try stackoverflow, however if there are additional features you need from our Authomize ITDR API stack we would love to hear about those.
 
 ## Getting Started
-Please refer to the [Wiki page](https://github.com/authomize/Authomize-ITDR/wiki) for instructions on installing and configuring each application, check out the solution documentation in the directory.
+Please refer to the [Wiki page](https://github.com/authomize/Authomize-ITDR/wiki) for instructions on getting started. This will have some references to Auhomize documentation and other information you will need to get started. As we publish solutions we will also include documentation within each directory, this will help in understanding what the use cases are and how to deploy or use any solution provided.
 
 ## Development
 Our development platform is based on NodeRed, Authomize may update and change core components as necessary to support the needs of our ITDR projects. Generally speaking most of this code is based on NODE.JS hence javascript is heavily used. Our other solution and utility directories may contain example python and javascript development efforts too. In rare occasions we may choose to provide an as is binary. Our solution directories will contain further detail on guides for building solutions with Authomize ITDR API framework. 
