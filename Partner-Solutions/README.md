@@ -1,6 +1,2 @@
-This location will contain customer and authomize created integrations.
-You will be able to contribute to this folder, suggested framework would be new Directory -> "solutionName" -> process would be to review upload of solution and provide feedback
-Include opensolutions such as
-    1)RiskyUser
-    2)MSSentinel
-    3)SyslogIntegration
+# Partner Solutions and Integrations
+This area is specicically for partners who work with Authomize directly or work with Authomize custoemrs. Further any integrations that Authomize has completed and could possibly be used by partners or customers are located here.
