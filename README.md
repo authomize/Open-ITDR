@@ -1,9 +1,9 @@
-
-
 <img src="https://github.com/authomize/Authomize-ITDR/blob/main/authomize.png" width="40" height="40" alt="Authomize">
 
 # Authomize-ITDR
-Authomize is commited to providing open solutions for partners and customers. This repository is based on our API stack providing connections into identities, applications and incidents. Our objective is to provide a mechanism where by using a low code implimentation of [Node-RED](https://nodered.org/) automation, workflows for collecting and distributing data can be built.
+Authomize is commited to providing open solutions for partners and customers. This repository is based on our API stack providing connections into identities, applications and incidents. Our objective is to provide a mechanism where by using a low code implimentation of [Node-RED](https://nodered.org/) automation, workflows for collecting and distributing data can be built. Further this respository will contain connectors and application integrations in the form of middleware written as stand along products both in python and javascript.
+
+By committing to the open-source methodology, we recognize that ultimately your contributions in the form of both ideas and code, will be instrumental to the future success of this project. There are a number of ways you can help whether you have software development experience or not. This might be in the form of identifying a bug, having some general feedback or want to request certain features.
 
 # Licensing
 Be aware of the licensing model used here, the data we share on this site is public and as such ensure anything you provide or share here does not contain any personal or corporate information. Liability for any of the code here is limited as all code here is open source and allowed to be used in anyway needed. Please review the [license agreement](./LICENSE) before you continue to use any applications found here within any of the directory structures. Licensing for any other products are detailed within those products themselves and do not necessarily supercede this license.
