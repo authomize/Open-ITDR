@@ -30,4 +30,4 @@ Our development platform is based on NodeRed, Authomize may update and change co
 In some casesd third party libraries may be used, these will be documented in the respective solution repositories, check them out out for further detail however if you need support or information please feel free to submit an issue as outlined above.
 
 # Contribution Guidelines
-How to contribute to the projects, please follow the process as outlined.
+High level details on how to contribute to the projects can be found [here](./CONTRIBUTION.md), please follow the process as outlined.
