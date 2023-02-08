@@ -33,12 +33,12 @@ In some casesd third party libraries may be used, these will be documented in th
 High level details on how to contribute to the projects can be found [here](./CONTRIBUTION.md), please follow the process as outlined.
 
 ## General Folder Details
-The following detail outlines the folder name and then goes into some detail around what the folder is for and what you would expect to find in each. Please note the ones listed for Public use, this is where you will be posted your code, find the applicable folder for what you have created.
+The following detail outlines the folder name and then goes into some detail around what the folder is for and what you would expect to find in each. ***Please note the folders listed for Public use***, this is where you will be posted your code, find the applicable folder for what you have created.
 
 | Folder           | Description                               | Public(P) |
 | ---------------- | ----------------------------------------- | --------- |
-| Documentation    | Authomize technical documentation and papers from research                            |     X     |
-| Open-ITDR    | Authomize technical documentation and papers from research                            |     X     |
-| Open-Solutions   | Authomize technical documentation and papers from research                            |     X     |
-| Partner-Solutions  | Authomize technical documentation and papers from research                            |     X     |
-| Tools-Utilities   | Authomize technical documentation and papers from research                            |     X     |
+| Documentation    | Authomize technical documentation and papers from research will be here                            |          |
+| Open-ITDR    | Build workflows and integrations based on Node-RED  |     P     |
+| Open-Solutions   | Customers and General contributors place connectors in this location                            |     P     |
+| Partner-Solutions  | Partner integrations and authomize special integrations are placed here                            |     P     |
+| Tools-Utilities   | Authomize research team creates specialized code in some cases for red and blue teams to use in thier scenarios   |         |
