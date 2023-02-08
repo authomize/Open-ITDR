@@ -14,11 +14,9 @@ Coming soon - Videos to demonstrate integrations and solutions. Check out each s
 ## Support for Bugs and Features
 As an open source project this software is not officially supported by Authomize. As such we ask that you please refrain from sending inquiries to the Authomize support team. The project maintainers will be working with active community contributors to address bugs and supply new features. If you have identified a bug or an issue, or simply want to submit a feature request then do this through the issues pages [Issues Pages](https://github.com/authomize/Authomize-ITDR/issues). [~~You can also post questions or start conversations on the project through our community forums page.~~ ]
 
-Please use the 
-
 ~~You can also join the project chat room to discuss in greater detail, click Slack to sign up. Please note that the email you sign up with will be viewable by other users. If you wish to keep your company name anonymous you should use a personal email that holds no affiliation.~~
 
-If you are really stuck then try and email [open-itdr](mailto:open-itdr@authomize.com) and at some point somone will respond to you, although please use this as a last resort.
+If you are really stuck then try and email [open-itdr](mailto:open-itdr@authomize.com) and someone will respond to you, although please use this as a last resort.
 
 Just so we are clear, we are not all knowledgable as some may think, however, we will do our best to help resolve issues as you tell us about them. If you are asking direct coding questions we would recommend you first try stackoverflow, however if there are additional features you need from our Authomize ITDR API stack we would love to hear about those.
 
