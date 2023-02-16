@@ -1,0 +1,10 @@
+{
+  "authority": "https://login.microsoftonline.com/41a02547-7c44-453e-83ce-3ff3843e97c6",
+  "client_id": "",
+  "scope": ["https://graph.microsoft.com/.default"],
+  "secret": "",
+  "endpoint": "https://graph.microsoft.com/v1.0/identityProtection/riskDetections",
+  "authomizeAPIkey": "",
+  "authomizeBaseURL": "https://api.authomize.com/v2/apps/",
+  "authomizeRestAPIid": ""
+}
