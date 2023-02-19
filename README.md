@@ -5,6 +5,16 @@ Authomize is commited to providing open solutions for partners and customers. Th
 
 By committing to the open-source methodology, we recognize that ultimately your contributions in the form of both ideas and code, will be instrumental to the future success of this project. There are a number of ways you can help whether you have software development experience or not. This might be in the form of identifying a bug, having some general feedback or want to request certain features.
 
+## General Folder Details
+The following detail outlines the folder name and then goes into some detail around what the folder is for and what you would expect to find in each. ***Please note the folders listed for Public use***, this is where you will post your code, find the applicable folder for what you have created.
+
+| Folder           | Description                               | Public(P) |
+| ---------------- | ----------------------------------------- | --------- |
+| Documentation    | Authomize technical documentation and papers from research will be here                            |          |
+| Open-Connectors   | General contributions for connectors in this location  – any inbound, outbound connector, general integration or partner integration                          |     P     |
+| Open-ITDR-Workflow    | Build workflows and integrations based on Node-RED  |     P     |
+| Tools-Utilities   | Authomize research team creates specialized code in some cases for red and blue teams to use in their scenarios   |         |
+
 ## Licensing
 Be aware of the licensing model used here, the data we share on this site is public and as such ensure anything you provide or share here does not contain any personal or corporate information. Liability for any of the code here is limited as all code here is open source and allowed to be used in anyway needed. Please review the [license agreement](./LICENSE) before you continue to use any applications found here within any of the directory structures. Licensing for any other products are detailed within those products themselves and do not necessarily supercede this license.
 
@@ -25,18 +35,8 @@ Please refer to the [Wiki page](https://github.com/authomize/Authomize-ITDR/wiki
 Our development platform is based on NodeRed, Authomize may update and change core components as necessary to support the needs of our ITDR projects. Generally speaking most of this code is based on NODE.JS hence javascript is heavily used. Our other solution and utility directories may contain example python and javascript development efforts too. In rare occasions we may choose to provide an as is binary. Our solution directories will contain further detail on guides for building solutions with Authomize ITDR API framework. 
 
 ## Third Party Libraries
-In some casesd third party libraries may be used, these will be documented in the respective solution repositories, check them out out for further detail however if you need support or information please feel free to submit an issue as outlined above.
+In some cases third party libraries may be used, these will be documented in the respective solution repositories, check them out out for further detail however if you need support or information please feel free to submit an issue as outlined above.
 
 ## Contribution Guidelines
 High level details on how to contribute to the projects can be found [here](./CONTRIBUTION.md), please follow the process as outlined.
 
-## General Folder Details
-The following detail outlines the folder name and then goes into some detail around what the folder is for and what you would expect to find in each. ***Please note the folders listed for Public use***, this is where you will post your code, find the applicable folder for what you have created.
-
-| Folder           | Description                               | Public(P) |
-| ---------------- | ----------------------------------------- | --------- |
-| Documentation    | Authomize technical documentation and papers from research will be here                            |          |
-| Open-ITDR    | Build workflows and integrations based on Node-RED  |     P     |
-| Open-Solutions   | Customers and General contributors place connectors in this location                            |     P     |
-| Partner-Solutions  | Partner integrations and authomize special integrations are placed here                            |     P     |
-| Tools-Utilities   | Authomize research team creates specialized code in some cases for red and blue teams to use in thier scenarios   |         |
