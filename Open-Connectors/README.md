@@ -4,7 +4,6 @@ This area will contain solutions that provide value to developers and companies 
 - **Connectors:** these pull identity and application data from one system and inject it into Authomize through the API
 - **Incident processing:** These applications or middleware in some cases pull Incidents from Authomize and make it generally available for use or          consumption by other tools.
 
-*NOTE: Partner integrations will be placed under Partner-Solutions branch, for example all Microsoft Solutions not placed on the microsoft marketplace will be located under Partner-Solutions branch.*
 
 ## Authomize Python Code
 Authomize provides code that can be used within your python projects, this can be found [here](https://pypi.org/project/authomize-rest-api-client/).
