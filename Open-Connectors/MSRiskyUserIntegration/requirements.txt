@@ -100,6 +100,6 @@ urllib3==1.26.9
 wcwidth==0.2.5
 webencodings==0.5.1
 websocket-client==1.4.2
-Werkzeug==2.2.2
+Werkzeug==2.2.3
 widgetsnbextension==4.0.3
 zulu==2.0.0
