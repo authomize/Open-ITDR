@@ -1,8 +1,3 @@
-#from dotenv import load_dotenv
-#import os
-#import pandas as pd
-#import numpy as np
-#import re as re
 import requests
 import math
 import json
@@ -27,9 +22,9 @@ def split_df_chunks(data_df,chunk_size):
 def delete(url_delete, token):
     r = requests.delete(url_delete, headers={'Content-Type': 'application/json', 'Authorization': token})
     file_response = str(r.status_code) + ' ' + str(r.text) + '\n'
-    file = open("apiv2_util.log", "a")
-    file.write(str(file_response))
-    file.close()
+    log = open("apiv2_util.log", "a")
+    log.write(str(file_response))
+    log.close()
     
     
 # POST pandas dataframe to endpoint
@@ -47,6 +42,6 @@ def post(df, url, token):
         payload = '{"data": ' +  str(json.loads(data_string)) + '}'
         r = requests.post(url, headers={'Content-Type': 'application/json', 'Authorization': token}, data=payload)
         file_response = str(r.status_code) + ' ' + str(r.text) + '\n'
-        file = open("apiv2_util.log", "a")
-        file.write(str(file_response))
-        file.close()
+        log = open("apiv2_util.log", "a")
+        log.write(str(file_response))
+        log.close()
