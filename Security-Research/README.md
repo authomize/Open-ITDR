@@ -6,4 +6,4 @@ This tool is based on [#passbleed](https://authomize.com/blog/authomize-discover
 <br />
 [Repository](https://github.com/authomize/okta_scim_attack_tool)
 <br />
-[Video](https://www.youtube.com/channel/UC5_CchB2Unugm4knRbLnTUg) - TBD
+[Video](https://www.youtube.com/watch?v=tPiuOimbwRY)
