@@ -72,7 +72,7 @@ pure-eval==0.2.2
 pycparser==2.21
 pydantic==1.10.2
 Pygments==2.13.0
-PyJWT==2.3.0
+PyJWT==2.4.0
 pyparsing==3.0.9
 pyrsistent==0.19.2
 python-dateutil==2.8.2
