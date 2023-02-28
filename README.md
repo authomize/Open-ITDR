@@ -1,4 +1,4 @@
-<img src="https://github.com/authomize/Authomize-ITDR/blob/main/OpenITDR-AuthomizeLogov2.png" alt="Authomize">
+<img src="https://github.com/authomize/Authomize-ITDR/blob/main/imageOpenITDRv2.png" alt="Authomize">
 
 # Authomize Open ITDR
 Authomize is commited to growing the identity security community, enabling our partners, customers, and the wider ITDR ecosystem to scale sustainably for the benefit of all. This repository is based on our API stack providing connections into identities, applications and incidents. Our objective is to provide a mechanism where by using a low code implimentation of [Node-RED](https://nodered.org/) automation, workflows for collecting and distributing data can be built. Further this respository will contain connectors and application integrations in the form of middleware written as stand along products both in python and javascript.
