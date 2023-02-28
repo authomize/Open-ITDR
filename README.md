@@ -1,4 +1,4 @@
-<img src="https://github.com/authomize/Authomize-ITDR/blob/main/authomize.png" width="40" height="40" alt="Authomize">
+<img src="https://github.com/authomize/Authomize-ITDR/blob/main/OpenITDR-AuthomizeLogov2.png" alt="Authomize">
 
 # Authomize Open ITDR
 Authomize is commited to growing the identity security community, enabling our partners, customers, and the wider ITDR ecosystem to scale sustainably for the benefit of all. This repository is based on our API stack providing connections into identities, applications and incidents. Our objective is to provide a mechanism where by using a low code implimentation of [Node-RED](https://nodered.org/) automation, workflows for collecting and distributing data can be built. Further this respository will contain connectors and application integrations in the form of middleware written as stand along products both in python and javascript.
@@ -13,7 +13,9 @@ The following detail outlines the folder name and then goes into some detail aro
 | Documentation    | Authomize technical documentation and papers from research will be here                            |          |
 | Open-Connectors   | General contributions for connectors in this location  – any inbound, outbound connector, general integration or partner integration                          |     P     |
 | Open-ITDR-Workflow    | Build workflows and integrations based on Node-RED  |     P     |
+| Seacurity-Research   | Authomize research team is continually creating content, visit regularly |         |
 | Tools-Utilities   | Authomize research team creates specialized code in some cases for red and blue teams to use in their scenarios   |         |
+| Universal-Images   | We love travel, we love NASA, we love people who innovate   |         |
 
 ## Licensing
 Be aware of the licensing model used here, the data we share on this site is public and as such ensure anything you provide or share here does not contain any personal or corporate information. Liability for any of the code here is limited as all code here is open source and allowed to be used in anyway needed. Please review the [license agreement](./LICENSE) before you continue to use any applications found here within any of the directory structures. Licensing for any other products are detailed within those products themselves and do not necessarily supercede this license.
