@@ -8,4 +8,4 @@ If you wish to submit your own flows, the requirements for publishing here is as
 - [x] Document workflow and store with exported JSON of your workflow
 - [x] Put in a pull request with a new directory with the above content in the Open-ITDR-Workflow area
 
-The specific setup instructions for the Authomize flows published here can be found (here)[
+The specific setup instructions for the Authomize flows published here can be found [here.](https://github.com/authomize/Open-ITDR/blob/main/Open-ITDR-Workflow/README.md)
