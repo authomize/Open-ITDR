@@ -1,0 +1,1021 @@
+[
+    {
+        "id": "fef444a29fad2f51",
+        "type": "tab",
+        "label": "OpenITDR Workflows",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2a15b4ae049c579d",
+        "type": "inject",
+        "z": "fef444a29fad2f51",
+        "name": "Incident - Okta Exfiltration - Webhook - DEV TEST",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"data\":{\"id\":\"383df5759ffa75b8e60adee2d05f637fd93d85a9\",\"createdAt\":\"2023-02-08T15:33:52.522000+00:00\",\"updatedAt\":\"2023-02-13T13:15:58.513000+00:00\",\"entities\":[{\"id\":\"a21988bc3c2775a4fe38a186ee6089deff730aea\",\"name\":\"Offensive SCIM APP\",\"object\":\"asset\"}],\"apps\":[{\"id\":\"0348e9718f660ca652abfeeda61bc3d1730767ff\",\"name\":\"Okta - dev-50124701-admin/\"}],\"category\":\"Suspicious Behavior\",\"tactics\":[\"Defense Evasion\"],\"compliance\":[{\"values\":[\"A.8.1.1\",\"A.9.4.1\"],\"id\":\"isoIec27001\",\"name\":\"ISO/IEC 27001\"},{\"values\":[\"CC3.2\"],\"id\":\"aicpaTsc2017\",\"name\":\"SOC 2 (TSC 2017)\"}],\"techniques\":[\"Impair Defenses\"],\"status\":\"Open\",\"severity\":\"High\",\"policyId\":\"75909510838\",\"policy\":{\"id\":\"75909510838\",\"name\":\"A new SCIM application was detected\",\"templateId\":\"759094967889\"},\"assigneeId\":\"\",\"recommendation\":\"Check for any changes in the SCIM's URL value. The value can be found under: \\\"App settings\\\"/Provisioning/Integration/Base URL. monitor your app admin and enforce MFA on them.\",\"isResolved\":false,\"url\":\"https://alpacas1dev.authomize.com/incidents/383df5759ffa75b8e60adee2d05f637fd93d85a9\"}}",
+        "payloadType": "json",
+        "x": 250,
+        "y": 20,
+        "wires": [
+            [
+                "c29a0e184e0c5bb8"
+            ]
+        ]
+    },
+    {
+        "id": "08356ee3b9f02222",
+        "type": "debug",
+        "z": "fef444a29fad2f51",
+        "name": "JSON Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 1120,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "c29a0e184e0c5bb8",
+        "type": "function",
+        "z": "fef444a29fad2f51",
+        "name": "Set Global Variables - USER TO UPDATE",
+        "func": "//Setting Global Variables\n\nglobal.set(\"AuthToken\", \"<AUTHOMIZETOKEN>\");\nglobal.set(\"AWSToken\", \"<NOTUSED>\");\nglobal.set(\"AuthomizeAPI\", \"https://api.authomize.com/v2/incidents/\");\nglobal.set(\"AWSAPI\", \"<NOTUSED>\");\nglobal.set(\"OktaAPI\", \"https://<YOURDOMAIN>.okta.com/api/v1/users/\");\nglobal.set(\"OktaKEY\", \"<ENTER DEV KEY>\");\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 240,
+        "wires": [
+            [
+                "395ce35ea9cce664"
+            ]
+        ]
+    },
+    {
+        "id": "5e2de2cb0bd7e119",
+        "type": "comment",
+        "z": "fef444a29fad2f51",
+        "name": "Workflows - Enable workflows as needed",
+        "info": "Following workflows have been created:\n\n1) Okta application exfiltration\n    - Find the users that have been exposed and then update the details\n2) AWS refactoring\n    - Apply the refactoring item to the AWS infratsructure\n3) Public git repo\n    - Turn off the git repo (could be just notitifcation at the moment)",
+        "x": 1020,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "940e713d5ef8e04c",
+        "type": "comment",
+        "z": "fef444a29fad2f51",
+        "name": "Workflow - Okta application exfiltration - Working",
+        "info": "",
+        "x": 1480,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "ae5c549a14fdaac7",
+        "type": "switch",
+        "z": "fef444a29fad2f51",
+        "d": true,
+        "name": "Identify Incident",
+        "property": "payload.data.policy.templateId",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "75909496788",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "79984212705",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "759094967885",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 3,
+        "x": 1160,
+        "y": 340,
+        "wires": [
+            [
+                "d81f67ddb7cf1d44"
+            ],
+            [
+                "541f425c4266c8e0"
+            ],
+            [
+                "57e0c3fb4470286a"
+            ]
+        ]
+    },
+    {
+        "id": "0ecc17d768088684",
+        "type": "debug",
+        "z": "fef444a29fad2f51",
+        "name": "Output of Process",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2950,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "6bf5eab40fab6e52",
+        "type": "debug",
+        "z": "fef444a29fad2f51",
+        "name": "Call Workflow AWS Refactor",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3120,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "bde094ec1556bd26",
+        "type": "debug",
+        "z": "fef444a29fad2f51",
+        "name": "Call Public git repo",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3130,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "395ce35ea9cce664",
+        "type": "function",
+        "z": "fef444a29fad2f51",
+        "name": "Get PolicyName for Routing",
+        "func": "//This node could be dropped at some point\n//Need to think about how to Identify Incident \n\n\n//Build URL with incident ID - \n//Need this to expand the Policy detail to see\n//if we need to work on this.\nlet Token = global.get(\"AuthToken\");\n\n// NOTE: THIS MAY FAIL ONCE USING REAL DATA - CHECK THIS BEFORE SWITCHING ON WEBHOOK\nlet IncidentId = msg.payload.data.id;\n\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"?expand=policy\";\n\nlet URL3 = URL1 + IncidentId + Extension;\nmsg.headers = {};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 460,
+        "wires": [
+            [
+                "0bd392efe622040b"
+            ]
+        ]
+    },
+    {
+        "id": "d81f67ddb7cf1d44",
+        "type": "function",
+        "z": "fef444a29fad2f51",
+        "d": true,
+        "name": "Get Exposed Users",
+        "func": "// NOTE: THIS MAY FAIL ONCE USING REAL DATA - CHECK THIS BEFORE SWITCHING ON WEBHOOK\nlet IncidentId = msg.payload.data.id;\nflow.set(\"FlowIncident\", IncidentId);\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/extended\";\nlet URL3 = URL1 + IncidentId + Extension;\n\n//Build URL with incident ID - this will allow us to now get the users that need to be Discabled...\n//For testing only\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\n// need to add to the payload - payload.policy.templateId\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1390,
+        "y": 180,
+        "wires": [
+            [
+                "2e9019d2b25024c8",
+                "40c9be0634935af0"
+            ]
+        ]
+    },
+    {
+        "id": "6ce32a37a4a2e8fd",
+        "type": "e-mail",
+        "z": "fef444a29fad2f51",
+        "server": "",
+        "port": "465",
+        "secure": true,
+        "tls": true,
+        "name": "",
+        "dname": "SendMail",
+        "x": 1960,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "2e9019d2b25024c8",
+        "type": "http request",
+        "z": "fef444a29fad2f51",
+        "name": "Get Exposed",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1670,
+        "y": 160,
+        "wires": [
+            [
+                "0ecc17d768088684",
+                "3720743b080403fc"
+            ]
+        ]
+    },
+    {
+        "id": "d7c755577a760f44",
+        "type": "function",
+        "z": "fef444a29fad2f51",
+        "d": true,
+        "name": "Okta Reset User Password",
+        "func": "\nlet OriginID = flow.get(\"FlowOriginID\");\n\nlet URL1 = global.get(\"OktaAPI\");\nlet Extension = \"/lifecycle/reset_password?sendEmail=true\";\nlet URL3 = URL1 + OriginID + Extension;\nlet Token = global.get(\"OktaKEY\");\n\n\nmsg.headers = {};\nmsg.url = URL3;\nmsg.headers['Accept'] = 'application/json';\nmsg.headers['Content-Type'] = 'application/json';\nmsg.headers['Authorization'] = 'SSWS ' + Token;\n\n// need to add to the payload - payload.policy.templateId\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1920,
+        "y": 60,
+        "wires": [
+            [
+                "33016906142e52bb"
+            ]
+        ]
+    },
+    {
+        "id": "33016906142e52bb",
+        "type": "http request",
+        "z": "fef444a29fad2f51",
+        "name": "Okta Reset Password",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 2180,
+        "y": 60,
+        "wires": [
+            [
+                "545b379a5228372f",
+                "0ecc17d768088684"
+            ]
+        ]
+    },
+    {
+        "id": "3947a4cfa244560b",
+        "type": "catch",
+        "z": "fef444a29fad2f51",
+        "name": "CheckMail",
+        "scope": [
+            "6ce32a37a4a2e8fd"
+        ],
+        "uncaught": false,
+        "x": 1720,
+        "y": 280,
+        "wires": [
+            [
+                "6ce32a37a4a2e8fd"
+            ]
+        ]
+    },
+    {
+        "id": "40c9be0634935af0",
+        "type": "function",
+        "z": "fef444a29fad2f51",
+        "name": "SetupMailSend",
+        "func": "//Set the URL mesg before hitting the request\n//msg.url = \"https://api.authomize.com/v2/incidents/1ec844535eb59cacbaca61d6ddb3678321cdf7ff\";\n//msg.headers = {};\n//msg.headers['Authorization'] = 'atmzODEyMTExMjk2MDc6MEVaVEw4TU9RQktIT1REOVdVSEJJSlVTMUVKTkpZR1BaWFZDRU8tWUZWMA==';\n//msg.headers['Content-Type'] = 'application/json';\n\n\n//For testing only\nmsg.payload = \"The test email coming through\";\nmsg.topic = \"Node-Red test subject\";\n//msg.cc = \"sriley2169@gmail.com\";\n//msg.bcc = \"sriley@symutils.com\"\n//msg.from = \"srileytest@symutils.com\"\n\n// need to add to the payload - payload.policy.templateId\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1680,
+        "y": 220,
+        "wires": [
+            [
+                "6ce32a37a4a2e8fd"
+            ]
+        ]
+    },
+    {
+        "id": "0bd392efe622040b",
+        "type": "http request",
+        "z": "fef444a29fad2f51",
+        "name": "Get Incident Policy",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 930,
+        "y": 340,
+        "wires": [
+            [
+                "ae5c549a14fdaac7",
+                "08356ee3b9f02222"
+            ]
+        ]
+    },
+    {
+        "id": "3720743b080403fc",
+        "type": "function",
+        "z": "fef444a29fad2f51",
+        "name": "Incident Comment Update",
+        "func": "// NOTE: THIS MAY FAIL ONCE USING REAL DATA - CHECK THIS BEFORE SWITCHING ON WEBHOOK\nlet OriginID = msg.payload.extended_information.password_exfiltration.exfiltrated_accounts[0].originId;\nflow.set(\"FlowOriginID\", OriginID);\n\nlet IncidentId = flow.get(\"FlowIncident\");\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/comments\";\nlet URL3 = URL1 + IncidentId + Extension;\n\n//Build URL with incident ID - this will allow us to now get the users that need to be Discabled...\n//For testing only\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.payload = {\"content\": \"OpenITDR Workflow Okta application exfiltration about to reset user password(s)\"};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1920,
+        "y": 120,
+        "wires": [
+            [
+                "021abb9f4a394c1e"
+            ]
+        ]
+    },
+    {
+        "id": "021abb9f4a394c1e",
+        "type": "http request",
+        "z": "fef444a29fad2f51",
+        "name": "Update Comment",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 2170,
+        "y": 120,
+        "wires": [
+            [
+                "d7c755577a760f44",
+                "0ecc17d768088684"
+            ]
+        ]
+    },
+    {
+        "id": "545b379a5228372f",
+        "type": "function",
+        "z": "fef444a29fad2f51",
+        "name": "Incident Comment Update",
+        "func": "// NOTE: THIS MAY FAIL ONCE USING REAL DATA - CHECK THIS BEFORE SWITCHING ON WEBHOOK\nlet IncidentId = flow.get(\"FlowIncident\");\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/comments\";\nlet URL3 = URL1 + IncidentId + Extension;\n\n//Build URL with incident ID - this will allow us to now get the users that need to be Discabled...\n//For testing only\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.payload = {\"content\": \"OpenITDR Workflow Okta application exfiltration finished resetting password(s), close this incident\"};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2460,
+        "y": 60,
+        "wires": [
+            [
+                "1bdfe892a035b582"
+            ]
+        ]
+    },
+    {
+        "id": "1bdfe892a035b582",
+        "type": "http request",
+        "z": "fef444a29fad2f51",
+        "name": "Update Comment",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 2710,
+        "y": 60,
+        "wires": [
+            [
+                "0ecc17d768088684"
+            ]
+        ]
+    },
+    {
+        "id": "537a59c539d78ba4",
+        "type": "inject",
+        "z": "fef444a29fad2f51",
+        "name": "Incident - AWS Refactor - Webhook - DEV TEST",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"data\":{\"id\":\"82177219c9bf1c109312d4f5332bfd5b1f453d32\",\"createdAt\":\"2023-01-26T07:35:25.054000+00:00\",\"updatedAt\":\"2023-02-27T03:19:44.760000+00:00\",\"entities\":[{\"id\":\"feeb58f5f544d7be3ba4a7985e9e1d5c716cc06d\",\"name\":\"User Access Administrator\",\"object\":\"asset\"}],\"apps\":[{\"id\":\"600095f2b5e49d08608c3ef1d2fc45c3497583c3\",\"name\":\"Microsoft Azure - Authomize\"}],\"category\":\"Least Privilege\",\"tactics\":[\"Collection\",\"Discovery\",\"Exfiltration\",\"Impact\"],\"compliance\":[],\"techniques\":[],\"status\":\"Open\",\"severity\":\"High\",\"policyId\":\"80106867731\",\"assigneeId\":null,\"recommendation\":\"Update the role User Access Administrator using the Authomize recommended new role through the Azure console or other preferred methods.\",\"isResolved\":false,\"url\":\"https://alpacas1dev.authomize.com/incidents/82177219c9bf1c109312d4f5332bfd5b1f453d32\"}}",
+        "payloadType": "json",
+        "x": 240,
+        "y": 140,
+        "wires": [
+            [
+                "c29a0e184e0c5bb8"
+            ]
+        ]
+    },
+    {
+        "id": "698493bb28376081",
+        "type": "comment",
+        "z": "fef444a29fad2f51",
+        "name": "!!! - Ensure you change the payload before running !!!",
+        "info": "",
+        "x": 2020,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "e4c4451904f097a4",
+        "type": "comment",
+        "z": "fef444a29fad2f51",
+        "name": "Workflow - Azure Refactoring ",
+        "info": "",
+        "x": 1420,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "10335e68a84e806f",
+        "type": "comment",
+        "z": "fef444a29fad2f51",
+        "name": "Work on process for multiple users and password resets",
+        "info": "",
+        "x": 2290,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "d0c0e1fb1c402044",
+        "type": "catch",
+        "z": "fef444a29fad2f51",
+        "name": "CheckMail",
+        "scope": [
+            "60e4ad9b76f4d4c8"
+        ],
+        "uncaught": false,
+        "x": 1640,
+        "y": 500,
+        "wires": [
+            [
+                "60e4ad9b76f4d4c8"
+            ]
+        ]
+    },
+    {
+        "id": "60e4ad9b76f4d4c8",
+        "type": "e-mail",
+        "z": "fef444a29fad2f51",
+        "server": "",
+        "port": "465",
+        "secure": true,
+        "tls": true,
+        "name": "",
+        "dname": "SendMail",
+        "x": 1880,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "d58c3e9103785eb5",
+        "type": "function",
+        "z": "fef444a29fad2f51",
+        "name": "SetupMailSend",
+        "func": "//Set the URL mesg before hitting the request\n//msg.url = \"https://api.authomize.com/v2/incidents/1ec844535eb59cacbaca61d6ddb3678321cdf7ff\";\n//msg.headers = {};\n//msg.headers['Authorization'] = 'atmzODEyMTExMjk2MDc6MEVaVEw4TU9RQktIT1REOVdVSEJJSlVTMUVKTkpZR1BaWFZDRU8tWUZWMA==';\n//msg.headers['Content-Type'] = 'application/json';\n\n\n//For testing only\nmsg.payload = \"The test email coming through\";\nmsg.topic = \"Node-Red test subject\";\n//msg.cc = \"sriley2169@gmail.com\";\n//msg.bcc = \"sriley@symutils.com\"\n//msg.from = \"srileytest@symutils.com\"\n\n// need to add to the payload - payload.policy.templateId\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1620,
+        "y": 440,
+        "wires": [
+            [
+                "60e4ad9b76f4d4c8"
+            ]
+        ]
+    },
+    {
+        "id": "70bbf03b366c5c25",
+        "type": "http request",
+        "z": "fef444a29fad2f51",
+        "name": "Get Exposed",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1610,
+        "y": 380,
+        "wires": [
+            [
+                "8181a569f78c996a"
+            ]
+        ]
+    },
+    {
+        "id": "541f425c4266c8e0",
+        "type": "function",
+        "z": "fef444a29fad2f51",
+        "name": "Get Refactored Policy",
+        "func": "// NOTE: THIS MAY FAIL ONCE USING REAL DATA - CHECK THIS BEFORE SWITCHING ON WEBHOOK\nlet IncidentId = msg.payload.data.id;\nflow.set(\"FlowIncident\", IncidentId);\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/extended\";\nlet URL3 = URL1 + IncidentId + Extension;\n\n//Build URL with incident ID - this will allow us to find the policy...\n//For testing only\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\n// need to add to the payload - payload.policy.templateId\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1400,
+        "y": 380,
+        "wires": [
+            [
+                "70bbf03b366c5c25",
+                "d58c3e9103785eb5"
+            ]
+        ]
+    },
+    {
+        "id": "8181a569f78c996a",
+        "type": "function",
+        "z": "fef444a29fad2f51",
+        "name": "Incident Comment Update",
+        "func": "// NOTE: THIS MAY FAIL ONCE USING REAL DATA - CHECK THIS BEFORE SWITCHING ON WEBHOOK\nlet OriginID = msg.payload.extended_information.password_exfiltration.exfiltrated_accounts[0].originId;\nflow.set(\"FlowOriginID\", OriginID);\n\nlet IncidentId = flow.get(\"FlowIncident\");\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/comments\";\nlet URL3 = URL1 + IncidentId + Extension;\n\n//Build URL with incident ID - this will allow us to now get the users that need to be Discabled...\n//For testing only\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.payload = {\"content\": \"OpenITDR Workflow Refactored Policy about to reset user password(s)\"};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1840,
+        "y": 380,
+        "wires": [
+            [
+                "5f9b7e13110c9e50"
+            ]
+        ]
+    },
+    {
+        "id": "5f9b7e13110c9e50",
+        "type": "http request",
+        "z": "fef444a29fad2f51",
+        "name": "Update Comment",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 2110,
+        "y": 380,
+        "wires": [
+            [
+                "cbcb5db68c4cb260"
+            ]
+        ]
+    },
+    {
+        "id": "6312d1cc5761a683",
+        "type": "function",
+        "z": "fef444a29fad2f51",
+        "name": "Incident Comment Update",
+        "func": "// NOTE: THIS MAY FAIL ONCE USING REAL DATA - CHECK THIS BEFORE SWITCHING ON WEBHOOK\nlet IncidentId = flow.get(\"FlowIncident\");\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/comments\";\nlet URL3 = URL1 + IncidentId + Extension;\n\n//Build URL with incident ID - this will allow us to now get the users that need to be Discabled...\n//For testing only\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.payload = {\"content\": \"OpenITDR Workflow Refactored Policy finished resetting password(s), close this incident\"};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2600,
+        "y": 380,
+        "wires": [
+            [
+                "71307da66b5b3003"
+            ]
+        ]
+    },
+    {
+        "id": "71307da66b5b3003",
+        "type": "http request",
+        "z": "fef444a29fad2f51",
+        "name": "Update Comment",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 2850,
+        "y": 380,
+        "wires": [
+            [
+                "6bf5eab40fab6e52"
+            ]
+        ]
+    },
+    {
+        "id": "cbcb5db68c4cb260",
+        "type": "function",
+        "z": "fef444a29fad2f51",
+        "name": "INSERT FUNCTION FOR REFACTOR HERE!!!",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2360,
+        "y": 520,
+        "wires": [
+            [
+                "6312d1cc5761a683"
+            ]
+        ]
+    },
+    {
+        "id": "a47fa506705f3cfa",
+        "type": "e-mail",
+        "z": "fef444a29fad2f51",
+        "server": "",
+        "port": "465",
+        "secure": true,
+        "tls": true,
+        "name": "",
+        "dname": "SendMail",
+        "x": 1900,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "6e4871e72a856f14",
+        "type": "catch",
+        "z": "fef444a29fad2f51",
+        "name": "CheckMail",
+        "scope": [
+            "a47fa506705f3cfa"
+        ],
+        "uncaught": false,
+        "x": 1660,
+        "y": 900,
+        "wires": [
+            [
+                "a47fa506705f3cfa"
+            ]
+        ]
+    },
+    {
+        "id": "5323e7fadc5a5ad8",
+        "type": "function",
+        "z": "fef444a29fad2f51",
+        "name": "SetupMailSend",
+        "func": "//Set the URL mesg before hitting the request\n//msg.url = \"https://api.authomize.com/v2/incidents/1ec844535eb59cacbaca61d6ddb3678321cdf7ff\";\n//msg.headers = {};\n//msg.headers['Authorization'] = 'atmzODEyMTExMjk2MDc6MEVaVEw4TU9RQktIT1REOVdVSEJJSlVTMUVKTkpZR1BaWFZDRU8tWUZWMA==';\n//msg.headers['Content-Type'] = 'application/json';\n\n\n//For testing only\nmsg.payload = \"The test email coming through\";\nmsg.topic = \"Node-Red test subject\";\n//msg.cc = \"sriley2169@gmail.com\";\n//msg.bcc = \"sriley@symutils.com\"\n//msg.from = \"srileytest@symutils.com\"\n\n// need to add to the payload - payload.policy.templateId\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1640,
+        "y": 840,
+        "wires": [
+            [
+                "a47fa506705f3cfa"
+            ]
+        ]
+    },
+    {
+        "id": "57e0c3fb4470286a",
+        "type": "function",
+        "z": "fef444a29fad2f51",
+        "name": "Git Repo Found",
+        "func": "// NOTE: THIS MAY FAIL ONCE USING REAL DATA - CHECK THIS BEFORE SWITCHING ON WEBHOOK\nlet IncidentId = msg.payload.data.id;\nflow.set(\"FlowIncident\", IncidentId);\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/extended\";\nlet URL3 = URL1 + IncidentId + Extension;\n\n//Build URL with incident ID - this will allow us to find the policy...\n//For testing only\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\n// need to add to the payload - payload.policy.templateId\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1400,
+        "y": 800,
+        "wires": [
+            [
+                "353bc3a41a5efbe1",
+                "5323e7fadc5a5ad8"
+            ]
+        ]
+    },
+    {
+        "id": "353bc3a41a5efbe1",
+        "type": "http request",
+        "z": "fef444a29fad2f51",
+        "name": "Get Exposed",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1630,
+        "y": 780,
+        "wires": [
+            [
+                "34a1829a06dcbf6a"
+            ]
+        ]
+    },
+    {
+        "id": "891d95f70256c749",
+        "type": "comment",
+        "z": "fef444a29fad2f51",
+        "name": "Workflow - Git Repo",
+        "info": "",
+        "x": 1410,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "34a1829a06dcbf6a",
+        "type": "function",
+        "z": "fef444a29fad2f51",
+        "name": "Incident Comment Update",
+        "func": "// NOTE: THIS MAY FAIL ONCE USING REAL DATA - CHECK THIS BEFORE SWITCHING ON WEBHOOK\nlet OriginID = msg.payload.extended_information.password_exfiltration.exfiltrated_accounts[0].originId;\nflow.set(\"FlowOriginID\", OriginID);\n\nlet IncidentId = flow.get(\"FlowIncident\");\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/comments\";\nlet URL3 = URL1 + IncidentId + Extension;\n\n//Build URL with incident ID - this will allow us to now get the users that need to be Discabled...\n//For testing only\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.payload = {\"content\": \"OpenITDR Workflow Git Repo about to reset user password(s)\"};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1880,
+        "y": 740,
+        "wires": [
+            [
+                "ce54e1825f6bcb35"
+            ]
+        ]
+    },
+    {
+        "id": "ce54e1825f6bcb35",
+        "type": "http request",
+        "z": "fef444a29fad2f51",
+        "name": "Update Comment",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 2150,
+        "y": 740,
+        "wires": [
+            [
+                "3813ad882fe1f1e1"
+            ]
+        ]
+    },
+    {
+        "id": "3813ad882fe1f1e1",
+        "type": "function",
+        "z": "fef444a29fad2f51",
+        "name": "INSERT FUNCTION FOR trufflehogjs HERE!!!",
+        "func": "//Maek call to connect and return data about found items\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2390,
+        "y": 880,
+        "wires": [
+            [
+                "0c8e8243fd3c4ee5"
+            ]
+        ]
+    },
+    {
+        "id": "0c8e8243fd3c4ee5",
+        "type": "function",
+        "z": "fef444a29fad2f51",
+        "name": "Incident Comment Update",
+        "func": "// NOTE: THIS MAY FAIL ONCE USING REAL DATA - CHECK THIS BEFORE SWITCHING ON WEBHOOK\nlet IncidentId = flow.get(\"FlowIncident\");\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/comments\";\nlet URL3 = URL1 + IncidentId + Extension;\n\n//Build URL with incident ID - this will allow us to now get the users that need to be Discabled...\n//For testing only\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.payload = {\"content\": \"OpenITDR Workflow Git Repo finished resetting password(s), close this incident\"};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2640,
+        "y": 740,
+        "wires": [
+            [
+                "90b6b35902e8ca65"
+            ]
+        ]
+    },
+    {
+        "id": "90b6b35902e8ca65",
+        "type": "http request",
+        "z": "fef444a29fad2f51",
+        "name": "Update Comment",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 2890,
+        "y": 740,
+        "wires": [
+            [
+                "bde094ec1556bd26"
+            ]
+        ]
+    },
+    {
+        "id": "0246b30db25111e5",
+        "type": "debug",
+        "z": "fef444a29fad2f51",
+        "name": "JSON Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "msg",
+        "x": 520,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "908b76435844a24b",
+        "type": "http in",
+        "z": "fef444a29fad2f51",
+        "name": "",
+        "url": "/Data",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 460,
+        "wires": [
+            [
+                "5b586963ee502b0b",
+                "0246b30db25111e5",
+                "c29a0e184e0c5bb8"
+            ]
+        ]
+    },
+    {
+        "id": "5b586963ee502b0b",
+        "type": "http response",
+        "z": "fef444a29fad2f51",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 380,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "681572061ba0582a",
+        "type": "inject",
+        "z": "fef444a29fad2f51",
+        "name": "Webhook - PROD TEST DATA",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"data\":{\"id\":\"1ec844535eb59cacbaca61d6ddb3678321cdf7ff\",\"createdAt\":\"2023-02-01T22:03:15.600000+00:00\",\"updatedAt\":\"2023-02-28T14:47:39.809000+00:00\",\"entities\":[{\"id\":\"fb2674369f97818b9b625fc30849ae3c80555734\",\"name\":\"Joni Sherman\",\"object\":\"identity\"}],\"apps\":[{\"id\":\"7c723f6aaa1d472954f30719c1c13b2d82ae60ec\",\"name\":\"RiskyUser\"}],\"category\":\"Misconfiguration\",\"tactics\":[\"Credential Access\",\"Initial Access\",\"Privilege Escalation\"],\"compliance\":[{\"values\":[\"12.7\",\"6.5\"],\"id\":\"cisv8\",\"name\":\"CIS v.8\"},{\"values\":[\"IAM-01\",\"IAM-14\",\"DSP-07\",\"IAM-16\"],\"id\":\"ccm402\",\"name\":\"CSA STAR (CCM 4.0.2)\"},{\"values\":[\"A.9.4.2\",\"A.9.1.2\",\"A.9.2.2\",\"A.9.2.3\"],\"id\":\"isoIec27001\",\"name\":\"ISO/IEC 27001\"},{\"values\":[\"CC6.2\"],\"id\":\"aicpaTsc2017\",\"name\":\"SOC 2 (TSC 2017)\"},{\"values\":[\"IAM-01\",\"IAM-02\",\"IAM-05\"],\"id\":\"ccm301\",\"name\":\"CSA STAR (CCM 3.0.1)\"}],\"techniques\":[\"Valid Accounts\",\"Account Manipulation\"],\"status\":\"Open\",\"severity\":\"High\",\"policyId\":\"79385387773\",\"assigneeId\":null,\"recommendation\":\"Ensure that Joni Sherman enables MFA.\",\"isResolved\":false,\"url\":\"https://msftriskyuser.authomize.com/incidents/1ec844535eb59cacbaca61d6ddb3678321cdf7ff\"}}",
+        "payloadType": "json",
+        "x": 180,
+        "y": 80,
+        "wires": [
+            [
+                "c29a0e184e0c5bb8"
+            ]
+        ]
+    },
+    {
+        "id": "ab859d17eed5c84e",
+        "type": "ui_spacer",
+        "z": "fef444a29fad2f51",
+        "name": "spacer",
+        "group": "a7875519fe0f4de4",
+        "order": 1,
+        "width": "1",
+        "height": "1"
+    },
+    {
+        "id": "a7875519fe0f4de4",
+        "type": "ui_group",
+        "name": "Some Data To Display",
+        "tab": "bd6745d4f11d4631",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "bd6745d4f11d4631",
+        "type": "ui_tab",
+        "name": "Authomize Worker",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
