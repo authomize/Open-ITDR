@@ -9,7 +9,7 @@ Here are the details for working directly with the existing Authomize workflows.
 - Once you have cloned, change directory to ```<yourworkingdirectory>/Open-ITDR/Open-ITDR-Workflow/Workflows```
 - Now create your image by typing in the following docker command note the period '.' at the end of the line - ``` docker build -t node-red:latest . ```
 - Now start the image by running the following command - ```docker run --rm -e "NODE_RED_CREDENTIAL_SECRET=T0pSecret" -p 1880:1880 -v node_red_data:/data --name mynodered001 node-red```
-  - Note that node_red_data is a volume. While this volume exists you changes and updates will persist. If you delete the volume your changes will be removed.
+  - Note that node_red_data is a volume. While this volume exists your changes and updates will persist. If you delete the volume your changes will be removed.
 - Get into the initial console by clicking on the following link as indicated when you started the image ```http://127.0.0.1:1880/```
 
 Congrats you are now running with Node-Red with an Authomize OpenITDR Workflow.
