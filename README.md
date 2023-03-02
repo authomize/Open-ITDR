@@ -13,7 +13,7 @@ The following detail outlines the folder name and then goes into some detail aro
 | Documentation    | Authomize technical documentation and papers from research will be here                            |          |
 | Open-Connectors   | General contributions for connectors in this location  – any inbound, outbound connector, general integration or partner integration                          |     P     |
 | Open-ITDR-Workflow    | Build workflows and integrations based on Node-RED  |     P     |
-| Seacurity-Research   | Authomize research team is continually creating content, visit regularly |         |
+| [Seacurity-Research](https://github.com/authomize/Open-ITDR/tree/main/Security-Research)   | Authomize research team is continually creating content, visit regularly |         |
 | Tools-Utilities   | Authomize research team creates specialized code in some cases for red and blue teams to use in their scenarios   |         |
 | Universal-Images   | We love travel, we love NASA, we love people who innovate   |         |
 
