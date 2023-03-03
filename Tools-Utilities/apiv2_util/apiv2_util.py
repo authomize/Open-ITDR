@@ -1,9 +1,11 @@
 import requests
 import math
 import json
+from copy import deepcopy
+import pandas as pd
 
 
-#breaks dataframes into chunks
+#Part of the Post funtion. Breaks Dataframe into chunks when Posting Dataframe
 chunk_size = 9000
 def split_df_chunks(data_df,chunk_size):
     total_length     = len(data_df)
@@ -28,7 +30,6 @@ def delete(url_delete, token):
     
     
 # POST pandas dataframe to endpoint
-
 def post(df, url, token):
     """
     assign Pandas DF, API endpoint including Connector ID in URL & a Token
@@ -45,3 +46,39 @@ def post(df, url, token):
         log = open("apiv2_util.log", "a")
         log.write(str(file_response))
         log.close()
+
+#Function for json_to_dataframe        
+def cross_join(left, right):
+    new_rows = [] if right else left
+    for left_row in left:
+        for right_row in right:
+            temp_row = deepcopy(left_row)
+            for key, value in right_row.items():
+                temp_row[key] = value
+            new_rows.append(deepcopy(temp_row))
+    return new_rows
+
+#Function for json_to_dataframe   
+def flatten_list(data):
+    for elem in data:
+        if isinstance(elem, list):
+            yield from flatten_list(elem)
+        else:
+            yield elem
+
+#Use to flatten nested JSON and turn JSON into a Pandas Dataframe
+def json_to_dataframe(data_in):
+    def flatten_json(data, prev_heading=''):
+        if isinstance(data, dict):
+            rows = [{}]
+            for key, value in data.items():
+                rows = cross_join(rows, flatten_json(value, prev_heading + '.' + key))
+        elif isinstance(data, list):
+            rows = []
+            for item in data:
+                [rows.append(elem) for elem in flatten_list(flatten_json(item, prev_heading))]
+        else:
+            rows = [{prev_heading[1:]: data}]
+        return rows
+
+    return pd.DataFrame(flatten_json(data_in))
