@@ -31,8 +31,6 @@ RUN apk add --no-cache \
 
 RUN aws --version
 
-
-
 # Copy _your_ Node-RED project files into place
 # NOTE: This will only work if you DO NOT later mount /data as an external volume.
 #       If you need to use an external volume for persistence then
@@ -44,6 +42,8 @@ COPY flows.json /data/flows.json
 COPY NewAWSPolicy.json /data/NewAWSPolicy.json
 
 RUN chown -R node-red:node-red /data/*
+
+USER node-red
 
 # You should add extra nodes via your package.json file but you can also add them here:
 #WORKDIR /usr/src/node-red
