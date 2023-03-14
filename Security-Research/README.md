@@ -13,6 +13,7 @@ You can find here an live list of security content, research, and tools, researc
     2. Modern attack vectors - "Excuse Me, Your Sword Is In My Eye: Responding to Red Teams and 'IRL' Threats in 2019 and Beyond" - BSidesLV 2019 talk by [Jeremy Galloway](https://infocondb.org/presenter/jeremy-galloway) from Atlassian. Find the lecture [here](https://www.youtube.com/watch?v=HvFi6xCHnHE)
     3. Azure AD attack and defense playbook by AAD security researchers - find the playbook [here](https://github.com/Cloud-Architekt/AzureAD-Attack-Defense)
     4. [Rhino Secuirty Labs](https://rhinosecuritylabs.com/) AWS explotation framework - [Pacu](https://github.com/RhinoSecurityLabs/pacu)
+    5. [HackTricks pentesting tools](https://book.hacktricks.xyz/welcome/readme), built by [Carlos Polop](https://www.linkedin.com/in/carlos-polop-martin/). Take a close look at the [AWS](https://cloud.hacktricks.xyz/pentesting-cloud/aws-pentesting) and [AAD](https://cloud.hacktricks.xyz/pentesting-cloud/azure-pentesting/az-lateral-movement-cloud-on-prem/azure-ad-connect-hybrid-identity) chapters.
 
 ## Authomize Security Lab Research
 
