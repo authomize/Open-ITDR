@@ -26,7 +26,7 @@ At this point you have the flows loaded in front of you. There are still a few m
 
 Click Done and Click "Deploy" found top right on the webpage
 
-Now watch the [video](./OktaExfiltration.mp4) showing how to switch on and update the other nodes within this flow. You may need to *download* before you can watch.
+Now watch the [video](https://app.box.com/s/8y5l5j0ba65ujfbxaijm8g4bw1jfzold) showing how to switch on and update the other nodes within this flow. You may need to *download* before you can watch.
 
 ### Other workflows
 We will document the other workflows and update content as they become available.
