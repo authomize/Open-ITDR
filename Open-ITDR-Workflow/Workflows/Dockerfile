@@ -43,7 +43,7 @@ COPY settings.js /data/settings.js
 COPY flows.json /data/flows.json
 COPY NewAWSPolicy.json /data/NewAWSPolicy.json
 
-
+RUN chown -R node-red:node-red /data/*
 
 # You should add extra nodes via your package.json file but you can also add them here:
 #WORKDIR /usr/src/node-red
