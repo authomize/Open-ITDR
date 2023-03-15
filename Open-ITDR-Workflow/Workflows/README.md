@@ -23,4 +23,4 @@ We have added a few components to support the current  workflows implemented wit
 - AWS CLI install [more details here](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 - Python scripts and other files to support the existing workflows
 
-Workflows are an initial release and can be found [here] ()./flows.json). Import this JSON into any nodered ennvironment, note that these flows do have additional requirements and need the installation files located in this repository.
+Workflows are an initial release and can be found [here](./flows.json). Import this JSON into any nodered ennvironment, note that these flows do have additional requirements and need the installation files located in this repository.
