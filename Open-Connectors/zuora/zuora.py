@@ -9,7 +9,7 @@ from datetime import datetime
 from typing import Dict, Any
 
 import requests
-from authomize.rest_api_client.generated.schemas import (
+from authomize.rest_api_client.generated.connectors_rest_api.schemas import (
     AccessTypes,
     AssetTypes,
     UserStatus,

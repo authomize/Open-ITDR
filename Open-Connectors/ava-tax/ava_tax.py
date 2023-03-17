@@ -3,7 +3,7 @@ import os
 from typing import Any, Dict, List
 
 from avalara import AvataxClient
-from authomize.rest_api_client.generated.schemas import (
+from authomize.rest_api_client.generated.connectors_rest_api.schemas import (
     AccessTypes,
     AssetTypes,
     UserStatus,
