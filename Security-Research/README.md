@@ -14,6 +14,7 @@ You can find here an live list of security content, research, and tools, researc
     3. Azure AD attack and defense playbook by AAD security researchers - find the playbook [here](https://github.com/Cloud-Architekt/AzureAD-Attack-Defense)
     4. [Rhino Secuirty Labs](https://rhinosecuritylabs.com/) AWS explotation framework - [Pacu](https://github.com/RhinoSecurityLabs/pacu)
     5. [HackTricks pentesting tools](https://book.hacktricks.xyz/welcome/readme), built by [Carlos Polop](https://www.linkedin.com/in/carlos-polop-martin/). Take a close look at the [AWS](https://cloud.hacktricks.xyz/pentesting-cloud/aws-pentesting) and [AAD](https://cloud.hacktricks.xyz/pentesting-cloud/azure-pentesting/az-lateral-movement-cloud-on-prem/azure-ad-connect-hybrid-identity) chapters.
+    6. [infosecn1nja](https://github.com/infosecn1nja) has curated some awsome open source security tools on his [red teaming toolkit repo](https://github.com/infosecn1nja/Red-Teaming-Toolkit), including [enumerate-iam](https://github.com/andresriancho/enumerate-iam), [AAD connect password extraction](https://github.com/fox-it/adconnectdump), and [stormspotter](https://github.com/Azure/Stormspotter) - Azure and AAD attack graph tool.
 
 ## Authomize Security Lab Research
 
