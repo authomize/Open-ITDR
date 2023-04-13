@@ -48,7 +48,7 @@ If you need help with this integration, please contact support@authomize.com.
 8. **NOTE - DO NOT CLICK** `Test Webhook (optional)`, the data will not generate the correct output for PagerDuty to process, so you will not see anything from that process.
 9. Click the **Create** button to save your settings.
 
-You are now complete, you should montor the **Webhook logs** found on the left bar to determine when events are being sent. Authomize customer success team work closley with all Authomize customers and will be able to support you in the process. If you have any questions or issues please reach out to us on support@authomize.com and a success team member will respond to you.
+You are now complete, you should monitor the **Webhook logs** found on the left bar to determine when events are being sent. Authomize customer success team work closley with all Authomize customers and will be able to support you in the process. If you have any questions or issues please reach out to us on support@authomize.com and a success team member will respond to you.
 
 # How to Uninstall
 
