@@ -1,0 +1,19 @@
+{
+  "services": [],
+  "identities": [],
+  "assets": [
+    {
+      "id": "42",
+      "name": "TestConnector",
+      "type": "Application",
+      "description": null,
+      "href": null,
+      "createdAt": null,
+      "isAuxiliary": null,
+      "service": null
+    }
+  ],
+  "inheritanceIdentities": [],
+  "inheritanceAssets": [],
+  "access": []
+}

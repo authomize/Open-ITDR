@@ -1,0 +1,10 @@
+{
+  "connectorId": "123456789",
+  "transactionCreatedAt": "2022-05-25T18:30:39.742Z",
+  "warnings": [
+    "string"
+  ],
+  "validations": {},
+  "id": "123",
+  "state": "Ingest"
+}

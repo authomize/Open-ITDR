@@ -13,3 +13,5 @@ Some of the connectors with available information are:
  - Workiva
  - Coupa
  - Jamf
+
+ We have created a copy of the environment for your convenience, we will continue to keep this in sync over time, however for the latest work from the GitLab Security Automation team visit thier repo. Meanwhile you can access the local directory [here](./GitLab-Authomize/) .

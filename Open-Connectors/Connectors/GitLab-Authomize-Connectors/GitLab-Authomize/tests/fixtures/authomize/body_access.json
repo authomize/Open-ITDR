@@ -1,0 +1,27 @@
+{
+  "services": [],
+  "identities": [],
+  "assets": [],
+  "inheritanceIdentities": [],
+  "inheritanceAssets": [],
+  "access": [
+    {
+      "fromIdentityId": "1",
+      "toAssetId": "42",
+      "accessType": "Administrative",
+      "accessName": null
+    },
+    {
+      "fromIdentityId": "2",
+      "toAssetId": "42",
+      "accessType": "Write",
+      "accessName": null
+    },
+    {
+      "fromIdentityId": "3",
+      "toAssetId": "42",
+      "accessType": "Read",
+      "accessName": null
+    }
+  ]
+}
