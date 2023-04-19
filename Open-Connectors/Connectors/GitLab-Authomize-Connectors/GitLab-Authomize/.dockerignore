@@ -1,0 +1,5 @@
+*
+!*.py
+!connectors
+!Pipfile
+!Pipfile.lock

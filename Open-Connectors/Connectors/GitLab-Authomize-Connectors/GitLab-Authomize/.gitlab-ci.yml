@@ -1,0 +1,67 @@
+stages:
+  - build
+  - test
+  - release
+  - deploy
+
+variables:
+  DOCKER_TLS_CERTDIR: "/certs"
+  CONTAINER_IMAGE_COMMIT: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+  CONTAINER_IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest
+  IMAGE_TAG: $CI_COMMIT_SHORT_SHA # Image tag for deployment pipeline
+
+# GitLab Secure
+# https://docs.gitlab.com/ee/user/application_security/
+
+include:
+  - template: Security/Dependency-Scanning.gitlab-ci.yml
+  - template: Security/License-Scanning.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
+  - template: Security/Secret-Detection.gitlab-ci.yml
+
+# Templates
+
+.docker_job:
+  image: docker:stable
+  services:
+    - docker:stable-dind
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+# Jobs
+test:
+  image: python:3.9
+  stage: test
+  script:
+    - make test
+  coverage: '/^TOTAL.+?(\d+\%)$/'
+  rules:
+    - if: $CI_COMMIT_BRANCH != null
+
+build:
+  extends: .docker_job
+  stage: build
+  script:
+    - docker build --pull --tag $CONTAINER_IMAGE_COMMIT .
+    # - docker run -v "$PWD/tests:/app/tests" $CONTAINER_IMAGE_COMMIT /app/tests/docker-tests
+    - docker push $CONTAINER_IMAGE_COMMIT
+  rules:
+    - if: $CI_COMMIT_BRANCH != null
+
+release_latest:
+  extends: .docker_job
+  stage: release
+  script:
+    - docker pull $CONTAINER_IMAGE_COMMIT
+    - docker tag $CONTAINER_IMAGE_COMMIT $CONTAINER_IMAGE_LATEST
+    - docker push $CONTAINER_IMAGE_LATEST
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+deploy:
+  stage: deploy
+  trigger: gitlab-private/gl-security/engineering-and-research/automation-team/kubernetes/secauto/authomize
+  rules:
+    - if: $DEPLOY_STOP != null
+      when: never
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

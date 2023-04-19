@@ -1,0 +1,12 @@
+# Directories
+__pycache__/
+.venv/
+exports/
+tmp/
+.vscode/
+
+# Files
+*.pyc
+.DS_Store
+.coverage
+.env*
