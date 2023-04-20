@@ -1,0 +1,30 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+authomize-rest-api-client = "==1.2.0"
+avalara = "*"
+click = "*"
+pytenable = "*"
+python-json-logger = "*"
+netsuitesdk = "*"
+requests-oauth2client = "*"
+cryptography = "*"
+python-gitlab = "*"
+gql = {extras = ["requests"], version = "*"}
+autohelp = {git = "https://git@gitlab.com/gitlab-com/gl-security/engineering-and-research/automation-team/autohelp.git"}
+
+[dev-packages]
+coverage = "*"
+pycodestyle = "*"
+pylint = "*"
+pytest = "*"
+python-dotenv = "*"
+
+[requires]
+python_version = "3.9"
+
+[pipenv]
+allow_prereleases = true
