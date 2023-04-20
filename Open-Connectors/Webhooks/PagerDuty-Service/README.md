@@ -46,6 +46,7 @@ If you need help with this integration, please contact support@authomize.com.
    * **YOUR-INTEGRATION-KEY** is the PagerDuty **Integration key** generated from point 5 above under the **Integrating With a PagerDuty Service** heading.
 7. On the **Events to subscribe** field select **Incident Created**
 8. Click the **Create** button to save your settings.
+9. **NOTE**: Do not press the [TEST] button, it will not generate an event that PagerDuty can read.
 
 You are now complete, you should monitor the **Webhook logs** found on the left bar to determine when events are being sent. Authomize customer success team work closley with all Authomize customers and will be able to support you in the process. If you have any questions or issues please reach out to us on support@authomize.com and a success team member will respond to you.
 
