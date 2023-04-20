@@ -1,1 +1,2471 @@
-[{"id":"fef444a29fad2f51","type":"tab","label":"OpenITDR Workflows","disabled":false,"info":"","env":[]},{"id":"0834077afbfa3457","type":"tab","label":"Okta Application Exfiltration","disabled":false,"info":"","env":[]},{"id":"08d46d137e03e77b","type":"tab","label":"AWS Refactoring","disabled":false,"info":"","env":[]},{"id":"6d8d00a0454e2a65","type":"tab","label":"Git Repo","disabled":false,"info":"","env":[]},{"id":"ec0b35b23ad2f78b","type":"group","z":"6d8d00a0454e2a65","style":{"stroke":"#999999","stroke-opacity":"1","fill":"none","fill-opacity":"1","label":true,"label-position":"nw","color":"#a4a4a4"},"nodes":["f79ad5da66e1e92c","a7e8fb6872994ffc","dc1e800851df685f","17c6789b9587e830"],"x":1194,"y":251.5,"w":492,"h":177},{"id":"e269a6f6f2ad800d","type":"group","z":"08d46d137e03e77b","style":{"stroke":"#999999","stroke-opacity":"1","fill":"none","fill-opacity":"1","label":true,"label-position":"nw","color":"#a4a4a4"},"nodes":["e5c5b80392f34927","9c0f62c500abefd8","8f5b0b852d4a04fd","dcd30539602533ee","51e53f00c679d5b0","370c5a5fa3aaa248","10545b8d384a95fe","e70d5367dcf6d01d","448e44463eafd654"],"x":1434,"y":71.5,"w":872,"h":277},{"id":"1f6e1936c6fd37e4","type":"ui_base","theme":{"name":"theme-dark","lightTheme":{"default":"#0094CE","baseColor":"#0094CE","baseFont":"-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif","edited":true,"reset":false},"darkTheme":{"default":"#097479","baseColor":"#097479","baseFont":"-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif","edited":true,"reset":false},"customTheme":{"name":"Untitled Theme 1","default":"#4B7930","baseColor":"#4B7930","baseFont":"-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"},"themeState":{"base-color":{"default":"#097479","value":"#097479","edited":false},"page-titlebar-backgroundColor":{"value":"#097479","edited":false},"page-backgroundColor":{"value":"#111111","edited":false},"page-sidebar-backgroundColor":{"value":"#333333","edited":false},"group-textColor":{"value":"#0eb8c0","edited":false},"group-borderColor":{"value":"#555555","edited":false},"group-backgroundColor":{"value":"#333333","edited":false},"widget-textColor":{"value":"#eeeeee","edited":false},"widget-backgroundColor":{"value":"#097479","edited":false},"widget-borderColor":{"value":"#333333","edited":false},"base-font":{"value":"-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"}},"angularTheme":{"primary":"indigo","accents":"blue","warn":"red","background":"grey","palette":"light"}},"site":{"name":"Default","hideToolbar":"true","allowSwipe":"false","lockMenu":"true","allowTempTheme":"true","dateFormat":"DD/MM/YYYY","sizes":{"sx":48,"sy":48,"gx":6,"gy":6,"cx":6,"cy":6,"px":0,"py":0}}},{"id":"08356ee3b9f02222","type":"debug","z":"fef444a29fad2f51","name":"JSON Output","active":true,"tosidebar":true,"console":false,"tostatus":true,"complete":"payload","targetType":"msg","statusVal":"payload","statusType":"auto","x":1880,"y":420,"wires":[]},{"id":"c29a0e184e0c5bb8","type":"function","z":"fef444a29fad2f51","name":"Set Global Variables - USER TO UPDATE","func":"//Setting Global Variables\n// Replace '*' with the appropriate values\n\n//AUTHOMIZE KEYS NEEDED\nglobal.set(\"AuthToken\", \"*\");\nglobal.set(\"AuthomizeAPI\", \"https://api.authomize.com/v2/incidents/\");\n\n//OKTA KEYS NEEDED\nglobal.set(\"OktaAPI\", \"https://*.okta.com/api/v1/users/\");\nglobal.set(\"OktaKEY\", \"*\");\n\n//AWS KEYS NEEDED\nglobal.set(\"aws_access_key_id\", \"*\");\nglobal.set(\"aws_secret_access_key\", \"*\");\nglobal.set(\"region\", \"*\");\nglobal.set(\"output\", \"json\");\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":1080,"y":260,"wires":[["ae5c549a14fdaac7"]]},{"id":"940e713d5ef8e04c","type":"comment","z":"fef444a29fad2f51","name":"Workflow - Okta application exfiltration","info":"","x":2150,"y":200,"wires":[]},{"id":"ae5c549a14fdaac7","type":"switch","z":"fef444a29fad2f51","name":"Identify Incident","property":"payload.data.policy.name","propertyType":"msg","rules":[{"t":"cont","v":"A new SCIM application was detected","vt":"str"},{"t":"cont","v":"Refactor AWS policy based on activities in the last 60 days.","vt":"str"},{"t":"cont","v":"Public Git repository","vt":"str"},{"t":"nempty"}],"checkall":"false","repair":false,"outputs":4,"x":1580,"y":260,"wires":[["86bea1d6d7e0dbac","08356ee3b9f02222"],["f8eae5fa322188f5","08356ee3b9f02222"],["9cefb787f18920f7","08356ee3b9f02222"],["9c503a8895bebc72"]]},{"id":"e4c4451904f097a4","type":"comment","z":"fef444a29fad2f51","name":"Workflow - AWS Refactoring ","info":"","x":2140,"y":300,"wires":[]},{"id":"891d95f70256c749","type":"comment","z":"fef444a29fad2f51","name":"Workflow - Git Repo","info":"","x":2150,"y":420,"wires":[]},{"id":"908b76435844a24b","type":"http in","z":"fef444a29fad2f51","name":"","url":"/Data","method":"post","upload":false,"swaggerDoc":"","x":270,"y":260,"wires":[["5b586963ee502b0b","c29a0e184e0c5bb8","b4bc8aa43f9789f9"]]},{"id":"5b586963ee502b0b","type":"http response","z":"fef444a29fad2f51","name":"","statusCode":"200","headers":{},"x":460,"y":320,"wires":[]},{"id":"86bea1d6d7e0dbac","type":"link out","z":"fef444a29fad2f51","d":true,"name":"OpenITDR-OUT-OktaExfiltration","mode":"link","links":["23d6e9ed13904e80"],"x":2155,"y":160,"wires":[]},{"id":"f8eae5fa322188f5","type":"link out","z":"fef444a29fad2f51","d":true,"name":"OpenITDR-OUT-AwsRefactor","mode":"link","links":["39792fd035ccb904"],"x":2155,"y":260,"wires":[]},{"id":"9cefb787f18920f7","type":"link out","z":"fef444a29fad2f51","d":true,"name":"OpenITDR-OUT-GitRepo","mode":"link","links":["e8dfdabcd2a59fc0"],"x":2155,"y":380,"wires":[]},{"id":"142a7f130c23e9eb","type":"comment","z":"fef444a29fad2f51","name":"WEBHOOK CONFIG: http://<yourip>/Data","info":"THIS CAN BE RUN DIRECTLY FROM POSTMAN\n\nNO AUTHENTICATION WITH THIS VERSION\n\nUSE http://<your workflow node ip>/Data \n\nto configure your Authomize webhook.","x":360,"y":200,"wires":[]},{"id":"ccc23667cd2e9fc6","type":"comment","z":"fef444a29fad2f51","name":"USERS - UPDATE ALL VARIABLES HERE","info":"THIS CAN BE RUN DIRECTLY FROM POSTMAN\n\nNO AUTHENTICATION WITH THIS VERSION","x":1080,"y":200,"wires":[]},{"id":"ac4a2f97cd43339f","type":"comment","z":"fef444a29fad2f51","name":"Use Policy Name - Switch to Workflow","info":"","x":1590,"y":200,"wires":[]},{"id":"9c503a8895bebc72","type":"debug","z":"fef444a29fad2f51","name":"Nothing to do - JSON Output","active":true,"tosidebar":true,"console":false,"tostatus":true,"complete":"payload","targetType":"msg","statusVal":"payload","statusType":"auto","x":1920,"y":540,"wires":[]},{"id":"b4bc8aa43f9789f9","type":"debug","z":"fef444a29fad2f51","name":"Processed Message","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":500,"y":380,"wires":[]},{"id":"23d6e9ed13904e80","type":"link in","z":"0834077afbfa3457","name":"IN-OktaExfiltration","links":["86bea1d6d7e0dbac"],"x":75,"y":360,"wires":[["d81f67ddb7cf1d44"]]},{"id":"6ce32a37a4a2e8fd","type":"e-mail","z":"0834077afbfa3457","server":"mail.symutils.com","port":"465","secure":true,"tls":false,"name":"srileytest@symutils.com","dname":"SendMail","x":840,"y":420,"wires":[]},{"id":"40c9be0634935af0","type":"function","z":"0834077afbfa3457","name":"SetupMailSend","func":"let TheIncident = flow.get(\"FlowIncident\");\n\nlet MyMessage = \"Working Status: \" + msg.payload.data.status + \" | Description: \" + msg.payload.data.description + \" | Recommendation: \" + msg.payload.data.recommendation + \" | Access URL: \" + msg.payload.data.url;\nmsg.payload = MyMessage;\n\nmsg.topic = \"Authomize Incident: \" + TheIncident;\n\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":560,"y":420,"wires":[["6ce32a37a4a2e8fd"]]},{"id":"d81f67ddb7cf1d44","type":"function","z":"0834077afbfa3457","name":"Get Exposed Users","func":"let IncidentId = msg.payload.data.id;\nflow.set(\"FlowIncident\", IncidentId);\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/extended\";\nlet URL3 = URL1 + IncidentId + Extension;\n\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":270,"y":360,"wires":[["2e9019d2b25024c8","40c9be0634935af0"]]},{"id":"2e9019d2b25024c8","type":"http request","z":"0834077afbfa3457","name":"Get Exposed","method":"GET","ret":"obj","paytoqs":"body","url":"","tls":"","persist":false,"proxy":"","insecureHTTPParser":false,"authType":"","senderr":false,"headers":[],"x":550,"y":300,"wires":[["0ecc17d768088684","3720743b080403fc"]]},{"id":"0ecc17d768088684","type":"debug","z":"0834077afbfa3457","name":"Okta Output of Process","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":2310,"y":520,"wires":[]},{"id":"3720743b080403fc","type":"function","z":"0834077afbfa3457","name":"Incident Comment Update","func":"let OriginID = msg.payload.extended_information.password_exfiltration.exfiltrated_accounts[0].originId;\nflow.set(\"FlowOriginID\", OriginID);\n\nlet IncidentId = flow.get(\"FlowIncident\");\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/comments\";\nlet URL3 = URL1 + IncidentId + Extension;\n\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.payload = {\"content\": \"OpenITDR Workflow Okta application exfiltration about to reset user password(s)\"};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":820,"y":300,"wires":[["021abb9f4a394c1e"]]},{"id":"33016906142e52bb","type":"http request","z":"0834077afbfa3457","name":"Okta Reset Password","method":"POST","ret":"obj","paytoqs":"body","url":"","tls":"","persist":false,"proxy":"","insecureHTTPParser":false,"authType":"","senderr":false,"headers":[],"x":1660,"y":300,"wires":[["545b379a5228372f"]]},{"id":"021abb9f4a394c1e","type":"http request","z":"0834077afbfa3457","name":"Update Comment","method":"POST","ret":"obj","paytoqs":"body","url":"","tls":"","persist":false,"proxy":"","insecureHTTPParser":false,"authType":"","senderr":false,"headers":[],"x":1070,"y":300,"wires":[["d7c755577a760f44","0ecc17d768088684"]]},{"id":"1bdfe892a035b582","type":"http request","z":"0834077afbfa3457","name":"Update Comment","method":"POST","ret":"obj","paytoqs":"body","url":"","tls":"","persist":false,"proxy":"","insecureHTTPParser":false,"authType":"","senderr":false,"headers":[],"x":2230,"y":300,"wires":[["0ecc17d768088684"]]},{"id":"d7c755577a760f44","type":"function","z":"0834077afbfa3457","name":"Okta Reset User Password","func":"let OriginID = flow.get(\"FlowOriginID\");\n\nlet URL1 = global.get(\"OktaAPI\");\nlet Extension = \"/lifecycle/reset_password?sendEmail=true\";\nlet URL3 = URL1 + OriginID + Extension;\nlet Token = global.get(\"OktaKEY\");\n\nmsg.headers = {};\nmsg.url = URL3;\nmsg.headers['Accept'] = 'application/json';\nmsg.headers['Content-Type'] = 'application/json';\nmsg.headers['Authorization'] = 'SSWS ' + Token;\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":1360,"y":300,"wires":[["33016906142e52bb"]]},{"id":"545b379a5228372f","type":"function","z":"0834077afbfa3457","name":"Incident Comment Update","func":"let IncidentId = flow.get(\"FlowIncident\");\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/comments\";\nlet URL3 = URL1 + IncidentId + Extension;\n\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.payload = {\"content\": \"OpenITDR Workflow Okta application exfiltration finished resetting password(s), close this incident\"};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":1960,"y":300,"wires":[["1bdfe892a035b582"]]},{"id":"39792fd035ccb904","type":"link in","z":"08d46d137e03e77b","name":"IN-AWSRefactor","links":["f8eae5fa322188f5"],"x":105,"y":500,"wires":[["541f425c4266c8e0"]]},{"id":"70bbf03b366c5c25","type":"http request","z":"08d46d137e03e77b","name":"Get Expnded Detail","method":"GET","ret":"obj","paytoqs":"body","url":"","tls":"","persist":false,"proxy":"","insecureHTTPParser":false,"authType":"","senderr":false,"headers":[],"x":710,"y":500,"wires":[["8181a569f78c996a","dd2c3da5598441a6","c0c3776a4c7b4e4e"]]},{"id":"541f425c4266c8e0","type":"function","z":"08d46d137e03e77b","name":"Get Extended Refactored Policy","func":"let IncidentId = msg.payload.data.id;\nflow.set(\"FlowIncident\", IncidentId);\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/extended\";\nlet URL3 = URL1 + IncidentId + Extension;\n\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":410,"y":500,"wires":[["70bbf03b366c5c25","d58c3e9103785eb5","b22ba9af01005136"]]},{"id":"8181a569f78c996a","type":"function","z":"08d46d137e03e77b","name":"Incident Comment Update","func":"//Setup Form Extended Details\nlet OrigAWSPolicy = msg.payload.extended_information.policy_refactor.originalPolicy;\nlet NewAWSPolicy = msg.payload.extended_information.policy_refactor.originalPolicy;\nlet IAMDetails = msg.payload.extended_information.entities[0].originId;\n\nflow.set(\"TheOrigAWSPolicy\", OrigAWSPolicy);\nflow.set(\"TheNewAWSPolicy\", NewAWSPolicy);\nflow.set(\"TheIAMDetails\", IAMDetails);\n\nlet IncidentId = flow.get(\"FlowIncident\");\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/comments\";\nlet URL3 = URL1 + IncidentId + Extension;\n\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.payload = {\"content\": \"OpenITDR Workflow Refactored Policy being worked on.\"};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":1020,"y":500,"wires":[["5f9b7e13110c9e50","4a440f2be11a2243"]]},{"id":"d58c3e9103785eb5","type":"function","z":"08d46d137e03e77b","name":"SetupMailSend","func":"let TheIncident = flow.get(\"FlowIncident\");\n\nlet MyMessage = \"Working Status: \" + msg.payload.data.status + \" | Description: \" + msg.payload.data.description + \" | Recommendation: \" + msg.payload.data.recommendation + \" | Access URL: \" + msg.payload.data.url;\nmsg.payload = MyMessage;\n\nmsg.topic = \"Authomize Incident: \" + TheIncident;\n\n\nreturn msg;\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":700,"y":580,"wires":[["60e4ad9b76f4d4c8"]]},{"id":"5f9b7e13110c9e50","type":"http request","z":"08d46d137e03e77b","name":"Update Comment","method":"POST","ret":"obj","paytoqs":"body","url":"","tls":"","persist":false,"proxy":"","insecureHTTPParser":false,"authType":"","senderr":false,"headers":[],"x":1330,"y":460,"wires":[["dd2c3da5598441a6","9c0f62c500abefd8"]]},{"id":"60e4ad9b76f4d4c8","type":"e-mail","z":"08d46d137e03e77b","server":"mail.symutils.com","port":"465","secure":true,"tls":false,"name":"srileytest@symutils.com","dname":"SendMail","x":880,"y":580,"wires":[]},{"id":"cbcb5db68c4cb260","type":"function","z":"08d46d137e03e77b","name":"Config for AWS Policy Call","func":"\nlet IAMDetails = flow.get(\"TheIAMDetails\");\n\nmsg.payload =  \"iam create-policy-version --policy-arn \" + IAMDetails + \" --policy-document file://NewAWSPolicy.json --set-as-default\";\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":1640,"y":420,"wires":[["e0c3e5a536bd5876"]]},{"id":"6312d1cc5761a683","type":"function","z":"08d46d137e03e77b","name":"Incident Comment Update","func":"let IncidentId = flow.get(\"FlowIncident\");\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/comments\";\nlet URL3 = URL1 + IncidentId + Extension;\n\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.payload = {\"content\": \"OpenITDR Workflow Refactored Policy finished resetting password(s), close this incident\"};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":2000,"y":460,"wires":[["71307da66b5b3003"]]},{"id":"71307da66b5b3003","type":"http request","z":"08d46d137e03e77b","name":"Update Comment","method":"POST","ret":"obj","paytoqs":"body","url":"","tls":"","persist":false,"proxy":"","insecureHTTPParser":false,"authType":"","senderr":false,"headers":[],"x":2390,"y":460,"wires":[["6bf5eab40fab6e52"]]},{"id":"6bf5eab40fab6e52","type":"debug","z":"08d46d137e03e77b","name":"AWS Refactor Output","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":2400,"y":540,"wires":[]},{"id":"b22ba9af01005136","type":"debug","z":"08d46d137e03e77b","name":"Routed to AWS Refactor","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":730,"y":680,"wires":[]},{"id":"dd2c3da5598441a6","type":"debug","z":"08d46d137e03e77b","name":"Just Before Work","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":1810,"y":720,"wires":[]},{"id":"c0c3776a4c7b4e4e","type":"function","z":"08d46d137e03e77b","name":"Setup to Send Attachment","func":"let TheIncident = flow.get(\"FlowIncident\");\nlet OrigAWSPolicy = flow.get(\"TheOrigAWSPolicy\");\nlet NewAWSPolicy = flow.get(\"TheNewAWSPolicy\");\n\nmsg.topic = \"Authomize found policy changes: \" + TheIncident;\nmsg.payload = \"Authomize content workflow discovered the following information on AWS policies. Please see the attached files for your information.\";\nmsg.attachments = [\n    { filename: \"OriginalPolicy.txt\", content: OrigAWSPolicy },\n    { filename: \"NewAWSPolicy.txt\", content: NewAWSPolicy },\n];\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":1020,"y":400,"wires":[["743769e48511c574"]]},{"id":"743769e48511c574","type":"e-mail","z":"08d46d137e03e77b","server":"mail.symutils.com","port":"465","secure":true,"tls":false,"name":"srileytest@symutils.com","dname":"SendMail","x":1300,"y":400,"wires":[]},{"id":"e5c5b80392f34927","type":"exec","z":"08d46d137e03e77b","g":"e269a6f6f2ad800d","command":"aws","addpay":"payload","append":"","useSpawn":"false","timer":"","winHide":false,"oldrc":false,"name":"Set AWS","x":1780,"y":120,"wires":[["8f5b0b852d4a04fd","448e44463eafd654"],["448e44463eafd654"],["448e44463eafd654"]]},{"id":"9c0f62c500abefd8","type":"function","z":"08d46d137e03e77b","g":"e269a6f6f2ad800d","name":"Setup Args for Exec","func":"//Set the keys from global record\nlet my_aws_access_key_id = global.get(\"aws_access_key_id\");\n\nmsg.payload = \"configure set aws_access_key_id \" + my_aws_access_key_id;\n\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":1560,"y":120,"wires":[["e5c5b80392f34927"]]},{"id":"8f5b0b852d4a04fd","type":"function","z":"08d46d137e03e77b","g":"e269a6f6f2ad800d","name":"Setup Args for Exec","func":"//Set the keys from global record\n\nlet my_aws_secret_access_key = global.get(\"aws_secret_access_key\");\n\nmsg.payload = \"configure set aws_secret_access_key \" + my_aws_secret_access_key;\n\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":1580,"y":180,"wires":[["dcd30539602533ee"]]},{"id":"dcd30539602533ee","type":"exec","z":"08d46d137e03e77b","g":"e269a6f6f2ad800d","command":"aws","addpay":"payload","append":"","useSpawn":"false","timer":"","winHide":false,"oldrc":false,"name":"Set AWS","x":1800,"y":180,"wires":[["51e53f00c679d5b0","448e44463eafd654"],["448e44463eafd654"],["448e44463eafd654"]]},{"id":"51e53f00c679d5b0","type":"function","z":"08d46d137e03e77b","g":"e269a6f6f2ad800d","name":"Setup Args for Exec","func":"//Set the keys from global record\n\nlet my_region = global.get(\"region\");\n\nmsg.payload = \"configure set region \" + my_region;\n\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":1600,"y":240,"wires":[["370c5a5fa3aaa248"]]},{"id":"370c5a5fa3aaa248","type":"exec","z":"08d46d137e03e77b","g":"e269a6f6f2ad800d","command":"aws","addpay":"payload","append":"","useSpawn":"false","timer":"","winHide":false,"oldrc":false,"name":"Set AWS","x":1820,"y":240,"wires":[["10545b8d384a95fe","448e44463eafd654"],["448e44463eafd654"],["448e44463eafd654"]]},{"id":"10545b8d384a95fe","type":"function","z":"08d46d137e03e77b","g":"e269a6f6f2ad800d","name":"Setup Args for Exec","func":"//Set the keys from global record\n\nlet my_output = global.get(\"output\");\n\nmsg.payload = \"configure set output \" + my_output;\n\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":1620,"y":300,"wires":[["e70d5367dcf6d01d"]]},{"id":"e70d5367dcf6d01d","type":"exec","z":"08d46d137e03e77b","g":"e269a6f6f2ad800d","command":"aws","addpay":"payload","append":"","useSpawn":"false","timer":"","winHide":false,"oldrc":false,"name":"Set AWS","x":1840,"y":300,"wires":[["448e44463eafd654","cbcb5db68c4cb260"],["448e44463eafd654"],["448e44463eafd654"]]},{"id":"448e44463eafd654","type":"debug","z":"08d46d137e03e77b","g":"e269a6f6f2ad800d","name":"AWS Console Output","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":2160,"y":200,"wires":[]},{"id":"63e79eed8a4da730","type":"comment","z":"08d46d137e03e77b","name":"Setup AWS CLI environment so we can make calls and do some work","info":"","x":1690,"y":60,"wires":[]},{"id":"e0c3e5a536bd5876","type":"exec","z":"08d46d137e03e77b","command":"aws","addpay":"payload","append":"","useSpawn":"false","timer":"","winHide":false,"oldrc":false,"name":"Apply new policy","x":1610,"y":500,"wires":[["6bf5eab40fab6e52","6312d1cc5761a683"],["6bf5eab40fab6e52"],["6bf5eab40fab6e52"]]},{"id":"24ec9fef7146a462","type":"file","z":"08d46d137e03e77b","name":"Write JSON to file","filename":"./NewAWSPolicy.json","filenameType":"str","appendNewline":false,"createDir":false,"overwriteFile":"true","encoding":"utf8","x":1390,"y":600,"wires":[["dd2c3da5598441a6"]]},{"id":"4a440f2be11a2243","type":"function","z":"08d46d137e03e77b","name":"Setup JSON for Writing","func":"\nmsg.payload = flow.get(\"TheNewAWSPolicy\");\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":1350,"y":520,"wires":[["24ec9fef7146a462"]]},{"id":"e8dfdabcd2a59fc0","type":"link in","z":"6d8d00a0454e2a65","name":"In-Git-Repo","links":["9cefb787f18920f7"],"x":45,"y":520,"wires":[["e44444bd43bbefd0"]]},{"id":"353bc3a41a5efbe1","type":"http request","z":"6d8d00a0454e2a65","name":"Get Extended","method":"GET","ret":"obj","paytoqs":"body","url":"","tls":"","persist":false,"proxy":"","insecureHTTPParser":false,"authType":"","senderr":false,"headers":[],"x":560,"y":520,"wires":[["34a1829a06dcbf6a","71b8f124e3076c70"]]},{"id":"57e0c3fb4470286a","type":"function","z":"6d8d00a0454e2a65","name":"Git Repo Find","func":"\nlet IncidentId = msg.payload.data.id;\nflow.set(\"FlowIncident\", IncidentId);\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/extended\";\nlet URL3 = URL1 + IncidentId + Extension;\n\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":280,"y":520,"wires":[["353bc3a41a5efbe1","5323e7fadc5a5ad8"]]},{"id":"34a1829a06dcbf6a","type":"function","z":"6d8d00a0454e2a65","name":"Incident Comment Update","func":"// Get info needed for Args later in the flow (see Exec flows)\n//Get RepoName here...\nlet MyGitRepoName = msg.payload.extended_information.entities[0].name;\nflow.set(\"GitRepoName\", MyGitRepoName);\n\n// Set basic incident info\nlet IncidentId = flow.get(\"FlowIncident\");\n\n\n// setup for the API call\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/comments\";\nlet URL3 = URL1 + IncidentId + Extension;\n\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.payload = {\"content\": \"OpenITDR Workflow Git Repo review being conducted.\"};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":1040,"y":520,"wires":[["ce54e1825f6bcb35"]]},{"id":"5323e7fadc5a5ad8","type":"function","z":"6d8d00a0454e2a65","name":"SetupMailSend","func":"let TheIncident = flow.get(\"FlowIncident\");\n\nlet MyMessage = \"Working Status: \" + msg.payload.data.status + \" | Description: \" + msg.payload.data.description + \" | Recommendation: \" + msg.payload.data.recommendation + \" | Access URL: \" + msg.payload.data.url;\nmsg.payload = MyMessage;\n\nmsg.topic = \"Authomize Incident: \" + TheIncident;\n\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":560,"y":600,"wires":[["a47fa506705f3cfa"]]},{"id":"ce54e1825f6bcb35","type":"http request","z":"6d8d00a0454e2a65","name":"Update Comment","method":"POST","ret":"obj","paytoqs":"body","url":"","tls":"","persist":false,"proxy":"","insecureHTTPParser":false,"authType":"","senderr":false,"headers":[],"x":1010,"y":440,"wires":[["fec9b1e7f5f5a78d","811ced318264b0c6"]]},{"id":"a47fa506705f3cfa","type":"e-mail","z":"6d8d00a0454e2a65","server":"mail.symutils.com","port":"465","secure":true,"tls":false,"name":"srileytest@symutils.com","dname":"SendMail","x":780,"y":600,"wires":[]},{"id":"0c8e8243fd3c4ee5","type":"function","z":"6d8d00a0454e2a65","name":"Incident Comment Update","func":"let IncidentId = flow.get(\"FlowIncident\");\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/comments\";\nlet URL3 = URL1 + IncidentId + Extension;\n\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.payload = {\"content\": \"OpenITDR Workflow Git Repo finished reviewing the content and sent emails, close this incident\"};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":1980,"y":340,"wires":[["90b6b35902e8ca65"]]},{"id":"90b6b35902e8ca65","type":"http request","z":"6d8d00a0454e2a65","name":"Update Comment","method":"POST","ret":"obj","paytoqs":"body","url":"","tls":"","persist":false,"proxy":"","insecureHTTPParser":false,"authType":"","senderr":false,"headers":[],"x":2310,"y":340,"wires":[["bde094ec1556bd26"]]},{"id":"bde094ec1556bd26","type":"debug","z":"6d8d00a0454e2a65","name":"Public git repo Output","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":2620,"y":340,"wires":[]},{"id":"fec9b1e7f5f5a78d","type":"debug","z":"6d8d00a0454e2a65","name":"Public git repo Expanded","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":1330,"y":460,"wires":[]},{"id":"17c6789b9587e830","type":"exec","z":"6d8d00a0454e2a65","g":"ec0b35b23ad2f78b","command":"python3","addpay":"payload","append":"","useSpawn":"false","timer":"","winHide":false,"oldrc":false,"name":"Connect to Github","x":1570,"y":380,"wires":[["ef803f30b01ba80b","a7e8fb6872994ffc"],["ef803f30b01ba80b"],["ef803f30b01ba80b"]]},{"id":"f79ad5da66e1e92c","type":"function","z":"6d8d00a0454e2a65","g":"ec0b35b23ad2f78b","name":"Setup Args for Exec","func":"let RepoName = flow.get(\"GitRepoName\");\nlet OrgName = flow.get(\"GitOrgName\");\n\nmsg.payload = \"/data/workingDir/getDataFromGitHub.py -o \" + OrgName + \" -r \" + RepoName;\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":1320,"y":380,"wires":[["17c6789b9587e830"]]},{"id":"dc1e800851df685f","type":"exec","z":"6d8d00a0454e2a65","g":"ec0b35b23ad2f78b","command":"unzip","addpay":"payload","append":"","useSpawn":"false","timer":"","winHide":false,"oldrc":false,"name":"List Github Content","x":1570,"y":300,"wires":[["e02dd92b680585de","2110638c40a31dbd","0c8e8243fd3c4ee5"],["e02dd92b680585de"],["e02dd92b680585de"]]},{"id":"e02dd92b680585de","type":"debug","z":"6d8d00a0454e2a65","name":"Unzip List Process","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":1950,"y":180,"wires":[]},{"id":"ef803f30b01ba80b","type":"debug","z":"6d8d00a0454e2a65","name":"Running Python","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":1940,"y":480,"wires":[]},{"id":"a7e8fb6872994ffc","type":"function","z":"6d8d00a0454e2a65","g":"ec0b35b23ad2f78b","name":"Setup Args for Exec","func":"let RepoName = flow.get(\"GitRepoName\");\nlet OrgName = flow.get(\"GitOrgName\");\n\nmsg.payload = \"-l /data/process/git/\" + OrgName + \"-\" + RepoName + \".zip > /data/process/git/content-list.txt\"\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":1320,"y":300,"wires":[["dc1e800851df685f"]]},{"id":"2110638c40a31dbd","type":"function","z":"6d8d00a0454e2a65","name":"Setup to Send Attachment","func":"let TheIncident = flow.get(\"FlowIncident\");\n\nmsg.topic = \"Authomize found Content: \" + TheIncident;\nmsg.payload = \"Authomize content workflow discovered the following information on GitHub. Please see the attached file.\";\nmsg.attachments = [\n    { filename: \"content-list.txt\", path: \"/data/process/git/content-list.txt\" },\n    { filename: \"repositories.csv\", path: \"/data/process/git/repositories.csv\" },\n];\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":1980,"y":280,"wires":[["dd33960bd03d5679"]]},{"id":"dd33960bd03d5679","type":"e-mail","z":"6d8d00a0454e2a65","server":"mail.symutils.com","port":"465","secure":true,"tls":false,"name":"srileytest@symutils.com","dname":"SendMail","x":2280,"y":280,"wires":[]},{"id":"78af271acafdfdb9","type":"comment","z":"6d8d00a0454e2a65","name":"Expand the information we found to extract the Repo details","info":"","x":420,"y":480,"wires":[]},{"id":"7b7e8b6927c2a5bf","type":"comment","z":"6d8d00a0454e2a65","name":"Notify people that we are working a Git Repo ticket","info":"","x":670,"y":560,"wires":[]},{"id":"2c268033b6ca0604","type":"comment","z":"6d8d00a0454e2a65","name":"This area sets up variables and executes actions on the server","info":"","x":1420,"y":220,"wires":[]},{"id":"4b0f396421ee2812","type":"comment","z":"6d8d00a0454e2a65","name":"Send file attachements and comment on ticket to close it out","info":"","x":2080,"y":240,"wires":[]},{"id":"71b8f124e3076c70","type":"debug","z":"6d8d00a0454e2a65","name":"Public git repo Expanded","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":770,"y":380,"wires":[]},{"id":"e44444bd43bbefd0","type":"function","z":"6d8d00a0454e2a65","name":"FlowVariables - USER TO UPDATE","func":"//Enter the name of the org you use for Git\n//Example the Org name for https://github.com/authomize/Open-ITDR\n//Is authomize\nflow.set(\"GitOrgName\", \"*\" );\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":220,"y":600,"wires":[["57e0c3fb4470286a"]]},{"id":"811ced318264b0c6","type":"exec","z":"6d8d00a0454e2a65","command":"rm","addpay":"","append":"/data/process/git/*","useSpawn":"false","timer":"","winHide":false,"oldrc":false,"name":"Clean Up Environment","x":1020,"y":320,"wires":[["f79ad5da66e1e92c","fec9b1e7f5f5a78d"],["fec9b1e7f5f5a78d"],["fec9b1e7f5f5a78d"]]},{"id":"6e580f1bc7329de1","type":"comment","z":"6d8d00a0454e2a65","name":"USER - UPDATE THIS NODE","info":"","x":200,"y":640,"wires":[]}]
+[
+    {
+        "disabled": false,
+        "env": [],
+        "id": "5194913d351aa6cd",
+        "info": "",
+        "label": "Global Configuration flow",
+        "type": "tab"
+    },
+    {
+        "disabled": false,
+        "env": [],
+        "id": "fef444a29fad2f51",
+        "info": "",
+        "label": "OpenITDR Workflows - Incoming webhook router",
+        "type": "tab"
+    },
+    {
+        "disabled": false,
+        "env": [],
+        "id": "0834077afbfa3457",
+        "info": "",
+        "label": "Okta Application Exfiltration",
+        "type": "tab"
+    },
+    {
+        "disabled": false,
+        "env": [],
+        "id": "08d46d137e03e77b",
+        "info": "",
+        "label": "AWS Refactoring",
+        "type": "tab"
+    },
+    {
+        "disabled": false,
+        "env": [],
+        "id": "6d8d00a0454e2a65",
+        "info": "",
+        "label": "Git Repo",
+        "type": "tab"
+    },
+    {
+        "id": "ec0b35b23ad2f78b",
+        "nodes": [
+            "f79ad5da66e1e92c",
+            "a7e8fb6872994ffc",
+            "dc1e800851df685f",
+            "17c6789b9587e830"
+        ],
+        "style": {
+            "color": "#a4a4a4",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "stroke": "#999999",
+            "stroke-opacity": "1"
+        },
+        "type": "group",
+        "x": 1194,
+        "y": 251.5,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "id": "e269a6f6f2ad800d",
+        "nodes": [
+            "e5c5b80392f34927",
+            "9c0f62c500abefd8",
+            "8f5b0b852d4a04fd",
+            "dcd30539602533ee",
+            "51e53f00c679d5b0",
+            "370c5a5fa3aaa248",
+            "10545b8d384a95fe",
+            "e70d5367dcf6d01d",
+            "448e44463eafd654"
+        ],
+        "style": {
+            "color": "#a4a4a4",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "stroke": "#999999",
+            "stroke-opacity": "1"
+        },
+        "type": "group",
+        "x": 1434,
+        "y": 71.5,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "h": 402,
+        "id": "40141c7e7830ab2a",
+        "name": "Dashboard info",
+        "nodes": [
+            "cecb8073bc731fae",
+            "00feb8284be413a4",
+            "dbc2dbdbb4980fde",
+            "6e32194ebeb1c87d",
+            "cb4b973f7521fde2",
+            "6ece62b4194494a6",
+            "c2650566e8de77a3",
+            "672e051889a36034",
+            "a6b4194283a555b2",
+            "bd5a839e314d27dd",
+            "a566929791402c5b"
+        ],
+        "style": {
+            "label": true
+        },
+        "type": "group",
+        "w": 672,
+        "x": 614,
+        "y": 399,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "id": "1ed36e968f6d4420",
+        "site": {
+            "allowSwipe": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "hideToolbar": "false",
+            "lockMenu": "false",
+            "name": "Open ITDR workflows management",
+            "sizes": {
+                "cx": 6,
+                "cy": 6,
+                "gx": 6,
+                "gy": 6,
+                "px": 0,
+                "py": 0,
+                "sx": 48,
+                "sy": 48
+            }
+        },
+        "theme": {
+            "angularTheme": {
+                "accents": "blue",
+                "background": "grey",
+                "palette": "light",
+                "primary": "indigo",
+                "warn": "red"
+            },
+            "customTheme": {
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "default": "#4B7930",
+                "name": "Untitled Theme 1"
+            },
+            "darkTheme": {
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "default": "#097479",
+                "edited": false
+            },
+            "lightTheme": {
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "default": "#0094CE",
+                "edited": true,
+                "reset": false
+            },
+            "name": "theme-light",
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "edited": false,
+                    "value": "#0094CE"
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                },
+                "group-backgroundColor": {
+                    "edited": false,
+                    "value": "#ffffff"
+                },
+                "group-borderColor": {
+                    "edited": false,
+                    "value": "#ffffff"
+                },
+                "group-textColor": {
+                    "edited": false,
+                    "value": "#1bbfff"
+                },
+                "page-backgroundColor": {
+                    "edited": false,
+                    "value": "#fafafa"
+                },
+                "page-sidebar-backgroundColor": {
+                    "edited": false,
+                    "value": "#ffffff"
+                },
+                "page-titlebar-backgroundColor": {
+                    "edited": false,
+                    "value": "#0094CE"
+                },
+                "widget-backgroundColor": {
+                    "edited": false,
+                    "value": "#0094ce"
+                },
+                "widget-borderColor": {
+                    "edited": false,
+                    "value": "#ffffff"
+                },
+                "widget-textColor": {
+                    "edited": false,
+                    "value": "#111111"
+                }
+            }
+        },
+        "type": "ui_base"
+    },
+    {
+        "disabled": false,
+        "hidden": false,
+        "icon": "dashboard",
+        "id": "935011a08908cb33",
+        "name": "Configuration",
+        "order": 2,
+        "type": "ui_tab"
+    },
+    {
+        "className": "",
+        "collapse": false,
+        "disp": true,
+        "id": "558de16aa469efc9",
+        "name": "Configuration Status",
+        "order": 2,
+        "tab": "935011a08908cb33",
+        "type": "ui_group",
+        "width": "12"
+    },
+    {
+        "className": "",
+        "collapse": false,
+        "disp": true,
+        "id": "c440c7312331526f",
+        "name": "Manual Actions",
+        "order": 2,
+        "tab": "a9017d875cbf361a",
+        "type": "ui_group",
+        "width": "6"
+    },
+    {
+        "icon": "open_in_browser",
+        "id": "7968e81ec130d714",
+        "link": "https://github.com/authomize/Open-ITDR",
+        "name": "Open ITDR repo",
+        "order": 5,
+        "target": "newtab",
+        "type": "ui_link"
+    },
+    {
+        "disabled": false,
+        "hidden": false,
+        "icon": "dashboard",
+        "id": "02632434b1433d71",
+        "name": "Open ITDR Dashboard",
+        "order": 1,
+        "type": "ui_tab"
+    },
+    {
+        "disabled": false,
+        "hidden": false,
+        "icon": "dashboard",
+        "id": "a9017d875cbf361a",
+        "name": "Manual Actions",
+        "order": 3,
+        "type": "ui_tab"
+    },
+    {
+        "className": "",
+        "collapse": false,
+        "disp": true,
+        "id": "f74b9fd880ecf4b3",
+        "name": "Actions",
+        "order": 1,
+        "tab": "935011a08908cb33",
+        "type": "ui_group",
+        "width": "6"
+    },
+    {
+        "group": "558de16aa469efc9",
+        "height": "1",
+        "id": "72713cf87591b8df",
+        "name": "spacer",
+        "order": 6,
+        "type": "ui_spacer",
+        "width": "6",
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "group": "558de16aa469efc9",
+        "height": "1",
+        "id": "c1f62afb4f066e65",
+        "name": "spacer",
+        "order": 2,
+        "type": "ui_spacer",
+        "width": "6",
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "group": "558de16aa469efc9",
+        "height": "1",
+        "id": "f7570c04b5d30122",
+        "name": "spacer",
+        "order": 4,
+        "type": "ui_spacer",
+        "width": "6",
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "disabled": false,
+        "hidden": false,
+        "icon": "dashboard",
+        "id": "a00e1e3af7d22271",
+        "name": "Error Logs",
+        "order": 4,
+        "type": "ui_tab"
+    },
+    {
+        "className": "",
+        "collapse": false,
+        "disp": true,
+        "id": "fc378e773fb6737d",
+        "name": "Error Logs",
+        "order": 1,
+        "tab": "a00e1e3af7d22271",
+        "type": "ui_group",
+        "width": "12"
+    },
+    {
+        "className": "",
+        "collapse": false,
+        "disp": true,
+        "id": "16d7010b3421fb45",
+        "name": "Dashboard",
+        "order": 1,
+        "tab": "02632434b1433d71",
+        "type": "ui_group",
+        "width": "6"
+    },
+    {
+        "crontab": "",
+        "id": "a63af50911ff16fc",
+        "name": "AutoRun configuration ",
+        "once": true,
+        "onceDelay": 0.1,
+        "payload": "",
+        "payloadType": "date",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "topic": "",
+        "type": "inject",
+        "wires": [
+            [
+                "13bb4d632eafe06a"
+            ]
+        ],
+        "x": 170,
+        "y": 120,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "finalize": "",
+        "func": "//Setting Global Variables\n// Replace '*' with the appropriate values\n\n//AUTHOMIZE KEYS NEEDED\nglobal.set(\"AuthToken\", global.get('config').Authomize.AuthToken);\nglobal.set(\"AuthomizeAPI\", global.get('config').Authomize.AuthomizeAPI);\n\n//OKTA KEYS NEEDED\nglobal.set(\"OktaAPI\", global.get('config').Okta.API);\nglobal.set(\"OktaKEY\", global.get('config').Okta.OktaKEY);\n\n//AWS KEYS NEEDED\nglobal.set(\"aws_access_key_id\", global.get('config').AWS.aws_access_key_id);\nglobal.set(\"aws_secret_access_key\", global.get('config').AWS.aws_secret_access_key);\nglobal.set(\"region\", global.get('config').AWS.region);\nglobal.set(\"output\", global.get('config').AWS.output);\n\nreturn msg;",
+        "id": "8938ba3e9e2f95ba",
+        "initialize": "",
+        "libs": [],
+        "name": "Set Global Variables - LEGACY DONT TOUCH",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "cecb8073bc731fae"
+            ]
+        ],
+        "x": 580,
+        "y": 280,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "field": "config",
+        "fieldType": "global",
+        "format": "json",
+        "id": "13bb4d632eafe06a",
+        "name": "Set globals - new (EDIT HERE)",
+        "output": "json",
+        "syntax": "mustache",
+        "template": "{\n    \"Authomize\" : {\n        \"AuthToken\" : \"atmzODEyMTExMjk2MDc6MEVaVEw4TU9RQktIT1REOVdVSEJJSlVTMUVKTkpZR1BaWFZDRU8tWUZWMA==\",\n        \"API\" : \"https://apidev.authomize.com/v2/incidents/\"\n    },\n    \"Okta\" : {\n        \"API\" : \"https://*.okta.com/api/v1/users/\",\n        \"OktaKEY\" : \"***\"\n    },\n    \"AWS\" : {\n        \"aws_access_key_id\" : \"*\",\n        \"aws_secret_access_key\" : \"*\",\n        \"region\" : \"*\",\n        \"output\" : \"json\"\n    }\n\n\n}\n",
+        "type": "template",
+        "wires": [
+            [
+                "8938ba3e9e2f95ba"
+            ]
+        ],
+        "x": 510,
+        "y": 200,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "id": "d9bd24055221e398",
+        "info": "",
+        "name": "update the globals here to set up the global variables",
+        "type": "comment",
+        "wires": [],
+        "x": 570,
+        "y": 160,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "id": "979aa61c47ca9ef4",
+        "info": "",
+        "name": "globals are reloaded every minute, manually inject if you want to force update",
+        "type": "comment",
+        "wires": [],
+        "x": 330,
+        "y": 80,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "action": "",
+        "from": "",
+        "g": "40141c7e7830ab2a",
+        "id": "cecb8073bc731fae",
+        "name": "send timestamp of last update",
+        "property": "",
+        "reg": false,
+        "rules": [
+            {
+                "p": "payload",
+                "pt": "msg",
+                "t": "set",
+                "to": "$now()\t",
+                "tot": "jsonata"
+            }
+        ],
+        "to": "",
+        "type": "change",
+        "wires": [
+            [
+                "00feb8284be413a4",
+                "6e32194ebeb1c87d",
+                "cb4b973f7521fde2",
+                "672e051889a36034",
+                "a6b4194283a555b2",
+                "a566929791402c5b"
+            ]
+        ],
+        "x": 770,
+        "y": 440,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "className": "",
+        "format": "{{msg.payload}}",
+        "g": "40141c7e7830ab2a",
+        "group": "558de16aa469efc9",
+        "height": 0,
+        "id": "00feb8284be413a4",
+        "label": "Timestamp of last config refresh",
+        "layout": "row-left",
+        "name": "",
+        "order": 1,
+        "type": "ui_text",
+        "width": 0,
+        "wires": [],
+        "x": 1130,
+        "y": 440,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "bgcolor": "",
+        "className": "",
+        "color": "",
+        "group": "f74b9fd880ecf4b3",
+        "height": 0,
+        "icon": "",
+        "id": "9f6893d88092f730",
+        "label": "Force configuration update",
+        "name": "",
+        "order": 1,
+        "passthru": false,
+        "payload": "",
+        "payloadType": "str",
+        "tooltip": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "type": "ui_button",
+        "width": 0,
+        "wires": [
+            [
+                "13bb4d632eafe06a",
+                "91c8da3dd1c568f2"
+            ]
+        ],
+        "x": 160,
+        "y": 200,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "className": "",
+        "format": "{{msg.payload}}",
+        "g": "40141c7e7830ab2a",
+        "group": "558de16aa469efc9",
+        "height": 0,
+        "id": "dbc2dbdbb4980fde",
+        "label": "AuthomizeAPI base",
+        "layout": "row-left",
+        "name": "",
+        "order": 3,
+        "type": "ui_text",
+        "width": 0,
+        "wires": [],
+        "x": 1090,
+        "y": 520,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "action": "",
+        "from": "",
+        "g": "40141c7e7830ab2a",
+        "id": "6e32194ebeb1c87d",
+        "name": "",
+        "property": "",
+        "reg": false,
+        "rules": [
+            {
+                "dc": true,
+                "p": "payload",
+                "pt": "msg",
+                "t": "set",
+                "to": "config.Authomize.API",
+                "tot": "global"
+            }
+        ],
+        "to": "",
+        "type": "change",
+        "wires": [
+            [
+                "dbc2dbdbb4980fde"
+            ]
+        ],
+        "x": 820,
+        "y": 520,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "action": "",
+        "from": "",
+        "g": "40141c7e7830ab2a",
+        "id": "cb4b973f7521fde2",
+        "name": "",
+        "property": "",
+        "reg": false,
+        "rules": [
+            {
+                "dc": true,
+                "p": "payload",
+                "pt": "msg",
+                "t": "set",
+                "to": "config.Okta.API",
+                "tot": "global"
+            }
+        ],
+        "to": "",
+        "type": "change",
+        "wires": [
+            [
+                "6ece62b4194494a6"
+            ]
+        ],
+        "x": 820,
+        "y": 600,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "className": "",
+        "format": "{{msg.payload}}",
+        "g": "40141c7e7830ab2a",
+        "group": "558de16aa469efc9",
+        "height": 0,
+        "id": "6ece62b4194494a6",
+        "label": "Okta API Base",
+        "layout": "row-left",
+        "name": "",
+        "order": 5,
+        "type": "ui_text",
+        "width": 0,
+        "wires": [],
+        "x": 1080,
+        "y": 600,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "className": "",
+        "format": "{{msg.payload}}",
+        "g": "40141c7e7830ab2a",
+        "group": "558de16aa469efc9",
+        "height": 0,
+        "id": "c2650566e8de77a3",
+        "label": "AWS Access Key ID",
+        "layout": "row-left",
+        "name": "",
+        "order": 7,
+        "type": "ui_text",
+        "width": 0,
+        "wires": [],
+        "x": 1100,
+        "y": 680,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "action": "",
+        "from": "",
+        "g": "40141c7e7830ab2a",
+        "id": "672e051889a36034",
+        "name": "",
+        "property": "",
+        "reg": false,
+        "rules": [
+            {
+                "dc": true,
+                "p": "payload",
+                "pt": "msg",
+                "t": "set",
+                "to": "config.AWS.aws_access_key_id",
+                "tot": "global"
+            }
+        ],
+        "to": "",
+        "type": "change",
+        "wires": [
+            [
+                "c2650566e8de77a3"
+            ]
+        ],
+        "x": 820,
+        "y": 680,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "action": "",
+        "from": "",
+        "g": "40141c7e7830ab2a",
+        "id": "a6b4194283a555b2",
+        "name": "",
+        "property": "",
+        "reg": false,
+        "rules": [
+            {
+                "dc": true,
+                "p": "payload",
+                "pt": "msg",
+                "t": "set",
+                "to": "config.AWS.region",
+                "tot": "global"
+            }
+        ],
+        "to": "",
+        "type": "change",
+        "wires": [
+            [
+                "bd5a839e314d27dd"
+            ]
+        ],
+        "x": 820,
+        "y": 760,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "className": "",
+        "format": "{{msg.payload}}",
+        "g": "40141c7e7830ab2a",
+        "group": "558de16aa469efc9",
+        "height": 0,
+        "id": "bd5a839e314d27dd",
+        "label": "AWS region",
+        "layout": "row-left",
+        "name": "",
+        "order": 8,
+        "type": "ui_text",
+        "width": 0,
+        "wires": [],
+        "x": 1070,
+        "y": 760,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "cancel": "",
+        "className": "",
+        "displayTime": "15",
+        "highlight": "",
+        "id": "91c8da3dd1c568f2",
+        "name": "Config update started notification",
+        "ok": "OK",
+        "outputs": 0,
+        "position": "top right",
+        "raw": false,
+        "sendall": true,
+        "topic": "Config update started",
+        "type": "ui_toast",
+        "wires": [],
+        "x": 180,
+        "y": 280,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "id": "c105d1b50255f2ee",
+        "name": "",
+        "scope": null,
+        "type": "catch",
+        "uncaught": false,
+        "wires": [
+            [
+                "c32fc52dfad15aa7",
+                "ecd2a3c9daacba44"
+            ]
+        ],
+        "x": 140,
+        "y": 520,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "className": "",
+        "format": "{{msg.payload}}",
+        "group": "fc378e773fb6737d",
+        "height": "20",
+        "id": "c32fc52dfad15aa7",
+        "label": "Dashboard errors page",
+        "layout": "col-center",
+        "name": "",
+        "order": 8,
+        "type": "ui_text",
+        "width": "12",
+        "wires": [],
+        "x": 390,
+        "y": 520,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "action": "",
+        "from": "",
+        "id": "ecd2a3c9daacba44",
+        "name": "timestamp",
+        "property": "",
+        "reg": false,
+        "rules": [
+            {
+                "p": "payload",
+                "pt": "msg",
+                "t": "set",
+                "to": "$now()\t",
+                "tot": "jsonata"
+            }
+        ],
+        "to": "",
+        "type": "change",
+        "wires": [
+            [
+                "1afb420bea9302b3"
+            ]
+        ],
+        "x": 150,
+        "y": 600,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "className": "",
+        "format": "{{msg.payload}}",
+        "group": "fc378e773fb6737d",
+        "height": 0,
+        "id": "1afb420bea9302b3",
+        "label": "Log update timestamp ",
+        "layout": "row-left",
+        "name": "",
+        "order": 1,
+        "type": "ui_text",
+        "width": 0,
+        "wires": [],
+        "x": 380,
+        "y": 600,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "className": "",
+        "format": "{{msg.payload}}",
+        "g": "40141c7e7830ab2a",
+        "group": "16d7010b3421fb45",
+        "height": 0,
+        "id": "a566929791402c5b",
+        "label": "Timestamp of last config refresh",
+        "layout": "row-left",
+        "name": "",
+        "order": 1,
+        "type": "ui_text",
+        "width": 0,
+        "wires": [],
+        "x": 1130,
+        "y": 480,
+        "z": "5194913d351aa6cd"
+    },
+    {
+        "active": true,
+        "complete": "payload",
+        "console": false,
+        "id": "08356ee3b9f02222",
+        "name": "JSON Output",
+        "statusType": "auto",
+        "statusVal": "payload",
+        "targetType": "msg",
+        "tosidebar": true,
+        "tostatus": true,
+        "type": "debug",
+        "wires": [],
+        "x": 1750,
+        "y": 400,
+        "z": "fef444a29fad2f51"
+    },
+    {
+        "d": true,
+        "finalize": "",
+        "func": "//Setting Global Variables\n// Replace '*' with the appropriate values\n\n//AUTHOMIZE KEYS NEEDED\nglobal.set(\"AuthToken\", \"atmzODEyMTExMjk2MDc6MEVaVEw4TU9RQktIT1REOVdVSEJJSlVTMUVKTkpZR1BaWFZDRU8tWUZWMA==\");\nglobal.set(\"AuthomizeAPI\", \"https://apidev.authomize.com/v2/incidents/\");\n\n//OKTA KEYS NEEDED\nglobal.set(\"OktaAPI\", \"https://*.okta.com/api/v1/users/\");\nglobal.set(\"OktaKEY\", \"*\");\n\n//AWS KEYS NEEDED\nglobal.set(\"aws_access_key_id\", \"*\");\nglobal.set(\"aws_secret_access_key\", \"*\");\nglobal.set(\"region\", \"*\");\nglobal.set(\"output\", \"json\");\n\nreturn msg;",
+        "id": "c29a0e184e0c5bb8",
+        "initialize": "",
+        "libs": [],
+        "name": "Set Global Variables - USER TO UPDATE",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "ae5c549a14fdaac7"
+            ]
+        ],
+        "x": 940,
+        "y": 140,
+        "z": "fef444a29fad2f51"
+    },
+    {
+        "id": "940e713d5ef8e04c",
+        "info": "",
+        "name": "Workflow - Okta application exfiltration",
+        "type": "comment",
+        "wires": [],
+        "x": 2150,
+        "y": 200,
+        "z": "fef444a29fad2f51"
+    },
+    {
+        "checkall": "false",
+        "id": "ae5c549a14fdaac7",
+        "name": "Identify Incident",
+        "outputs": 5,
+        "property": "payload.data.policy.name",
+        "propertyType": "msg",
+        "repair": false,
+        "rules": [
+            {
+                "t": "cont",
+                "v": "A new SCIM application was detected",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Refactor AWS policy based on activities in the last 60 days.",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Public Git repository",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "NEXT WEBHOOK",
+                "vt": "str"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "type": "switch",
+        "wires": [
+            [
+                "86bea1d6d7e0dbac",
+                "08356ee3b9f02222",
+                "09d1b4d07409f243"
+            ],
+            [
+                "f8eae5fa322188f5",
+                "08356ee3b9f02222",
+                "09d1b4d07409f243"
+            ],
+            [
+                "9cefb787f18920f7",
+                "08356ee3b9f02222",
+                "09d1b4d07409f243"
+            ],
+            [],
+            [
+                "9c503a8895bebc72"
+            ]
+        ],
+        "x": 1340,
+        "y": 260,
+        "z": "fef444a29fad2f51"
+    },
+    {
+        "id": "e4c4451904f097a4",
+        "info": "",
+        "name": "Workflow - AWS Refactoring ",
+        "type": "comment",
+        "wires": [],
+        "x": 2140,
+        "y": 300,
+        "z": "fef444a29fad2f51"
+    },
+    {
+        "id": "891d95f70256c749",
+        "info": "",
+        "name": "Workflow - Git Repo",
+        "type": "comment",
+        "wires": [],
+        "x": 1950,
+        "y": 400,
+        "z": "fef444a29fad2f51"
+    },
+    {
+        "id": "908b76435844a24b",
+        "method": "post",
+        "name": "",
+        "swaggerDoc": "",
+        "type": "http in",
+        "upload": false,
+        "url": "/Data",
+        "wires": [
+            [
+                "5b586963ee502b0b",
+                "c29a0e184e0c5bb8",
+                "b4bc8aa43f9789f9",
+                "ae5c549a14fdaac7"
+            ]
+        ],
+        "x": 270,
+        "y": 260,
+        "z": "fef444a29fad2f51"
+    },
+    {
+        "headers": {},
+        "id": "5b586963ee502b0b",
+        "name": "Respond to webhook sender",
+        "statusCode": "200",
+        "type": "http response",
+        "wires": [],
+        "x": 520,
+        "y": 320,
+        "z": "fef444a29fad2f51"
+    },
+    {
+        "d": true,
+        "id": "86bea1d6d7e0dbac",
+        "links": [
+            "23d6e9ed13904e80"
+        ],
+        "mode": "link",
+        "name": "OpenITDR-OUT-OktaExfiltration",
+        "type": "link out",
+        "wires": [],
+        "x": 2155,
+        "y": 160,
+        "z": "fef444a29fad2f51"
+    },
+    {
+        "d": true,
+        "id": "f8eae5fa322188f5",
+        "links": [
+            "39792fd035ccb904"
+        ],
+        "mode": "link",
+        "name": "OpenITDR-OUT-AwsRefactor",
+        "type": "link out",
+        "wires": [],
+        "x": 2155,
+        "y": 260,
+        "z": "fef444a29fad2f51"
+    },
+    {
+        "d": true,
+        "id": "9cefb787f18920f7",
+        "links": [
+            "e8dfdabcd2a59fc0"
+        ],
+        "mode": "link",
+        "name": "OpenITDR-OUT-GitRepo",
+        "type": "link out",
+        "wires": [],
+        "x": 1955,
+        "y": 360,
+        "z": "fef444a29fad2f51"
+    },
+    {
+        "id": "142a7f130c23e9eb",
+        "info": "THIS CAN BE RUN DIRECTLY FROM POSTMAN\n\nNO AUTHENTICATION WITH THIS VERSION\n\nUSE http://<your workflow node ip>/Data \n\nto configure your Authomize webhook.\n\nneed tp add secret check",
+        "name": "WEBHOOK CONFIG: http://<yourip>/Data",
+        "type": "comment",
+        "wires": [],
+        "x": 360,
+        "y": 200,
+        "z": "fef444a29fad2f51"
+    },
+    {
+        "id": "ccc23667cd2e9fc6",
+        "info": "THIS CAN BE RUN DIRECTLY FROM POSTMAN\n\nNO AUTHENTICATION WITH THIS VERSION",
+        "name": "Legacy - moved to \"Global Config\" flow",
+        "type": "comment",
+        "wires": [],
+        "x": 930,
+        "y": 180,
+        "z": "fef444a29fad2f51"
+    },
+    {
+        "id": "ac4a2f97cd43339f",
+        "info": "",
+        "name": "Use Policy Name - Switch to Workflow",
+        "type": "comment",
+        "wires": [],
+        "x": 1410,
+        "y": 200,
+        "z": "fef444a29fad2f51"
+    },
+    {
+        "active": true,
+        "complete": "payload",
+        "console": false,
+        "id": "9c503a8895bebc72",
+        "name": "Nothing to do - JSON Output",
+        "statusType": "auto",
+        "statusVal": "payload",
+        "targetType": "msg",
+        "tosidebar": true,
+        "tostatus": true,
+        "type": "debug",
+        "wires": [],
+        "x": 1800,
+        "y": 520,
+        "z": "fef444a29fad2f51"
+    },
+    {
+        "active": true,
+        "complete": "payload",
+        "console": false,
+        "id": "b4bc8aa43f9789f9",
+        "name": "Processed Message",
+        "statusType": "auto",
+        "statusVal": "",
+        "targetType": "msg",
+        "tosidebar": true,
+        "tostatus": false,
+        "type": "debug",
+        "wires": [],
+        "x": 500,
+        "y": 380,
+        "z": "fef444a29fad2f51"
+    },
+    {
+        "chartType": "line",
+        "className": "",
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "cutout": 0,
+        "dot": true,
+        "group": "16d7010b3421fb45",
+        "height": 0,
+        "id": "dec22325516108a4",
+        "interpolate": "linear",
+        "label": "Workflow runs by webhook",
+        "legend": "false",
+        "name": "",
+        "nodata": "No webhooks run yet",
+        "order": 1,
+        "outputs": 1,
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "type": "ui_chart",
+        "useDifferentColor": false,
+        "useOneColor": false,
+        "useUTC": false,
+        "width": 0,
+        "wires": [
+            []
+        ],
+        "x": 1980,
+        "xformat": "HH:mm:ss",
+        "y": 720,
+        "ymax": "",
+        "ymin": "",
+        "z": "fef444a29fad2f51"
+    },
+    {
+        "action": "",
+        "from": "",
+        "id": "09d1b4d07409f243",
+        "name": "Prepare data for dashboard chart",
+        "property": "",
+        "reg": false,
+        "rules": [
+            {
+                "p": "topic",
+                "pt": "msg",
+                "t": "set",
+                "to": "payload.data.policy.name",
+                "tot": "msg"
+            },
+            {
+                "p": "payload",
+                "pt": "msg",
+                "t": "set",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "to": "",
+        "type": "change",
+        "wires": [
+            [
+                "dec22325516108a4"
+            ]
+        ],
+        "x": 1680,
+        "y": 720,
+        "z": "fef444a29fad2f51"
+    },
+    {
+        "id": "23d6e9ed13904e80",
+        "links": [
+            "86bea1d6d7e0dbac"
+        ],
+        "name": "IN-OktaExfiltration",
+        "type": "link in",
+        "wires": [
+            [
+                "d81f67ddb7cf1d44"
+            ]
+        ],
+        "x": 75,
+        "y": 360,
+        "z": "0834077afbfa3457"
+    },
+    {
+        "authtype": "BASIC",
+        "dname": "SendMail",
+        "id": "6ce32a37a4a2e8fd",
+        "name": "srileytest@symutils.com",
+        "port": "465",
+        "saslformat": false,
+        "secure": true,
+        "server": "mail.symutils.com",
+        "tls": false,
+        "token": "",
+        "type": "e-mail",
+        "wires": [],
+        "x": 840,
+        "y": 420,
+        "z": "0834077afbfa3457"
+    },
+    {
+        "finalize": "",
+        "func": "let TheIncident = flow.get(\"FlowIncident\");\n\nlet MyMessage = \"Working Status: \" + msg.payload.data.status + \" | Description: \" + msg.payload.data.description + \" | Recommendation: \" + msg.payload.data.recommendation + \" | Access URL: \" + msg.payload.data.url;\nmsg.payload = MyMessage;\n\nmsg.topic = \"Authomize Incident: \" + TheIncident;\n\n\nreturn msg;",
+        "id": "40c9be0634935af0",
+        "initialize": "",
+        "libs": [],
+        "name": "SetupMailSend",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "6ce32a37a4a2e8fd"
+            ]
+        ],
+        "x": 560,
+        "y": 420,
+        "z": "0834077afbfa3457"
+    },
+    {
+        "finalize": "",
+        "func": "let IncidentId = msg.payload.data.id;\nflow.set(\"FlowIncident\", IncidentId);\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/extended\";\nlet URL3 = URL1 + IncidentId + Extension;\n\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;",
+        "id": "d81f67ddb7cf1d44",
+        "initialize": "",
+        "libs": [],
+        "name": "Get Exposed Users",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "2e9019d2b25024c8",
+                "40c9be0634935af0"
+            ]
+        ],
+        "x": 270,
+        "y": 360,
+        "z": "0834077afbfa3457"
+    },
+    {
+        "authType": "",
+        "headers": [],
+        "id": "2e9019d2b25024c8",
+        "insecureHTTPParser": false,
+        "method": "GET",
+        "name": "Get Exposed",
+        "paytoqs": "body",
+        "persist": false,
+        "proxy": "",
+        "ret": "obj",
+        "senderr": false,
+        "tls": "",
+        "type": "http request",
+        "url": "",
+        "wires": [
+            [
+                "0ecc17d768088684",
+                "3720743b080403fc"
+            ]
+        ],
+        "x": 550,
+        "y": 300,
+        "z": "0834077afbfa3457"
+    },
+    {
+        "active": true,
+        "complete": "payload",
+        "console": false,
+        "id": "0ecc17d768088684",
+        "name": "Okta Output of Process",
+        "statusType": "auto",
+        "statusVal": "",
+        "targetType": "msg",
+        "tosidebar": true,
+        "tostatus": false,
+        "type": "debug",
+        "wires": [],
+        "x": 2310,
+        "y": 520,
+        "z": "0834077afbfa3457"
+    },
+    {
+        "finalize": "",
+        "func": "let OriginID = msg.payload.extended_information.password_exfiltration.exfiltrated_accounts[0].originId;\nflow.set(\"FlowOriginID\", OriginID);\n\nlet IncidentId = flow.get(\"FlowIncident\");\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/comments\";\nlet URL3 = URL1 + IncidentId + Extension;\n\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.payload = {\"content\": \"OpenITDR Workflow Okta application exfiltration about to reset user password(s)\"};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;",
+        "id": "3720743b080403fc",
+        "initialize": "",
+        "libs": [],
+        "name": "Incident Comment Update",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "021abb9f4a394c1e"
+            ]
+        ],
+        "x": 820,
+        "y": 300,
+        "z": "0834077afbfa3457"
+    },
+    {
+        "authType": "",
+        "headers": [],
+        "id": "33016906142e52bb",
+        "insecureHTTPParser": false,
+        "method": "POST",
+        "name": "Okta Reset Password",
+        "paytoqs": "body",
+        "persist": false,
+        "proxy": "",
+        "ret": "obj",
+        "senderr": false,
+        "tls": "",
+        "type": "http request",
+        "url": "",
+        "wires": [
+            [
+                "545b379a5228372f"
+            ]
+        ],
+        "x": 1660,
+        "y": 300,
+        "z": "0834077afbfa3457"
+    },
+    {
+        "authType": "",
+        "headers": [],
+        "id": "021abb9f4a394c1e",
+        "insecureHTTPParser": false,
+        "method": "POST",
+        "name": "Update Comment",
+        "paytoqs": "body",
+        "persist": false,
+        "proxy": "",
+        "ret": "obj",
+        "senderr": false,
+        "tls": "",
+        "type": "http request",
+        "url": "",
+        "wires": [
+            [
+                "d7c755577a760f44",
+                "0ecc17d768088684"
+            ]
+        ],
+        "x": 1070,
+        "y": 300,
+        "z": "0834077afbfa3457"
+    },
+    {
+        "authType": "",
+        "headers": [],
+        "id": "1bdfe892a035b582",
+        "insecureHTTPParser": false,
+        "method": "POST",
+        "name": "Update Comment",
+        "paytoqs": "body",
+        "persist": false,
+        "proxy": "",
+        "ret": "obj",
+        "senderr": false,
+        "tls": "",
+        "type": "http request",
+        "url": "",
+        "wires": [
+            [
+                "0ecc17d768088684"
+            ]
+        ],
+        "x": 2230,
+        "y": 300,
+        "z": "0834077afbfa3457"
+    },
+    {
+        "finalize": "",
+        "func": "let OriginID = flow.get(\"FlowOriginID\");\n\nlet URL1 = global.get(\"OktaAPI\");\nlet Extension = \"/lifecycle/reset_password?sendEmail=true\";\nlet URL3 = URL1 + OriginID + Extension;\nlet Token = global.get(\"OktaKEY\");\n\nmsg.headers = {};\nmsg.url = URL3;\nmsg.headers['Accept'] = 'application/json';\nmsg.headers['Content-Type'] = 'application/json';\nmsg.headers['Authorization'] = 'SSWS ' + Token;\n\nreturn msg;",
+        "id": "d7c755577a760f44",
+        "initialize": "",
+        "libs": [],
+        "name": "Okta Reset User Password",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "33016906142e52bb"
+            ]
+        ],
+        "x": 1360,
+        "y": 300,
+        "z": "0834077afbfa3457"
+    },
+    {
+        "finalize": "",
+        "func": "let IncidentId = flow.get(\"FlowIncident\");\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/comments\";\nlet URL3 = URL1 + IncidentId + Extension;\n\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.payload = {\"content\": \"OpenITDR Workflow Okta application exfiltration finished resetting password(s), close this incident\"};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;",
+        "id": "545b379a5228372f",
+        "initialize": "",
+        "libs": [],
+        "name": "Incident Comment Update",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "1bdfe892a035b582"
+            ]
+        ],
+        "x": 1960,
+        "y": 300,
+        "z": "0834077afbfa3457"
+    },
+    {
+        "id": "39792fd035ccb904",
+        "links": [
+            "f8eae5fa322188f5"
+        ],
+        "name": "IN-AWSRefactor",
+        "type": "link in",
+        "wires": [
+            [
+                "541f425c4266c8e0"
+            ]
+        ],
+        "x": 105,
+        "y": 500,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "authType": "",
+        "headers": [],
+        "id": "70bbf03b366c5c25",
+        "insecureHTTPParser": false,
+        "method": "GET",
+        "name": "Get Expnded Detail",
+        "paytoqs": "body",
+        "persist": false,
+        "proxy": "",
+        "ret": "obj",
+        "senderr": false,
+        "tls": "",
+        "type": "http request",
+        "url": "",
+        "wires": [
+            [
+                "8181a569f78c996a",
+                "dd2c3da5598441a6",
+                "c0c3776a4c7b4e4e"
+            ]
+        ],
+        "x": 710,
+        "y": 500,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "finalize": "",
+        "func": "let IncidentId = msg.payload.data.id;\nflow.set(\"FlowIncident\", IncidentId);\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/extended\";\nlet URL3 = URL1 + IncidentId + Extension;\n\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;",
+        "id": "541f425c4266c8e0",
+        "initialize": "",
+        "libs": [],
+        "name": "Get Extended Refactored Policy",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "70bbf03b366c5c25",
+                "d58c3e9103785eb5",
+                "b22ba9af01005136"
+            ]
+        ],
+        "x": 410,
+        "y": 500,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "finalize": "",
+        "func": "//Setup Form Extended Details\nlet OrigAWSPolicy = msg.payload.extended_information.policy_refactor.originalPolicy;\nlet NewAWSPolicy = msg.payload.extended_information.policy_refactor.originalPolicy;\nlet IAMDetails = msg.payload.extended_information.entities[0].originId;\n\nflow.set(\"TheOrigAWSPolicy\", OrigAWSPolicy);\nflow.set(\"TheNewAWSPolicy\", NewAWSPolicy);\nflow.set(\"TheIAMDetails\", IAMDetails);\n\nlet IncidentId = flow.get(\"FlowIncident\");\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/comments\";\nlet URL3 = URL1 + IncidentId + Extension;\n\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.payload = {\"content\": \"OpenITDR Workflow Refactored Policy being worked on.\"};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;",
+        "id": "8181a569f78c996a",
+        "initialize": "",
+        "libs": [],
+        "name": "Incident Comment Update",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "5f9b7e13110c9e50",
+                "4a440f2be11a2243"
+            ]
+        ],
+        "x": 1020,
+        "y": 500,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "finalize": "",
+        "func": "let TheIncident = flow.get(\"FlowIncident\");\n\nlet MyMessage = \"Working Status: \" + msg.payload.data.status + \" | Description: \" + msg.payload.data.description + \" | Recommendation: \" + msg.payload.data.recommendation + \" | Access URL: \" + msg.payload.data.url;\nmsg.payload = MyMessage;\n\nmsg.topic = \"Authomize Incident: \" + TheIncident;\n\n\nreturn msg;\n\nreturn msg;",
+        "id": "d58c3e9103785eb5",
+        "initialize": "",
+        "libs": [],
+        "name": "SetupMailSend",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "60e4ad9b76f4d4c8"
+            ]
+        ],
+        "x": 700,
+        "y": 580,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "authType": "",
+        "headers": [],
+        "id": "5f9b7e13110c9e50",
+        "insecureHTTPParser": false,
+        "method": "POST",
+        "name": "Update Comment",
+        "paytoqs": "body",
+        "persist": false,
+        "proxy": "",
+        "ret": "obj",
+        "senderr": false,
+        "tls": "",
+        "type": "http request",
+        "url": "",
+        "wires": [
+            [
+                "dd2c3da5598441a6",
+                "9c0f62c500abefd8"
+            ]
+        ],
+        "x": 1330,
+        "y": 460,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "authtype": "BASIC",
+        "dname": "SendMail",
+        "id": "60e4ad9b76f4d4c8",
+        "name": "srileytest@symutils.com",
+        "port": "465",
+        "saslformat": false,
+        "secure": true,
+        "server": "mail.symutils.com",
+        "tls": false,
+        "token": "",
+        "type": "e-mail",
+        "wires": [],
+        "x": 880,
+        "y": 580,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "finalize": "",
+        "func": "\nlet IAMDetails = flow.get(\"TheIAMDetails\");\n\nmsg.payload =  \"iam create-policy-version --policy-arn \" + IAMDetails + \" --policy-document file://NewAWSPolicy.json --set-as-default\";\n\nreturn msg;",
+        "id": "cbcb5db68c4cb260",
+        "initialize": "",
+        "libs": [],
+        "name": "Config for AWS Policy Call",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "e0c3e5a536bd5876"
+            ]
+        ],
+        "x": 1640,
+        "y": 420,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "finalize": "",
+        "func": "let IncidentId = flow.get(\"FlowIncident\");\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/comments\";\nlet URL3 = URL1 + IncidentId + Extension;\n\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.payload = {\"content\": \"OpenITDR Workflow Refactored Policy finished resetting password(s), close this incident\"};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;",
+        "id": "6312d1cc5761a683",
+        "initialize": "",
+        "libs": [],
+        "name": "Incident Comment Update",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "71307da66b5b3003"
+            ]
+        ],
+        "x": 2000,
+        "y": 460,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "authType": "",
+        "headers": [],
+        "id": "71307da66b5b3003",
+        "insecureHTTPParser": false,
+        "method": "POST",
+        "name": "Update Comment",
+        "paytoqs": "body",
+        "persist": false,
+        "proxy": "",
+        "ret": "obj",
+        "senderr": false,
+        "tls": "",
+        "type": "http request",
+        "url": "",
+        "wires": [
+            [
+                "6bf5eab40fab6e52"
+            ]
+        ],
+        "x": 2390,
+        "y": 460,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "active": true,
+        "complete": "payload",
+        "console": false,
+        "id": "6bf5eab40fab6e52",
+        "name": "AWS Refactor Output",
+        "statusType": "auto",
+        "statusVal": "",
+        "targetType": "msg",
+        "tosidebar": true,
+        "tostatus": false,
+        "type": "debug",
+        "wires": [],
+        "x": 2400,
+        "y": 540,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "active": true,
+        "complete": "payload",
+        "console": false,
+        "id": "b22ba9af01005136",
+        "name": "Routed to AWS Refactor",
+        "statusType": "auto",
+        "statusVal": "",
+        "targetType": "msg",
+        "tosidebar": true,
+        "tostatus": false,
+        "type": "debug",
+        "wires": [],
+        "x": 730,
+        "y": 680,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "active": true,
+        "complete": "payload",
+        "console": false,
+        "id": "dd2c3da5598441a6",
+        "name": "Just Before Work",
+        "statusType": "auto",
+        "statusVal": "",
+        "targetType": "msg",
+        "tosidebar": true,
+        "tostatus": false,
+        "type": "debug",
+        "wires": [],
+        "x": 1810,
+        "y": 720,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "finalize": "",
+        "func": "let TheIncident = flow.get(\"FlowIncident\");\nlet OrigAWSPolicy = flow.get(\"TheOrigAWSPolicy\");\nlet NewAWSPolicy = flow.get(\"TheNewAWSPolicy\");\n\nmsg.topic = \"Authomize found policy changes: \" + TheIncident;\nmsg.payload = \"Authomize content workflow discovered the following information on AWS policies. Please see the attached files for your information.\";\nmsg.attachments = [\n    { filename: \"OriginalPolicy.txt\", content: OrigAWSPolicy },\n    { filename: \"NewAWSPolicy.txt\", content: NewAWSPolicy },\n];\nreturn msg;",
+        "id": "c0c3776a4c7b4e4e",
+        "initialize": "",
+        "libs": [],
+        "name": "Setup to Send Attachment",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "743769e48511c574"
+            ]
+        ],
+        "x": 1020,
+        "y": 400,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "authtype": "BASIC",
+        "dname": "SendMail",
+        "id": "743769e48511c574",
+        "name": "srileytest@symutils.com",
+        "port": "465",
+        "saslformat": false,
+        "secure": true,
+        "server": "mail.symutils.com",
+        "tls": false,
+        "token": "",
+        "type": "e-mail",
+        "wires": [],
+        "x": 1300,
+        "y": 400,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "addpay": "payload",
+        "append": "",
+        "command": "aws",
+        "g": "e269a6f6f2ad800d",
+        "id": "e5c5b80392f34927",
+        "name": "Set AWS",
+        "oldrc": false,
+        "timer": "",
+        "type": "exec",
+        "useSpawn": "false",
+        "winHide": false,
+        "wires": [
+            [
+                "8f5b0b852d4a04fd",
+                "448e44463eafd654"
+            ],
+            [
+                "448e44463eafd654"
+            ],
+            [
+                "448e44463eafd654"
+            ]
+        ],
+        "x": 1780,
+        "y": 120,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "finalize": "",
+        "func": "//Set the keys from global record\nlet my_aws_access_key_id = global.get(\"aws_access_key_id\");\n\nmsg.payload = \"configure set aws_access_key_id \" + my_aws_access_key_id;\n\n\nreturn msg;",
+        "g": "e269a6f6f2ad800d",
+        "id": "9c0f62c500abefd8",
+        "initialize": "",
+        "libs": [],
+        "name": "Setup Args for Exec",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "e5c5b80392f34927"
+            ]
+        ],
+        "x": 1560,
+        "y": 120,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "finalize": "",
+        "func": "//Set the keys from global record\n\nlet my_aws_secret_access_key = global.get(\"aws_secret_access_key\");\n\nmsg.payload = \"configure set aws_secret_access_key \" + my_aws_secret_access_key;\n\n\nreturn msg;",
+        "g": "e269a6f6f2ad800d",
+        "id": "8f5b0b852d4a04fd",
+        "initialize": "",
+        "libs": [],
+        "name": "Setup Args for Exec",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "dcd30539602533ee"
+            ]
+        ],
+        "x": 1580,
+        "y": 180,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "addpay": "payload",
+        "append": "",
+        "command": "aws",
+        "g": "e269a6f6f2ad800d",
+        "id": "dcd30539602533ee",
+        "name": "Set AWS",
+        "oldrc": false,
+        "timer": "",
+        "type": "exec",
+        "useSpawn": "false",
+        "winHide": false,
+        "wires": [
+            [
+                "51e53f00c679d5b0",
+                "448e44463eafd654"
+            ],
+            [
+                "448e44463eafd654"
+            ],
+            [
+                "448e44463eafd654"
+            ]
+        ],
+        "x": 1800,
+        "y": 180,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "finalize": "",
+        "func": "//Set the keys from global record\n\nlet my_region = global.get(\"region\");\n\nmsg.payload = \"configure set region \" + my_region;\n\n\nreturn msg;",
+        "g": "e269a6f6f2ad800d",
+        "id": "51e53f00c679d5b0",
+        "initialize": "",
+        "libs": [],
+        "name": "Setup Args for Exec",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "370c5a5fa3aaa248"
+            ]
+        ],
+        "x": 1600,
+        "y": 240,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "addpay": "payload",
+        "append": "",
+        "command": "aws",
+        "g": "e269a6f6f2ad800d",
+        "id": "370c5a5fa3aaa248",
+        "name": "Set AWS",
+        "oldrc": false,
+        "timer": "",
+        "type": "exec",
+        "useSpawn": "false",
+        "winHide": false,
+        "wires": [
+            [
+                "10545b8d384a95fe",
+                "448e44463eafd654"
+            ],
+            [
+                "448e44463eafd654"
+            ],
+            [
+                "448e44463eafd654"
+            ]
+        ],
+        "x": 1820,
+        "y": 240,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "finalize": "",
+        "func": "//Set the keys from global record\n\nlet my_output = global.get(\"output\");\n\nmsg.payload = \"configure set output \" + my_output;\n\n\nreturn msg;",
+        "g": "e269a6f6f2ad800d",
+        "id": "10545b8d384a95fe",
+        "initialize": "",
+        "libs": [],
+        "name": "Setup Args for Exec",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "e70d5367dcf6d01d"
+            ]
+        ],
+        "x": 1620,
+        "y": 300,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "addpay": "payload",
+        "append": "",
+        "command": "aws",
+        "g": "e269a6f6f2ad800d",
+        "id": "e70d5367dcf6d01d",
+        "name": "Set AWS",
+        "oldrc": false,
+        "timer": "",
+        "type": "exec",
+        "useSpawn": "false",
+        "winHide": false,
+        "wires": [
+            [
+                "448e44463eafd654",
+                "cbcb5db68c4cb260"
+            ],
+            [
+                "448e44463eafd654"
+            ],
+            [
+                "448e44463eafd654"
+            ]
+        ],
+        "x": 1840,
+        "y": 300,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "active": true,
+        "complete": "payload",
+        "console": false,
+        "g": "e269a6f6f2ad800d",
+        "id": "448e44463eafd654",
+        "name": "AWS Console Output",
+        "statusType": "auto",
+        "statusVal": "",
+        "targetType": "msg",
+        "tosidebar": true,
+        "tostatus": false,
+        "type": "debug",
+        "wires": [],
+        "x": 2160,
+        "y": 200,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "id": "63e79eed8a4da730",
+        "info": "",
+        "name": "Setup AWS CLI environment so we can make calls and do some work",
+        "type": "comment",
+        "wires": [],
+        "x": 1690,
+        "y": 60,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "addpay": "payload",
+        "append": "",
+        "command": "aws",
+        "id": "e0c3e5a536bd5876",
+        "name": "Apply new policy",
+        "oldrc": false,
+        "timer": "",
+        "type": "exec",
+        "useSpawn": "false",
+        "winHide": false,
+        "wires": [
+            [
+                "6bf5eab40fab6e52",
+                "6312d1cc5761a683"
+            ],
+            [
+                "6bf5eab40fab6e52"
+            ],
+            [
+                "6bf5eab40fab6e52"
+            ]
+        ],
+        "x": 1610,
+        "y": 500,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "appendNewline": false,
+        "createDir": false,
+        "encoding": "utf8",
+        "filename": "./NewAWSPolicy.json",
+        "filenameType": "str",
+        "id": "24ec9fef7146a462",
+        "name": "Write JSON to file",
+        "overwriteFile": "true",
+        "type": "file",
+        "wires": [
+            [
+                "dd2c3da5598441a6"
+            ]
+        ],
+        "x": 1390,
+        "y": 600,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "finalize": "",
+        "func": "\nmsg.payload = flow.get(\"TheNewAWSPolicy\");\n\nreturn msg;",
+        "id": "4a440f2be11a2243",
+        "initialize": "",
+        "libs": [],
+        "name": "Setup JSON for Writing",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "24ec9fef7146a462"
+            ]
+        ],
+        "x": 1350,
+        "y": 520,
+        "z": "08d46d137e03e77b"
+    },
+    {
+        "id": "e8dfdabcd2a59fc0",
+        "links": [
+            "9cefb787f18920f7"
+        ],
+        "name": "In-Git-Repo",
+        "type": "link in",
+        "wires": [
+            [
+                "e44444bd43bbefd0"
+            ]
+        ],
+        "x": 45,
+        "y": 520,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "authType": "",
+        "headers": [],
+        "id": "353bc3a41a5efbe1",
+        "insecureHTTPParser": false,
+        "method": "GET",
+        "name": "Get Extended",
+        "paytoqs": "body",
+        "persist": false,
+        "proxy": "",
+        "ret": "obj",
+        "senderr": false,
+        "tls": "",
+        "type": "http request",
+        "url": "",
+        "wires": [
+            [
+                "34a1829a06dcbf6a",
+                "71b8f124e3076c70"
+            ]
+        ],
+        "x": 560,
+        "y": 520,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "finalize": "",
+        "func": "\nlet IncidentId = msg.payload.data.id;\nflow.set(\"FlowIncident\", IncidentId);\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/extended\";\nlet URL3 = URL1 + IncidentId + Extension;\n\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\n\nreturn msg;",
+        "id": "57e0c3fb4470286a",
+        "initialize": "",
+        "libs": [],
+        "name": "Git Repo Find",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "353bc3a41a5efbe1",
+                "5323e7fadc5a5ad8"
+            ]
+        ],
+        "x": 280,
+        "y": 520,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "finalize": "",
+        "func": "// Get info needed for Args later in the flow (see Exec flows)\n//Get RepoName here...\nlet MyGitRepoName = msg.payload.extended_information.entities[0].name;\nflow.set(\"GitRepoName\", MyGitRepoName);\n\n// Set basic incident info\nlet IncidentId = flow.get(\"FlowIncident\");\n\n\n// setup for the API call\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/comments\";\nlet URL3 = URL1 + IncidentId + Extension;\n\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.payload = {\"content\": \"OpenITDR Workflow Git Repo review being conducted.\"};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;",
+        "id": "34a1829a06dcbf6a",
+        "initialize": "",
+        "libs": [],
+        "name": "Incident Comment Update",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "ce54e1825f6bcb35"
+            ]
+        ],
+        "x": 1040,
+        "y": 520,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "finalize": "",
+        "func": "let TheIncident = flow.get(\"FlowIncident\");\n\nlet MyMessage = \"Working Status: \" + msg.payload.data.status + \" | Description: \" + msg.payload.data.description + \" | Recommendation: \" + msg.payload.data.recommendation + \" | Access URL: \" + msg.payload.data.url;\nmsg.payload = MyMessage;\n\nmsg.topic = \"Authomize Incident: \" + TheIncident;\n\n\nreturn msg;",
+        "id": "5323e7fadc5a5ad8",
+        "initialize": "",
+        "libs": [],
+        "name": "SetupMailSend",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "a47fa506705f3cfa"
+            ]
+        ],
+        "x": 560,
+        "y": 600,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "authType": "",
+        "headers": [],
+        "id": "ce54e1825f6bcb35",
+        "insecureHTTPParser": false,
+        "method": "POST",
+        "name": "Update Comment",
+        "paytoqs": "body",
+        "persist": false,
+        "proxy": "",
+        "ret": "obj",
+        "senderr": false,
+        "tls": "",
+        "type": "http request",
+        "url": "",
+        "wires": [
+            [
+                "fec9b1e7f5f5a78d",
+                "811ced318264b0c6"
+            ]
+        ],
+        "x": 1010,
+        "y": 440,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "authtype": "BASIC",
+        "dname": "SendMail",
+        "id": "a47fa506705f3cfa",
+        "name": "srileytest@symutils.com",
+        "port": "465",
+        "saslformat": false,
+        "secure": true,
+        "server": "mail.symutils.com",
+        "tls": false,
+        "token": "",
+        "type": "e-mail",
+        "wires": [],
+        "x": 780,
+        "y": 600,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "finalize": "",
+        "func": "let IncidentId = flow.get(\"FlowIncident\");\n\nlet URL1 = global.get(\"AuthomizeAPI\");\nlet Extension = \"/comments\";\nlet URL3 = URL1 + IncidentId + Extension;\n\nlet Token = global.get(\"AuthToken\");\nmsg.headers = {};\nmsg.payload = {\"content\": \"OpenITDR Workflow Git Repo finished reviewing the content and sent emails, close this incident\"};\nmsg.url = URL3;\nmsg.headers['Authorization'] = Token;\nmsg.headers['Content-Type'] = 'application/json';\n\nreturn msg;",
+        "id": "0c8e8243fd3c4ee5",
+        "initialize": "",
+        "libs": [],
+        "name": "Incident Comment Update",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "90b6b35902e8ca65"
+            ]
+        ],
+        "x": 1980,
+        "y": 340,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "authType": "",
+        "headers": [],
+        "id": "90b6b35902e8ca65",
+        "insecureHTTPParser": false,
+        "method": "POST",
+        "name": "Update Comment",
+        "paytoqs": "body",
+        "persist": false,
+        "proxy": "",
+        "ret": "obj",
+        "senderr": false,
+        "tls": "",
+        "type": "http request",
+        "url": "",
+        "wires": [
+            [
+                "bde094ec1556bd26"
+            ]
+        ],
+        "x": 2310,
+        "y": 340,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "active": true,
+        "complete": "payload",
+        "console": false,
+        "id": "bde094ec1556bd26",
+        "name": "Public git repo Output",
+        "statusType": "auto",
+        "statusVal": "",
+        "targetType": "msg",
+        "tosidebar": true,
+        "tostatus": false,
+        "type": "debug",
+        "wires": [],
+        "x": 2620,
+        "y": 340,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "active": true,
+        "complete": "payload",
+        "console": false,
+        "id": "fec9b1e7f5f5a78d",
+        "name": "Public git repo Expanded",
+        "statusType": "auto",
+        "statusVal": "",
+        "targetType": "msg",
+        "tosidebar": true,
+        "tostatus": false,
+        "type": "debug",
+        "wires": [],
+        "x": 1330,
+        "y": 460,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "addpay": "payload",
+        "append": "",
+        "command": "python3",
+        "g": "ec0b35b23ad2f78b",
+        "id": "17c6789b9587e830",
+        "name": "Connect to Github",
+        "oldrc": false,
+        "timer": "",
+        "type": "exec",
+        "useSpawn": "false",
+        "winHide": false,
+        "wires": [
+            [
+                "ef803f30b01ba80b",
+                "a7e8fb6872994ffc"
+            ],
+            [
+                "ef803f30b01ba80b"
+            ],
+            [
+                "ef803f30b01ba80b"
+            ]
+        ],
+        "x": 1570,
+        "y": 380,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "finalize": "",
+        "func": "let RepoName = flow.get(\"GitRepoName\");\nlet OrgName = flow.get(\"GitOrgName\");\n\nmsg.payload = \"/data/workingDir/getDataFromGitHub.py -o \" + OrgName + \" -r \" + RepoName;\n\nreturn msg;",
+        "g": "ec0b35b23ad2f78b",
+        "id": "f79ad5da66e1e92c",
+        "initialize": "",
+        "libs": [],
+        "name": "Setup Args for Exec",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "17c6789b9587e830"
+            ]
+        ],
+        "x": 1320,
+        "y": 380,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "addpay": "payload",
+        "append": "",
+        "command": "unzip",
+        "g": "ec0b35b23ad2f78b",
+        "id": "dc1e800851df685f",
+        "name": "List Github Content",
+        "oldrc": false,
+        "timer": "",
+        "type": "exec",
+        "useSpawn": "false",
+        "winHide": false,
+        "wires": [
+            [
+                "e02dd92b680585de",
+                "2110638c40a31dbd",
+                "0c8e8243fd3c4ee5"
+            ],
+            [
+                "e02dd92b680585de"
+            ],
+            [
+                "e02dd92b680585de"
+            ]
+        ],
+        "x": 1570,
+        "y": 300,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "active": true,
+        "complete": "payload",
+        "console": false,
+        "id": "e02dd92b680585de",
+        "name": "Unzip List Process",
+        "statusType": "auto",
+        "statusVal": "",
+        "targetType": "msg",
+        "tosidebar": true,
+        "tostatus": false,
+        "type": "debug",
+        "wires": [],
+        "x": 1950,
+        "y": 180,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "active": true,
+        "complete": "payload",
+        "console": false,
+        "id": "ef803f30b01ba80b",
+        "name": "Running Python",
+        "statusType": "auto",
+        "statusVal": "",
+        "targetType": "msg",
+        "tosidebar": true,
+        "tostatus": false,
+        "type": "debug",
+        "wires": [],
+        "x": 1940,
+        "y": 480,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "finalize": "",
+        "func": "let RepoName = flow.get(\"GitRepoName\");\nlet OrgName = flow.get(\"GitOrgName\");\n\nmsg.payload = \"-l /data/process/git/\" + OrgName + \"-\" + RepoName + \".zip > /data/process/git/content-list.txt\"\n\nreturn msg;",
+        "g": "ec0b35b23ad2f78b",
+        "id": "a7e8fb6872994ffc",
+        "initialize": "",
+        "libs": [],
+        "name": "Setup Args for Exec",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "dc1e800851df685f"
+            ]
+        ],
+        "x": 1320,
+        "y": 300,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "finalize": "",
+        "func": "let TheIncident = flow.get(\"FlowIncident\");\n\nmsg.topic = \"Authomize found Content: \" + TheIncident;\nmsg.payload = \"Authomize content workflow discovered the following information on GitHub. Please see the attached file.\";\nmsg.attachments = [\n    { filename: \"content-list.txt\", path: \"/data/process/git/content-list.txt\" },\n    { filename: \"repositories.csv\", path: \"/data/process/git/repositories.csv\" },\n];\nreturn msg;",
+        "id": "2110638c40a31dbd",
+        "initialize": "",
+        "libs": [],
+        "name": "Setup to Send Attachment",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "dd33960bd03d5679"
+            ]
+        ],
+        "x": 1980,
+        "y": 280,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "dname": "SendMail",
+        "id": "dd33960bd03d5679",
+        "name": "srileytest@symutils.com",
+        "port": "465",
+        "secure": true,
+        "server": "mail.symutils.com",
+        "tls": false,
+        "type": "e-mail",
+        "wires": [],
+        "x": 2280,
+        "y": 280,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "id": "78af271acafdfdb9",
+        "info": "",
+        "name": "Expand the information we found to extract the Repo details",
+        "type": "comment",
+        "wires": [],
+        "x": 420,
+        "y": 480,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "id": "7b7e8b6927c2a5bf",
+        "info": "",
+        "name": "Notify people that we are working a Git Repo ticket",
+        "type": "comment",
+        "wires": [],
+        "x": 670,
+        "y": 560,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "id": "2c268033b6ca0604",
+        "info": "",
+        "name": "This area sets up variables and executes actions on the server",
+        "type": "comment",
+        "wires": [],
+        "x": 1420,
+        "y": 220,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "id": "4b0f396421ee2812",
+        "info": "",
+        "name": "Send file attachements and comment on ticket to close it out",
+        "type": "comment",
+        "wires": [],
+        "x": 2080,
+        "y": 240,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "active": true,
+        "complete": "payload",
+        "console": false,
+        "id": "71b8f124e3076c70",
+        "name": "Public git repo Expanded",
+        "statusType": "auto",
+        "statusVal": "",
+        "targetType": "msg",
+        "tosidebar": true,
+        "tostatus": false,
+        "type": "debug",
+        "wires": [],
+        "x": 770,
+        "y": 380,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "finalize": "",
+        "func": "//Enter the name of the org you use for Git\n//Example the Org name for https://github.com/authomize/Open-ITDR\n//Is authomize\nflow.set(\"GitOrgName\", \"authomize\" );\n\nreturn msg;",
+        "id": "e44444bd43bbefd0",
+        "initialize": "",
+        "libs": [],
+        "name": "FlowVariables - USER TO UPDATE",
+        "noerr": 0,
+        "outputs": 1,
+        "type": "function",
+        "wires": [
+            [
+                "57e0c3fb4470286a"
+            ]
+        ],
+        "x": 220,
+        "y": 600,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "addpay": "",
+        "append": "/data/process/git/*",
+        "command": "rm",
+        "id": "811ced318264b0c6",
+        "name": "Clean Up Environment",
+        "oldrc": false,
+        "timer": "",
+        "type": "exec",
+        "useSpawn": "false",
+        "winHide": false,
+        "wires": [
+            [
+                "f79ad5da66e1e92c",
+                "fec9b1e7f5f5a78d"
+            ],
+            [
+                "fec9b1e7f5f5a78d"
+            ],
+            [
+                "fec9b1e7f5f5a78d"
+            ]
+        ],
+        "x": 1020,
+        "y": 320,
+        "z": "6d8d00a0454e2a65"
+    },
+    {
+        "id": "6e580f1bc7329de1",
+        "info": "",
+        "name": "USER - UPDATE THIS NODE",
+        "type": "comment",
+        "wires": [],
+        "x": 200,
+        "y": 640,
+        "z": "6d8d00a0454e2a65"
+    }
+]
