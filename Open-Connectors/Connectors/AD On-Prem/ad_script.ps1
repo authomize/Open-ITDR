@@ -1,13 +1,14 @@
-﻿Import-Module ActiveDirectory
+Import-Module ActiveDirectory
 
 # Define variables
 $useCredentialManager = $true # Set this to $true to use CredentialManager, $false to use environment variables. For Security reasons using CredentialManager is preferred.
-$authToken = "authToken" # Set as CredentialManager Token field or Environmental Variable Name 
-$appId = "<AUTHOMIZE_CONNECTOR_APP_ID>" # Replace with your App ID
+$authToken = "ENTER AUTHOMIZE TOKEN HERE" # Set as CredentialManager `Target` field or Environmental Variable Name 
+$appId = "ENTER AUTHOMIZE APP ID HERE" # Replace with your App ID
 $ou = "DC=authomizese,DC=com" # Replace with the OU you'd like to pull AD information from
 $excludeOUs = $true # Set this variable to $true if you want to exclude a specific OU, otherwise set it to $false
-$excludedOU = ".*OU=TST,OU=Tier 2.*|.*OU=Testing.*" # REGEX match - The .* in this variable serves as wildcards, allowing any characters to appear before or after the OU=TST,OU=Tier 2 pattern. Use the regex | to list multiple OUs. Irrelevant if $excludeOUs = $false. 
-$logFilePath = "ad_script.log" #log file
+$excludedOU = ".*OU=exampleOU.*" # REGEX match - The .* in this variable serves as wildcards, allowing any characters to appear before or after the OU=TST,OU=Tier 2 pattern. Use the regex | to list multiple OUs. Irrelevant if $excludeOUs = $false. 
+$baseDirectory = $PSScriptRoot # Get the base directory of the script
+$logFilePath = "$baseDirectory\ad_script.log" # Log file
 
 # Decrypt Token function
 function Convert-SecureStringToPlainText {
@@ -66,7 +67,7 @@ $newContent = "#Log File"
 Set-Content -Path $logFilePath -Value $newContent
 
 # Get all AD users
-$adUsers = Get-ADUser -Filter * -SearchBase $ou -Properties ObjectGUID, Name, Mail, Title, GivenName, Surname, Enabled, Description, Manager, LastLogonDate, City, Country, Department, EmployeeNumber | Where ObjectClass -like "user"
+$adUsers = Get-ADUser -Filter {objectClass -eq 'user'} -SearchBase $ou -Properties ObjectGUID, Name, Mail, Title, GivenName, Surname, Enabled, Description, Manager, LastLogonDate, City, Country, Department, EmployeeNumber
 
 # Filter out excluded OUs if $excludeOUs is set to $true
 if ($excludeOUs) {
@@ -109,21 +110,31 @@ foreach ($adUser in $adUsers) {
     }
 
     $identitiesUserObject = @{
-        uniqueId     = $adUser.ObjectGUID
-        originId     = $adUser.ObjectGUID
-        name         = $adUser.Name
-        email        = $adUser.Mail
-        managerId    = if ($adUser.Manager) { (Get-ADUser -Identity $adUser.Manager).ObjectGUID } else { $null }
-        title        = $adUser.Title
-        firstName    = $adUser.GivenName
-        lastName     = $adUser.Surname
-        status       = $status
-        description  = $adUser.Description
-        city         = $adUser.City
-        country      = $adUser.Country
-        department   = $adUser.Department
-        employeeNumber   = $adUser.EmployeeNumber
-    }
+    uniqueId       = $adUser.ObjectGUID
+    originId       = $adUser.ObjectGUID
+    name           = $adUser.Name
+    email          = $adUser.Mail
+    managerId      = if ($adUser.Manager) {
+                        $manager = Get-ADUser -Identity $adUser.Manager -Properties DistinguishedName, ObjectGUID
+                        if ($excludeOUs -and ($manager.DistinguishedName -match $excludedOU)) {
+                            $null
+                        } else {
+                            $manager.ObjectGUID
+                        }
+                    } else {
+                        $null
+                    }
+    title          = $adUser.Title
+    firstName      = $adUser.GivenName
+    lastName       = $adUser.Surname
+    status         = $status
+    description    = $adUser.Description
+    city           = $adUser.City
+    country        = $adUser.Country
+    department     = $adUser.Department
+    employeeNumber = $adUser.EmployeeNumber
+}
+
     $accountsUserData += $accountsUserObject
     $identitiesUserData += $identitiesUserObject
  
@@ -161,7 +172,7 @@ foreach ($adGroup in $adGroups) {
     $groupsData += $groupObject
 
     # Get the groups the current group is a member of
-    $groupMemberships = Get-ADGroupMember -Identity $adGroup | Where-Object { $_.DistinguishedName -like "*$ou" } | Where-Object { $_.ObjectClass -eq 'Group' }
+    $groupMemberships = Get-ADPrincipalGroupMembership -Identity $adGroup | Where-Object { $_.DistinguishedName -like "*$ou" } | Where-Object { $_.ObjectClass -eq 'Group' }
 
     # Filter out excluded OUs if $excludeOUs is set to $true
     if ($excludeOUs) {
@@ -177,6 +188,7 @@ foreach ($adGroup in $adGroups) {
         $groupGroupAssociationsData += $groupGroupMembership
     }
 }
+
 # Function to post data in chunks and write response to a log file
 function PostDataInChunks ($url, $jsonData, $token, $logFilePath) {
     $headers = @{
@@ -184,22 +196,25 @@ function PostDataInChunks ($url, $jsonData, $token, $logFilePath) {
     }
     $acceptedTimestampList = @()
     $index = 0
+    
     while ($index -lt $jsonData.data.Count) {
         $chunk = @{
             data = $jsonData.data[$index..($index + $chunkSize - 1)]
         } | ConvertTo-Json
 
-        $Response = Invoke-RestMethod -Method POST -Uri $url -Body $chunk -ContentType "application/json" -Headers $headers -ErrorAction SilentlyContinue
-        $index += $chunkSize
-
-        if ($Response) {
-            $acceptedTimestampList += $Response.acceptedTimestamp
-            # Write response JSON to log file
-            Add-Content -Path $logFilePath -Value ("`n" + (Get-Date -Format "yyyy-MM-dd HH:mm:ss") + " - API request to $url at index $index with chunk size $($chunkSize): $($Response | ConvertTo-Json -Compress)")
-        } else {
-            Add-Content -Path $logFilePath -Value ("`n" + (Get-Date -Format "yyyy-MM-dd HH:mm:ss") + " - Error during API request to $url at index $index with chunk size $($chunkSize) Response: $($Error[0])")
+        try {
+            $Response = Invoke-RestMethod -Method POST -Uri $url -Body $chunk -ContentType "application/json" -Headers $headers -ErrorAction Stop
+            if ($Response) {
+                $acceptedTimestampList += $Response.acceptedTimestamp
+                # Write response JSON to log file
+                Add-Content -Path $logFilePath -Value ("`n" + (Get-Date -Format "yyyy-MM-dd HH:mm:ss") + " - API request to $url at index $index with chunk size $($chunkSize): $($Response | ConvertTo-Json -Compress)")
+            }
+        } catch {
+            Add-Content -Path $logFilePath -Value ("`n" + (Get-Date -Format "yyyy-MM-dd HH:mm:ss") + " - Error during API request to $url at index $index with chunk size $($chunkSize). Exception Message: $($_.Exception.Message)")
         }
+        $index += $chunkSize
     }
+    
     return $acceptedTimestampList
 }
 
@@ -229,31 +244,31 @@ $accountsJsonData = @{
     data = $accountsUserData
 }
 $accountsjson = $accountsJsonData | ConvertTo-Json
-Set-Content -Path "accounts.json" -Value $accountsjson
+Set-Content -Path "$baseDirectory\accounts.json" -Value $accountsjson
 
 $identitiesJsonData = @{
     data = $identitiesUserData
 }
 $identitiesjson = $identitiesJsonData | ConvertTo-Json
-Set-Content -Path "identities.json" -Value $identitiesjson
+Set-Content -Path "$baseDirectory\identities.json" -Value $identitiesjson
 
 $groupsJsonData = @{
     data = $groupsData
 }
 $groupsjson = $groupsJsonData | ConvertTo-Json
-Set-Content -Path "groups.json" -Value $groupsjson
+Set-Content -Path "$baseDirectory\groups.json" -Value $groupsjson
 
 $userGroupAssociationsJsonData = @{
     data = $userGroupAssociationsData
 }
 $userGroupAssociationsjson = $userGroupAssociationsJsonData | ConvertTo-Json
-Set-Content -Path "userGroupAssociations.json" -Value $userGroupAssociationsjson
+Set-Content -Path "$baseDirectory\userGroupAssociations.json" -Value $userGroupAssociationsjson
 
 $groupGroupAssociationsJsonData = @{
     data = $groupGroupAssociationsData
 }
 $groupGroupAssociationsjson = $groupGroupAssociationsJsonData | ConvertTo-Json
-Set-Content -Path "groupGroupAssociations.json" -Value $groupGroupAssociationsjson
+Set-Content -Path "$baseDirectory\groupGroupAssociations.json" -Value $groupGroupAssociationsjson
 
 # POST data to the API endpoints in chunks 
 $timestamps = PostDataInChunks $accountsUsersUrl $accountsJsonData $authToken $logFilePath
@@ -269,4 +284,4 @@ $firstposttimestamp = $timestamps[0]
 $Response = Invoke-RestMethod -Method Delete -Uri $apiBase$deleteEndpoint$firstposttimestamp -ContentType "application/json" -Headers $headers
 
 # Write response to log file
-Add-Content -Path $logFilePath -Value ("`n" + (Get-Date -Format "yyyy-MM-dd HH:mm:ss") + " - Delete data for $apiBase$deleteEndpoint$firstposttimestamp Response: $($Response | ConvertTo-Json -Compress)")
+Add-Content -Path $logFilePath -Value ("`n" + (Get-Date -Format "yyyy-MM-dd HH:mm:ss") + " - Delete data for $apiBase$deleteEndpoint$firstposttimestamp Response: $($Response | ConvertTo-Json -Compress)") 

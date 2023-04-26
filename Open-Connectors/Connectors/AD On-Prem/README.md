@@ -1,4 +1,4 @@
-#### Authomize Active Directory Connector (Release - .9 Beta)
+#### Authomize Active Directory Connector (Release - .9.1 Beta)
 
 ### Getting Started
 
@@ -7,12 +7,16 @@
 `gh repo clone authomize/Open-ITDR` https://github.com/authomize/Open-ITDR
 
 ## Required Permissions: 
--Active Directory permissions: The script needs permissions to query and read users and group data from the Active Directory. To achieve this, the account running the script should have at least "Read" permission on the OU (Organizational Units) being queried.
--Filesystem permissions: The script writes logs to a file ($logFilePath). The account running the script should have permission to create and write to the specified log file.
--PowerShell execution policy: To run the script, the PowerShell execution policy on the machine should be configured to allow running scripts. 
+- Active Directory permissions: The script needs permissions to query and read users and group data from the Active Directory. To achieve this, the account running the script should have at least "Read" permission on the OU (Organizational Units) being queried.
+- Filesystem permissions: The script writes logs to a file ($logFilePath). The account running the script should have permission to create and write to the specified log file.
+- PowerShell execution policy: To run the script, the PowerShell execution policy on the machine should be configured to allow running scripts. 
+
+## Ensure you have RSAT Tools Installed
+- RSAT Tools is Optional in some Installations
+- Install RSAT Tools via PowerShell `Install-WindowsFeature -Name "RSAT-AD-PowerShell" -IncludeAllSubFeature`
 
 ## Install ActiveDirectory PowerShell Module
-`Install-Module -Name ActiveDirectory`
+- Via Powershell `Install-Module -Name ActiveDirectory`
 
 ## Install CredentialManager 
 - Via Powershell `Install-Module -Name CredentialManager`
@@ -24,7 +28,7 @@
 ## Define variables in ad_script.ps1
 - Further variable details are in ad_script.ps1
 
-## Use Windows Task Scheduler to schedule ad_script.ps1
+## Use Windows Task Scheduler to Schedule ad_script.ps1
 - Set the script to run on a 12 hour schedule
 - For help with this refer to: https://learn.microsoft.com/en-us/windows/win32/taskschd/using-the-task-scheduler
 
