@@ -2,7 +2,7 @@
 
 # Define variables
 $useCredentialManager = $true # Set this to $true to use CredentialManager, $false to use environment variables. For Security reasons using CredentialManager is preferred.
-$authToken = "ENTER AUTHOMIZE TOKEN HERE" # Set as CredentialManager Token field or Environmental Variable Name 
+$authToken = "ENTER AUTHOMIZE TOKEN HERE" # Set as CredentialManager `Target` field or Environmental Variable Name 
 $appId = "ENTER AUTHOMIZE APP ID HERE" # Replace with your App ID
 $ou = "DC=authomizese,DC=com" # Replace with the OU you'd like to pull AD information from
 $excludeOUs = $true # Set this variable to $true if you want to exclude a specific OU, otherwise set it to $false
