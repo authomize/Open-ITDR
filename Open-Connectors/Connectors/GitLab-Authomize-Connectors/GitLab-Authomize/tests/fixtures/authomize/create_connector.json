@@ -1,0 +1,14 @@
+{
+  "config": {},
+  "serviceId": "TestConnector",
+  "id": "1234",
+  "createdAt": "2022-05-25T18:34:53.959Z",
+  "lastSyncedAt": "string",
+  "lastError": "string",
+  "modifiedAt": "string",
+  "status": "enabled",
+  "serviceType": "string",
+  "availableConnectorId": "restApiImport",
+  "actorType": "string",
+  "actorId": "string"
+}

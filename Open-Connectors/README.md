@@ -15,6 +15,3 @@ Authomize provides code that can be used within your python projects, this can b
 
 ## Get Postman OpenAPI Specifications
 To help with any code you may be creating please download the specifications from the [Authomize API reference page](https://api.authomize.com/documentation). This will assist you with writing code against the API stack that Authomize provides.
-
-## [Development Note]
-*PagerDuty-Service*: Please leave directory, currently under review by pager duty, we understand there is another directory under [Webhooks](./Webhooks/) - regards BD team.

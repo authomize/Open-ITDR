@@ -38,7 +38,7 @@
 - Users that are a memberOf each Group
 - Groups that are a membersOf each Group
 
-## Hints & Other Info:
+## Hints & other info:
 - The created JSON files are only used for troubleshooting purposes. These can be safely commented out of the script if desired.
 - The log file overwrites itself on every run. This is to keep the file small and easy to read.
 

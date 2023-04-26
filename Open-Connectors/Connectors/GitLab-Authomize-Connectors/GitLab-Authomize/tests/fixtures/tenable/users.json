@@ -1,0 +1,97 @@
+[
+  {
+    "uuid": "184343fe-6d0f-4d90-b12a-3c4a3f04b018",
+    "id": 2,
+    "user_name": "example1@gitlab.com",
+    "username": "example1@gitlab.com",
+    "email": "example1@gitlab.com",
+    "name": "Example One",
+    "type": "local",
+    "permissions": 16,
+    "last_login_attempt": 1604338613207,
+    "login_fail_count": 0,
+    "login_fail_total": 56,
+    "enabled": false,
+    "undeletable": true,
+    "group_uuids": [
+      "00000000-0000-0000-0000-000000000000"
+    ],
+    "lockout": 0,
+    "preferences": {
+      "enableExplore": "true",
+      "tenableGridState": "null",
+      "enableAssetWorkbench": "true",
+      "enableVMWorkbench": "true",
+      "enableUnifiedScanConfiguration": "false",
+      "enableWebAppWorkbench": "true"
+    },
+    "container_uuid": "76e65b1f-157d-4304-b5ee-d2082fdddaf6",
+    "lastlogin": 1615334034961,
+    "uuid_id": "184343fe-6d0f-4d90-b12a-3c4a3f04b018"
+  },
+  {
+    "uuid": "c1741305-01ae-4d25-b41f-6e120d5d473a",
+    "id": 3,
+    "user_name": "example2@gitlab.com",
+    "username": "example2@gitlab.com",
+    "email": "example2@gitlab.com",
+    "name": "Example Two",
+    "type": "local",
+    "permissions": 64,
+    "login_fail_count": 0,
+    "login_fail_total": 0,
+    "enabled": false,
+    "undeletable": false,
+    "group_uuids": [
+      "00000000-0000-0000-0000-000000000000"
+    ],
+    "lockout": 0,
+    "preferences": {
+      "enableExplore": "true",
+      "tenableGridState": "null",
+      "enableAssetWorkbench": "true",
+      "enableVMWorkbench": "true",
+      "enableUnifiedScanConfiguration": "false",
+      "enableWebAppWorkbench": "true"
+    },
+    "container_uuid": "76e65b1f-157d-4304-b5ee-d2082fdddaf6",
+    "lastlogin": 1549453093241,
+    "uuid_id": "c1741305-01ae-4d25-b41f-6e120d5d473a"
+  },
+  {
+    "uuid": "ed073a69-25f6-4dc8-a12d-499b345fe949",
+    "id": 4,
+    "user_name": "example3@gitlab.com",
+    "username": "example3@gitlab.com",
+    "email": "example3@gitlab.com",
+    "name": "Example Three",
+    "type": "local",
+    "permissions": 40,
+    "login_fail_count": 0,
+    "login_fail_total": 0,
+    "enabled": true,
+    "undeletable": false,
+    "group_uuids": [
+      "00000000-0000-0000-0000-000000000000"
+    ],
+    "two_factor": {
+      "activated": 1605629682,
+      "sms_phone": "+15551234567",
+      "sms_enabled": 1,
+      "email_enabled": 0,
+      "totp_enabled": 0
+    },
+    "lockout": 0,
+    "preferences": {
+      "enableExplore": "true",
+      "tenableGridState": "null",
+      "enableAssetWorkbench": "true",
+      "enableVMWorkbench": "true",
+      "enableUnifiedScanConfiguration": "false",
+      "enableWebAppWorkbench": "true"
+    },
+    "container_uuid": "76e65b1f-157d-4304-b5ee-d2082fdddaf6",
+    "lastlogin": 1584373994275,
+    "uuid_id": "ed073a69-25f6-4dc8-a12d-499b345fe949"
+  }
+]

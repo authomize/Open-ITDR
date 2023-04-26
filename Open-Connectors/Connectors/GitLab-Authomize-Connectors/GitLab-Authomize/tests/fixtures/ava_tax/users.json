@@ -1,0 +1,51 @@
+{
+  "@recordsetCount": 22,
+  "value": [
+    {
+      "id": 117494,
+      "accountId": 2000004039,
+      "companyId": 0,
+      "userName": "example1@gtilab.com",
+      "firstName": "Example",
+      "lastName": "One",
+      "email": "example1@gitlab.com",
+      "postalCode": "94103",
+      "securityRoleId": "AccountAdmin",
+      "passwordStatus": "UserMustChange",
+      "isActive": false,
+      "createdDate": "2017-07-27T23:18:37.743Z",
+      "modifiedDate": "2019-01-16T21:48:36.217Z",
+      "SuppressNewUserEmail": false
+    },
+    {
+      "id": 242248,
+      "accountId": 2000004039,
+      "userName": "example2@gitlab.com",
+      "firstName": "Example",
+      "lastName": "Two",
+      "email": "example2@gitlab.com",
+      "postalCode": "94104",
+      "securityRoleId": "AccountUser",
+      "passwordStatus": "UserCanChange",
+      "isActive": true,
+      "createdDate": "2019-02-05T04:11:29.96Z",
+      "modifiedDate": "2020-02-03T16:07:35.59Z",
+      "SuppressNewUserEmail": false
+    },
+    {
+      "id": 391889,
+      "accountId": 2000004039,
+      "userName": "example3@gitlab.com",
+      "firstName": "Example",
+      "lastName": "Three",
+      "email": "example3@gitlab.com",
+      "postalCode": "99999",
+      "securityRoleId": "AccountAdmin",
+      "passwordStatus": "UserCanChange",
+      "isActive": true,
+      "createdDate": "2020-04-14T15:02:04.607Z",
+      "modifiedDate": "2022-06-02T08:27:11.463Z",
+      "SuppressNewUserEmail": false
+    }
+  ]
+}

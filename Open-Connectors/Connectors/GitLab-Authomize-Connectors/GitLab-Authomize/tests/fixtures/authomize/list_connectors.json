@@ -1,0 +1,51 @@
+{
+  "pagination": {
+    "limit": 20,
+    "skip": 0,
+    "total": 3
+  },
+  "data": [
+    {
+      "config": {},
+      "serviceId": "Test1",
+      "id": "123456789",
+      "createdAt": "2022-05-13T17:58:08.066000+00:00",
+      "lastSyncedAt": null,
+      "lastError": null,
+      "modifiedAt": "2022-05-24T11:14:42.180Z",
+      "status": "failure",
+      "serviceType": "TestConnector",
+      "availableConnectorId": "restApiImport",
+      "actorType": null,
+      "actorId": null
+    },
+    {
+      "config": {},
+      "serviceId": "Test2",
+      "id": "50776286591",
+      "createdAt": "2022-05-13T18:51:14.144000+00:00",
+      "lastSyncedAt": null,
+      "lastError": null,
+      "modifiedAt": "2022-05-13T18:51:14.167Z",
+      "status": "enabled",
+      "serviceType": "net-suite",
+      "availableConnectorId": "restApiImport",
+      "actorType": null,
+      "actorId": null
+    },
+    {
+      "config": {},
+      "serviceId": "Test3",
+      "id": "51156909573",
+      "createdAt": "2022-05-17T12:17:06.389000+00:00",
+      "lastSyncedAt": null,
+      "lastError": null,
+      "modifiedAt": "2022-05-17T12:17:06.411Z",
+      "status": "enabled",
+      "serviceType": "bamboo-hr",
+      "availableConnectorId": "restApiImport",
+      "actorType": null,
+      "actorId": null
+    }
+  ]
+}

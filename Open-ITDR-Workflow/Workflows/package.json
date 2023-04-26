@@ -4,9 +4,6 @@
     "dependencies": {
         "node-red": ">=3.0.2",
         "node-red-dashboard": ">=3.3.1",
-        "node-red-contrib-securedhttp": "1.0.10",
-        "dashboard-evi": "1.0.2",
-        "node-red-contrib-ui_j": "1.2.19",
         "node-red-node-email": "*"
     },
     "scripts": {

@@ -1,4 +1,4 @@
-﻿Import-Module ActiveDirectory
+Import-Module ActiveDirectory
 
 # Define variables
 $useCredentialManager = $true # Set this to $true to use CredentialManager, $false to use environment variables. For Security reasons using CredentialManager is preferred.
