@@ -161,13 +161,27 @@ foreach ($adUser in $adUsers) {
 foreach ($adGroup in $adGroups) {
 
     $groupObject = @{
-        uniqueId             = $adGroup.ObjectGUID
-        originId             = $adGroup.ObjectGUID
-        name                 = $adGroup.Name
-        originType           = $adGroup.GroupCategory.ToString()
-        type                 = "Group"
-        owner                = if ($adGroup.ManagedBy) { (Get-ADUser -Identity $adGroup.ManagedBy).ObjectGUID } else { $null }
-    }
+    uniqueId             = $adGroup.ObjectGUID
+    originId             = $adGroup.ObjectGUID
+    name                 = $adGroup.Name
+    originType           = $adGroup.GroupCategory.ToString()
+    type                 = "Group"
+    owner                = if ($adGroup.ManagedBy) { 
+                                $object = Get-ADObject -Identity $adGroup.ManagedBy
+                                if($object.ObjectClass -eq 'user') {
+                                    $user = Get-ADUser -Identity $adGroup.ManagedBy
+                                    if($excludeOUs -and ($user.DistinguishedName -match $excludedOU)) {
+                                        $null
+                                    } else {
+                                        $user.ObjectGUID
+                                    }
+                                } else {
+                                    $null
+                                }
+                          } else { 
+                                $null 
+                          }
+}
 
     $groupsData += $groupObject
 
