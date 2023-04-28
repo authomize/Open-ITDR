@@ -7,7 +7,7 @@
 * ***Create high and low urgency incidents based on the severity of the event from the Authomize event payload.***
 
 # How it Works
-* When authomize finds an anomoly in your identity infrastructure it generates an event. Some events will be critical in nature while others are informational. For example a user without MFA as opposed to finding a new EC2 instance exposed on the internet in AWS.
+* When authomize finds an anomaly in your identity infrastructure it generates an event. Some events will be critical in nature while others are informational. For example a user without MFA as opposed to finding a new EC2 instance exposed on the internet in AWS.
 * When you configure the webhooks in Authomize to send the events to PagerDuty using this integration the Authomize tenant will send the events directly to PagerDuty about once every two to three hours. ***ONLY*** new events are sent. If an event is automatically resolved by Authomize and then reopens again, the event will be sent again as if it was a new event.
 * PagerDuty maps specific custom data to the generated PagerDuty ticket to assist in determining what type of priority you should apply to the ticket or other actions you may need to take.
 * Authomize does not send any other events to indicate any process change, you will need to click on the URL pointing to the event back on Authomize to determine additional details and to perform any further investigations.
@@ -15,7 +15,7 @@
 
 # Requirements
 * PagerDuty integrations require an Admin base role for account authorization. If you do not have this role, please reach out to an Admin or Account Owner within your organization to configure the integration.
-* Authomize configuration of webhooks requires an Admin based role for the creation and configration of webhooks. If you do not have this role, you will need to reach out to your Admin or Account Owner within your organization to finalize the configuration.
+* Authomize configuration of webhooks requires an Admin based role for the creation and configuration of webhooks. If you do not have this role, you will need to reach out to your Admin or Account Owner within your organization to finalize the configuration.
 
 # Support
 
@@ -34,7 +34,7 @@ If you need help with this integration, please contact support@authomize.com.
 ![](https://pdpartner.s3.amazonaws.com/ig-template-copy-integration-key.png)
 
 ## In Authomize
-1. **Login** to your Authomize tenant with **Admin** priveleges.
+1. **Login** to your Authomize tenant with **Admin** privileges.
 2. From the **Configuration** menu found on the top right of your screen, select **Webhooks** located on the menu bar to the left.
 3. Click the **Create Webhook** button found top right.
 4. When the **Create Webhook** dialogue box comes up you will see three fields:
@@ -48,7 +48,7 @@ If you need help with this integration, please contact support@authomize.com.
 8. Click the **Create** button to save your settings.
 9. **NOTE**: Do not press the [TEST] button, it will not generate an event that PagerDuty can read.
 
-You are now complete, you should monitor the **Webhook logs** found on the left bar to determine when events are being sent. Authomize customer success team work closley with all Authomize customers and will be able to support you in the process. If you have any questions or issues please reach out to us on support@authomize.com and a success team member will respond to you.
+You are now complete, you should monitor the **Webhook logs** found on the left bar to determine when events are being sent. Authomize customer success team work closely with all Authomize customers and will be able to support you in the process. If you have any questions or issues please reach out to us on support@authomize.com and a success team member will respond to you.
 
 # How to Uninstall
 
