@@ -159,13 +159,13 @@ foreach ($adUser in $adUsers) {
 
 # Loop through AD groups
 foreach ($adGroup in $adGroups) {
-
     $groupObject = @{
     uniqueId             = $adGroup.ObjectGUID
     originId             = $adGroup.ObjectGUID
     name                 = $adGroup.Name
     originType           = $adGroup.GroupCategory.ToString()
     type                 = "Group"
+    alternativeName      = if ($adGroup.Description.Length -gt 256) { $adGroup.Description.Substring(0, 256) } else { $adGroup.Description }
     owner                = if ($adGroup.ManagedBy) { 
                                 $object = Get-ADObject -Identity $adGroup.ManagedBy
                                 if($object.ObjectClass -eq 'user') {
@@ -181,7 +181,7 @@ foreach ($adGroup in $adGroups) {
                           } else { 
                                 $null 
                           }
-}
+} 
 
     $groupsData += $groupObject
 
