@@ -1,11 +1,13 @@
 version: '3.9'
 
 services:
-  your_service_name:
+  authomize-connectors:
+    build: <ENTER_YOUR_PATH_HERE>/Open-ITDR/Open-Connectors/Connectors/Authomize_Docker_Image # Change this to the directory containing your Dockerfile
     image: authomize-connectors
     container_name: authomize-connectors
     volumes:
       - <ENTER_YOUR_PATH_HERE>/.env:/app/.env # .env file
-      - <ENTER_YOUR_PATH_HERE>/Open-ITDR/Open-Connectors/Connectors/Authomize_Docker_Image:/app/ # main Docker directory
-      - <ENTER_YOUR_PATH_HERE>/Open-ITDR/Open-Connectors/Connectors/atlassian:/app/atlassian # script path
+      - <ENTER_YOUR_PATH_HERE>/Open-ITDR/Open-Connectors/Connectors/Authomize_Docker_Image/:/app/ # main Docker directory
+      - <ENTER_YOUR_PATH_HERE>/Open-ITDR/Open-Connectors/Connectors/atlassian/:/app/atlassian/ # atlassian script path
+      - <ENTER_YOUR_PATH_HERE>/Open-ITDR/Open-Connectors/Connectors/splunk/:/app/splunk/ # splunk script path
       #- <ENTER_YOUR_PATH_HERE>/host/path/script3:/container/path/script3
