@@ -10,8 +10,8 @@ $excludedOU = ".*OU=exampleOU.*" # REGEX match - The .* in this variable serves 
 $baseDirectory = $PSScriptRoot # Get the base directory of the script
 $logFilePath = "$baseDirectory\ad_script.log" # Log file
 
-# Decrypt Token function
-function Convert-SecureStringToPlainText {
+ # Decrypt Token function
+ function Convert-SecureStringToPlainText {
     param($secureString)
 
     $BSTR = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($secureString)
@@ -97,15 +97,22 @@ foreach ($adUser in $adUsers) {
         default { "Unknown" }
     }
 
+    $email = if ($adUser.Mail -match '^[^\s@]+@[^\s@]+\.[^\s@]+$') {
+        $adUser.Mail
+    } else {
+        Add-Content -Path $logFilePath -Value "Invalid email for user $($adUser.Name): $($adUser.Mail) - Posting user's email as null."
+        $null
+    }
+
     $accountsUserObject = @{
         uniqueId     = $adUser.ObjectGUID
         originId     = $adUser.ObjectGUID
         name         = $adUser.Name
-        email        = $adUser.Mail
+        email        = $email
         firstName    = $adUser.GivenName
         lastName     = $adUser.Surname
         status       = $status
-        description  = $adUser.Description
+        description  = if ($adUser.Description) { $adUser.Description.ToString() } else { $null }
         lastLoginAt  = if ($adUser.LastLogonDate) { (Get-Date $adUser.LastLogonDate -Format "yyyy-MM-ddTHH:mm:ssZ") } else { $null }
     }
 
@@ -113,7 +120,7 @@ foreach ($adUser in $adUsers) {
     uniqueId       = $adUser.ObjectGUID
     originId       = $adUser.ObjectGUID
     name           = $adUser.Name
-    email          = $adUser.Mail
+    email          = $email
     managerId      = if ($adUser.Manager) {
                         $manager = Get-ADUser -Identity $adUser.Manager -Properties DistinguishedName, ObjectGUID
                         if ($excludeOUs -and ($manager.DistinguishedName -match $excludedOU)) {
@@ -128,7 +135,7 @@ foreach ($adUser in $adUsers) {
     firstName      = $adUser.GivenName
     lastName       = $adUser.Surname
     status         = $status
-    description    = $adUser.Description
+    description  = if ($adUser.Description) { $adUser.Description.ToString() } else { $null }
     city           = $adUser.City
     country        = $adUser.Country
     department     = $adUser.Department
@@ -159,6 +166,7 @@ foreach ($adUser in $adUsers) {
 
 # Loop through AD groups
 foreach ($adGroup in $adGroups) {
+
     $groupObject = @{
     uniqueId             = $adGroup.ObjectGUID
     originId             = $adGroup.ObjectGUID
@@ -181,7 +189,7 @@ foreach ($adGroup in $adGroups) {
                           } else { 
                                 $null 
                           }
-} 
+}
 
     $groupsData += $groupObject
 
@@ -203,21 +211,27 @@ foreach ($adGroup in $adGroups) {
     }
 }
 
-# Function to post data in chunks and write response to a log file
 function PostDataInChunks ($url, $jsonData, $token, $logFilePath) {
-    $headers = @{
-        "Authorization" = "$token"
-    }
     $acceptedTimestampList = @()
     $index = 0
+    $unicodeEncoding = New-Object System.Text.UnicodeEncoding
     
     while ($index -lt $jsonData.data.Count) {
         $chunk = @{
             data = $jsonData.data[$index..($index + $chunkSize - 1)]
-        } | ConvertTo-Json
+        } | ConvertTo-Json -Compress
+
+        $chunkBytes = $unicodeEncoding.GetBytes($chunk)
+
+        $headers = @{
+            "Authorization" = "$token"
+            "Content-Type" = "application/json; charset=UTF-16"
+            "Accept" = "application/json"
+            "Cache-Control" = "no-cache"
+        }
 
         try {
-            $Response = Invoke-RestMethod -Method POST -Uri $url -Body $chunk -ContentType "application/json" -Headers $headers -ErrorAction Stop
+            $Response = Invoke-RestMethod -Method POST -Uri $url -Body $chunkBytes -Headers $headers -ErrorAction Stop
             if ($Response) {
                 $acceptedTimestampList += $Response.acceptedTimestamp
                 # Write response JSON to log file
@@ -299,3 +313,4 @@ $Response = Invoke-RestMethod -Method Delete -Uri $apiBase$deleteEndpoint$firstp
 
 # Write response to log file
 Add-Content -Path $logFilePath -Value ("`n" + (Get-Date -Format "yyyy-MM-dd HH:mm:ss") + " - Delete data for $apiBase$deleteEndpoint$firstposttimestamp Response: $($Response | ConvertTo-Json -Compress)") 
+ 
