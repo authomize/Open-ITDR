@@ -6,8 +6,5 @@ This area will contain solutions that provide value to developers and companies 
 ### Please Note:
 We have found some legacy connectors in this repo, they are currently being reviewed and looked at to ensure a simpler adoption experience.
 
-## Authomize Python Code
-Authomize provides code that can be used within your python projects, this can be found [here](https://pypi.org/project/authomize-rest-api-client/).
-
 ## Get Postman OpenAPI Specifications
 To help with any code you may be creating please download the specifications from the [Authomize API reference page](https://api.authomize.com/documentation). This will assist you with writing code against the API stack that Authomize provides.
