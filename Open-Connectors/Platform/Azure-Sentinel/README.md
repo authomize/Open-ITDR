@@ -1,0 +1,2 @@
+# Authomize Integration with Azure Sentinel
+This is a replication of the integration directory located on Azure-Sentinel [github repositoty](https://github.com/Azure/Azure-Sentinel/tree/master/Solutions/Authomize). The purpose is to give reference for customers wanting access to the middleware component built to pull data from Authomize and send to Azure sentinel.
