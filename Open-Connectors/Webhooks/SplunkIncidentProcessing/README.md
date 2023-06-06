@@ -1,24 +1,84 @@
-## Get details from Splunk on HTTP Event Collector
-By enabling the following feature on Splunk and then configuring a webhook within Authomize to point to your instance, Splunk will ingest Authomize events.
+# Splunk-Authomize Integration
 
-1. Read through the splunk technical documention for the [event collector](https://docs.splunk.com/Documentation/Splunk/latest/Data/FormateventsforHTTPEventCollector).
-2. Understand how to configure the Webhook back on Authomize by reading the [splunk admin documentation](https://docs.splunk.com/Documentation/Splunk/9.0.4/Data/UsetheHTTPEventCollector#Configure_HTTP_Event_Collector_on_Splunk_Cloud_Platform).
-3. You will need to contact Splunk Support if you are using Splunk Cloud to ensure you enable "query string authentication". This enables Authomize to send JSON events to splunk and authenticate using the token in the URI.
+This document provides step-by-step instructions on how to set up a Splunk HTTP Event Collector (HEC) for integrating Splunk with Authomize. The guide covers the setup process for both Splunk Cloud and Splunk Enterprise.
 
-Once you have a token from Splunk.
+The Splunk-Authomize integration enables you to collect and analyze security events from Authomize in your Splunk environment. This integration relies on tokens for authentication.
 
-## Create a Webhook In Authomize
-1. **Login** to your Authomize tenant with **Admin** priveleges.
-2. From the **Configuration** menu found on the top right of your screen, select **Webhooks** located on the menu bar to the left.
-3. Click the **Create Webhook** button found top right.
-4. When the **Create Webhook** dialogue box comes up you will see three fields:
-   * **Webhook Name**
-   * **URL**
-   * **Events to subscribe**
-5. On the **Webhook Name** field enter a meaningful name such as `Splunk-Authomize-Events`.
-6. On the **URL** field enter the url [https://```<see splunk doco>```.splunk.com/```<see splunk doco>```] .
-   * Remember to use the  **Splunk key** you get from Splunk Support in this url.
-7. On the **Events to subscribe** field select **Incident Created**
-8. Click the **Create** button to save your settings.
+## Prerequisites
 
-You are now complete, you should montor the **Webhook logs** found on the left menu bar to determine when events are being sent. Authomize customer success team work closley with all Authomize customers and will be able to support you in the process. If you have any questions or issues please reach out to us on support@authomize.com and a success team member will respond to you as they can.
+- A Splunk Cloud or Splunk Enterprise instance.
+- Authomize account with the necessary permissions.
+- Basic understanding of Splunk and Authomize.
+
+## Setting up the HTTP Event Collector (HEC)
+
+Follow these steps to set up the Splunk HEC for both Splunk Cloud and Splunk Enterprise:
+
+### 1. Enable HEC
+
+**Splunk Cloud**
+
+If you are using Splunk Cloud, submit a support request to enable HEC:
+- Go to https://www.splunk.com/en_us/support-and-services.html
+- Ensure you request that you can use query string authorization for HEC
+- Click "Submit a request" and follow the instructions to request HEC enablement
+
+**Splunk Enterprise**
+
+If you are using Splunk Enterprise, enable HEC by following these steps:
+- Log in to Splunk Web as an administrator.
+- Go to Settings > Data Inputs.
+- Click on HTTP Event Collector.
+- Click on "Global Settings" in the top-right corner.
+- Set "All Tokens" to "Enabled".
+- Click "Save".
+- Now enable the query string authorization for HEC
+   - You'll need to modify the HEC configuration in your Splunk instance.
+   - Open the inputs.conf file located in `$SPLUNK_HOME/etc/apps/<your-app>/local` (create the file if it doesn't exist).
+      - `<your-app>` should be splunk_httpinput
+   - Add the following lines:
+      - `[http]`
+      - `allowQueryStringAuth = true`
+
+
+### 2. Create an HEC Token
+
+**Splunk Cloud and Splunk Enterprise**
+
+To create an HEC token, follow these steps:
+- Log in to Splunk Web as an administrator.
+- Go to Settings > Data Inputs.
+- Click on HTTP Event Collector.
+- Click "New Token".
+- Fill in the required fields (Name, Description, and Source type) and click "Next".
+- Select an existing index or create a new one, and click "Review".
+- Review your token settings and click "Submit" to create the token.
+- Copy the generated token value and save it. You will use this token for the Authomize webhook configuration.
+
+## Configuring Authomize Webhook
+
+To configure the Authomize webhook, follow these steps:
+
+1. Log in to your Authomize account.
+2. Go to the settings or integrations page.
+3. Locate the webhook settings or integration section.
+4. Enter the Splunk HEC URL and the token you saved earlier.
+   - The HEC URL format should be: `https://<hec_hostname>:<hec_port>/services/collector/raw?token=<your-token>`
+   - Replace `<hec_hostname>` with your Splunk instance's hostname, and `<hec_port>` with the port on which HEC is listening (default is 8088) and `<your-token>` which you got when you configured the HTTP Event Collector.
+5. Save the configuration.
+
+## Testing the Integration
+
+To test the integration, trigger a test event from Authomize. The event should appear in Splunk in the index you specified during the HEC token creation.
+
+## Troubleshooting
+
+If you encounter any issues during the setup process, consult the Splunk and Authomize documentation or contact their respective support teams:
+
+- Splunk Support: https://www.splunk.com/en_us/support-and-services.html
+- Authomize Support: https://www.authomize.com/contact
+
+## Further Reading
+
+- Splunk HTTP Event Collector documentation: https://docs.splunk.com/Documentation/Splunk/9.0.4/Data/UsetheHTTPEventCollector
+- Authomize documentation: https://www.authomize.com/docs
