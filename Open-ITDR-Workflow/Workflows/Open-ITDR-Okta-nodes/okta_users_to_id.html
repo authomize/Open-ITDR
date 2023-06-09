@@ -1,0 +1,26 @@
+<script type="text/javascript">
+    RED.nodes.registerType('okta_users_to_id',{
+        category: 'authomize_okta',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value:"Okta users to id"}
+        },
+        inputs:3,
+        outputs:1,
+        icon: "file.png",
+        label: function() {
+            return this.name||"okta_users_to_id";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="okta_users_to_id">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="okta_users_to_id">
+    <p>Receives a list of users emails and returns a dictionary of user  and email</p>
+</script>

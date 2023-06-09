@@ -1,0 +1,29 @@
+<script type="text/javascript">
+    RED.nodes.registerType('add_user_to_group',{
+        category: 'authomize_okta',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value: "Add user to group"}
+            //group_name: {value:"", required: true},
+            //group_desc: {value:""}
+
+        },
+        inputs:2,
+        outputs:1,
+        icon: "file.png",
+        //label: function() {
+        //    return this.name||"add_user_to_group";
+        //}
+    });
+</script>
+
+<script type="text/html" data-template-name="add_user_to_group">
+    <div class="form-row">
+                <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+                <input type="text" id="node-input-name" placeholder="Name">
+        </div>
+</script>
+
+<script type="text/html" data-help-name="add_user_to_group">
+        <p>Adds users to an existing group</p>
+</script>
