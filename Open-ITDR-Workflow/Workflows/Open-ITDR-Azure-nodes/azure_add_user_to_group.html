@@ -1,0 +1,26 @@
+<script type="text/javascript">
+    RED.nodes.registerType('azure_add_user_to_group',{
+        category: 'authomize_azure',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value:"Azure - Add user to group"}
+        },
+        inputs:3,
+        outputs:1,
+        icon: "file.png",
+        label: function() {
+            return this.name||"azure_add_user_to_group";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="azure_add_user_to_group">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="azure_add_user_to_group">
+    <p>Adds a user to a specific Azure group</p>
+</script>

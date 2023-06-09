@@ -1,0 +1,25 @@
+<script type="text/javascript">
+    RED.nodes.registerType('azure_does_group_exist',{
+        category: 'authomize_azure',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value:""}
+         },
+        inputs: 1,
+        outputs: 2,
+        icon: "switch.png",
+        label: function() {
+            return this.name || "azure_does_group_exist";
+        }
+    });
+</script>
+<script type="text/html" data-template-name="azure_does_group_exist">
+    <div class="form-row">
+                <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+                <input type="text" id="node-input-name" placeholder="Name">
+        </div>
+</script>
+
+<script type="text/html" data-help-name="azure_does_group_exist">
+        <p>Checks if a group exists in Okta</p>
+</script>

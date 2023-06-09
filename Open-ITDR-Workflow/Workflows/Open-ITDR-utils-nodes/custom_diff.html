@@ -1,0 +1,32 @@
+<script type="text/javascript">
+  RED.nodes.registerType('custom_diff', {
+    category: 'authomize_utils',
+    color: '#a6bbcf',
+    defaults: {
+      name: { value: "Custom diff" },
+      listA_name: { value: "", required: true },
+      listB_name: { value: "", required: true }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.png",
+    label: function() {
+      return this.name || "custom_diff";
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="custom_diff">
+  <div class="form-row">
+    <label for="node-input-listA_name"><i class="fa fa-tag"></i>List A name</label>
+    <input type="text" id="node-input-listA_name" placeholder="List A name" ng-model="config.listA_name">
+  </div>
+  <div class="form-row">
+    <label for="node-input-listB_name"><i class="fa fa-tag"></i>List B name</label>
+    <input type="text" id="node-input-listB_name" placeholder="List B name" ng-model="config.listB_name">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="custom_diff">
+  <p>Returns the differences between two lists.</p>
+</script>
