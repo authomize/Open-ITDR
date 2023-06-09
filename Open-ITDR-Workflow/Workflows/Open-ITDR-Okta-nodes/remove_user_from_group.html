@@ -1,0 +1,24 @@
+<script type="text/javascript">
+    RED.nodes.registerType('remove_user_from_group',{
+        category: 'authomize_okta',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value: "Remove user from group"}
+
+        },
+        inputs:2,
+        outputs:1,
+        icon: "file.png",
+    });
+</script>
+
+<script type="text/html" data-template-name="remove_user_from_group">
+    <div class="form-row">
+                <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+                <input type="text" id="node-input-name" placeholder="Name">
+        </div>
+</script>
+
+<script type="text/html" data-help-name="remove_user_from_group">
+        <p>Removess users from an existing group</p>
+</script>

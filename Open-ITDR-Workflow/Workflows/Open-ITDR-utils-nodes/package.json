@@ -1,0 +1,15 @@
+{
+  "name": "Open-ITDR-utils-nodes",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Authomize LTD",
+  "license": "ISC",
+  "node-red" : {
+    "nodes": {
+	  "any_split": "any_split.js",
+	  "custom_diff": "custom_diff.js"
+    }
+  }
+}
+
+
