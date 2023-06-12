@@ -70,6 +70,7 @@
     "type": "tab"
     },
     {
+    "h": 177,
     "id": "ec0b35b23ad2f78b",
     "nodes":
         [
@@ -89,6 +90,7 @@
         "stroke-opacity": "1"
         },
     "type": "group",
+    "w": 492,
     "x": 1194,
     "y": 251.5,
     "z": "6d8d00a0454e2a65"
@@ -813,7 +815,8 @@
         [
             [
             "c32fc52dfad15aa7",
-            "ecd2a3c9daacba44"
+            "ecd2a3c9daacba44",
+            "065e3a605be386d4"
             ]
         ],
     "x": 140,
@@ -822,6 +825,9 @@
     },
     {
     "className": "",
+    "color": "#000000",
+    "font": "",
+    "fontSize": "",
     "format": "{{msg.payload}}",
     "group": "fc378e773fb6737d",
     "height": "20",
@@ -830,6 +836,7 @@
     "layout": "col-center",
     "name": "",
     "order": 8,
+    "style": false,
     "type": "ui_text",
     "width": "12",
     "wires":
@@ -905,6 +912,24 @@
         ],
     "x": 1130,
     "y": 480,
+    "z": "5194913d351aa6cd"
+    },
+    {
+    "active": true,
+    "complete": "false",
+    "console": false,
+    "id": "065e3a605be386d4",
+    "name": "debug 1",
+    "statusType": "auto",
+    "statusVal": "",
+    "tosidebar": true,
+    "tostatus": false,
+    "type": "debug",
+    "wires":
+        [
+        ],
+    "x": 380,
+    "y": 700,
     "z": "5194913d351aa6cd"
     },
     {
@@ -988,12 +1013,12 @@
             },
             {
             "t": "cont",
-            "v": "Okta - dynamic group",
+            "v": "okta isadmin",
             "vt": "str"
             },
             {
             "t": "cont",
-            "v": "Azure - dynamic group",
+            "v": "azure isadmin",
             "vt": "str"
             },
             {
@@ -1024,10 +1049,12 @@
             "09d1b4d07409f243"
             ],
             [
-            "7d38a2d8fb2bf333"
+            "7d38a2d8fb2bf333",
+            "09d1b4d07409f243"
             ],
             [
-            "33f9dc3727f5a694"
+            "33f9dc3727f5a694",
+            "09d1b4d07409f243"
             ],
             [
             ],
@@ -1183,7 +1210,7 @@
         [
         ],
     "x": 1410,
-    "y": 200,
+    "y": 180,
     "z": "fef444a29fad2f51"
     },
     {
@@ -1372,7 +1399,7 @@
     "wires":
         [
         ],
-    "x": 840,
+    "x": 820,
     "y": 420,
     "z": "0834077afbfa3457"
     },
@@ -3066,53 +3093,6 @@
     "z": "2650ec355a712558"
     },
     {
-    "crontab": "",
-    "id": "7145c6a1e93b099a",
-    "name": "Start",
-    "once": false,
-    "onceDelay": 0.1,
-    "props":
-        [
-            {
-            "p": "config",
-            "v": "config.Azure",
-            "vt": "global"
-            },
-            {
-            "p": "group_name",
-            "v": "aaaa24",
-            "vt": "str"
-            },
-            {
-            "p": "group_desc",
-            "v": "dshfkjsdhf",
-            "vt": "str"
-            },
-            {
-            "p": "emails",
-            "v": "[\"chenbremer@authomize.com\",\"authomize2@gmail.com\"]",
-            "vt": "json"
-            },
-            {
-            "p": "Add",
-            "v": "false",
-            "vt": "bool"
-            }
-        ],
-    "repeat": "",
-    "topic": "",
-    "type": "inject",
-    "wires":
-        [
-            [
-            "508551b16659558d"
-            ]
-        ],
-    "x": 150,
-    "y": 240,
-    "z": "314ccafea268aded"
-    },
-    {
     "id": "3fd58154aea1f085",
     "name": "Azure users to id",
     "type": "azure_users_to_id",
@@ -3139,7 +3119,7 @@
             "28b65bfdf7fbbd20"
             ]
         ],
-    "x": 1070,
+    "x": 1090,
     "y": 240,
     "z": "314ccafea268aded"
     },
@@ -3150,10 +3130,10 @@
     "wires":
         [
             [
-            "abd6b32da15e2561"
+            "3fd58154aea1f085"
             ]
         ],
-    "x": 350,
+    "x": 630,
     "y": 240,
     "z": "314ccafea268aded"
     },
@@ -3182,11 +3162,12 @@
     "wires":
         [
             [
-            "508551b16659558d"
+            "abd6b32da15e2561",
+            "1c935518de5c7c28"
             ]
         ],
-    "x": 115,
-    "y": 160,
+    "x": 105,
+    "y": 240,
     "z": "314ccafea268aded"
     },
     {
@@ -3210,10 +3191,10 @@
     "wires":
         [
             [
-            "adb294e6fc7c3a54"
+            "6a8494b8200568a8"
             ],
             [
-            "a7081e12296ecd57"
+            "3a37411ac39269b6"
             ]
         ],
     "x": 1540,
@@ -3229,8 +3210,8 @@
             [
             ]
         ],
-    "x": 1770,
-    "y": 200,
+    "x": 2070,
+    "y": 180,
     "z": "314ccafea268aded"
     },
     {
@@ -3242,60 +3223,13 @@
             [
             ]
         ],
-    "x": 1790,
-    "y": 260,
-    "z": "314ccafea268aded"
-    },
-    {
-    "crontab": "",
-    "id": "95d4ad04b9b8537b",
-    "name": "Start",
-    "once": false,
-    "onceDelay": 0.1,
-    "payload": "{\"data\":{\"id\":\"114413776939\",\"createdAt\":\"2023-06-03T19:05:36.029000+00:00\",\"updatedAt\":\"2023-06-05T07:09:19.248000+00:00\",\"entities\":[{\"id\":\"735e03175f1b46a858f0d44ff9387c307473571e\",\"name\":\"Idan Rufeisen\",\"object\":\"account\",\"email\":\"cyberabota@gmail.com\",\"originId\":\"09f1ed70-e982-4e0c-852a-79e09e6cb0ef\"}],\"apps\":[],\"category\":\"Custom\",\"tactics\":[],\"compliance\":[],\"techniques\":[],\"status\":\"Open\",\"severity\":\"Low\",\"policyId\":\"111686265494\",\"policy\":{\"id\":\"111686265494\",\"name\":\"azure isadmin5 false\",\"templateId\":\"111377685423\"},\"assigneeId\":null,\"recommendation\":\"\",\"description\":\"\",\"isResolved\":false,\"url\":\"https://authomizeenv.authomize.com/incidents/114413776939\"}}",
-    "payloadType": "json",
-    "props":
-        [
-            {
-            "p": "config",
-            "v": "config.Azure",
-            "vt": "global"
-            },
-            {
-            "p": "group_name",
-            "v": "aaaa23",
-            "vt": "str"
-            },
-            {
-            "p": "group_desc",
-            "v": "created automatically by Authomize",
-            "vt": "str"
-            },
-            {
-            "p": "Add",
-            "v": "false",
-            "vt": "bool"
-            },
-            {
-            "p": "payload"
-            }
-        ],
-    "repeat": "",
-    "topic": "",
-    "type": "inject",
-    "wires":
-        [
-            [
-            "508551b16659558d"
-            ]
-        ],
-    "x": 150,
+    "x": 2170,
     "y": 300,
     "z": "314ccafea268aded"
     },
     {
     "finalize": "",
-    "func": "const group_name = msg.payload.data.policy.name;\nconst splitValues = group_name.split(' ');\nmsg.emails = [msg.payload.data.entities[0].email]\n\nif (splitValues.length >= 3) {\n    const group_name = splitValues[1];\n    msg.group_name = group_name;\n\n    const is_admin = splitValues[2] === \"false\" ? false : Boolean(splitValues[2]);\n    msg.is_admin = is_admin;\n    \n\n} else {\n    node.error('The groupName value does not contain at least three values.');\n}\n\nreturn msg;",
+    "func": "const group_name = msg.payload.data.policy.name;\nconst splitValues = group_name.split(' ');\nmsg.emails = [msg.payload.data.entities[0].email];\nmsg.config = global.get(\"config\");\n\nif (splitValues.length >= 3) {\n    const group_name = splitValues[1];\n    msg.group_name = group_name;\n\n    const is_admin = splitValues[2] === \"false\" ? false : Boolean(splitValues[2]);\n    msg.is_admin = is_admin;\n    \n\n} else {\n    node.error('The groupName value does not contain at least three values.');\n}\n\nreturn msg;",
     "id": "abd6b32da15e2561",
     "initialize": "",
     "libs":
@@ -3308,11 +3242,101 @@
     "wires":
         [
             [
-            "3fd58154aea1f085"
+            "508551b16659558d"
             ]
         ],
-    "x": 610,
+    "x": 340,
     "y": 240,
+    "z": "314ccafea268aded"
+    },
+    {
+    "id": "3a37411ac39269b6",
+    "name": "",
+    "type": "azure_is_user_in_group",
+    "wires":
+        [
+            [
+            "a7081e12296ecd57"
+            ],
+            [
+            "65d193eca4b6b970"
+            ]
+        ],
+    "x": 1790,
+    "y": 300,
+    "z": "314ccafea268aded"
+    },
+    {
+    "active": true,
+    "complete": "payload",
+    "console": false,
+    "id": "65d193eca4b6b970",
+    "name": "User is not in group",
+    "statusType": "auto",
+    "statusVal": "",
+    "targetType": "msg",
+    "tosidebar": true,
+    "tostatus": false,
+    "type": "debug",
+    "wires":
+        [
+        ],
+    "x": 2070,
+    "y": 380,
+    "z": "314ccafea268aded"
+    },
+    {
+    "id": "6a8494b8200568a8",
+    "name": "",
+    "type": "azure_is_user_in_group",
+    "wires":
+        [
+            [
+            "787c35fc387ccce9"
+            ],
+            [
+            "adb294e6fc7c3a54"
+            ]
+        ],
+    "x": 1810,
+    "y": 160,
+    "z": "314ccafea268aded"
+    },
+    {
+    "active": true,
+    "complete": "payload",
+    "console": false,
+    "id": "787c35fc387ccce9",
+    "name": "User is already in group",
+    "statusType": "auto",
+    "statusVal": "",
+    "targetType": "msg",
+    "tosidebar": true,
+    "tostatus": false,
+    "type": "debug",
+    "wires":
+        [
+        ],
+    "x": 2070,
+    "y": 100,
+    "z": "314ccafea268aded"
+    },
+    {
+    "active": true,
+    "complete": "false",
+    "console": false,
+    "id": "1c935518de5c7c28",
+    "name": "debug 3",
+    "statusType": "auto",
+    "statusVal": "",
+    "tosidebar": true,
+    "tostatus": false,
+    "type": "debug",
+    "wires":
+        [
+        ],
+    "x": 300,
+    "y": 140,
     "z": "314ccafea268aded"
     }
 ]
