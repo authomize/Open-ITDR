@@ -41,9 +41,9 @@ COPY settings.js /data/settings.js
 COPY flows.json /data/flows.json
 COPY NewAWSPolicy.json /data/NewAWSPolicy.json
 
-COPY Open-ITDR-Azure-nodes /usr/src/node-red/Open-ITDR-Azure-nodes
-COPY Open-ITDR-Okta-nodes /usr/src/node-red/Open-ITDR-Okta-nodes
-COPY Open-ITDR-utils-nodes /usr/src/node-red/Open-ITDR-utils-nodes
+COPY Node-Red-Azure-nodes /usr/src/node-red/Node-Red-Azure-nodes
+COPY Node-Red-Okta-nodes /usr/src/node-red/Node-Red-Okta-nodes
+COPY Node-Red-utils-nodes /usr/src/node-red/Node-Red-utils-nodes
 
 RUN chown -R node-red:node-red /data/*
 
@@ -51,9 +51,9 @@ USER root
 RUN chown -R node-red:node-red /usr/src/node-red
 
 USER node-red
-RUN npm i /usr/src/node-red/Open-ITDR-Azure-nodes
-RUN npm i /usr/src/node-red/Open-ITDR-Okta-nodes
-RUN npm i /usr/src/node-red/Open-ITDR-utils-nodes
+RUN npm i /usr/src/node-red/Node-Red-Azure-nodes
+RUN npm i /usr/src/node-red/Node-Red-Okta-nodes
+RUN npm i /usr/src/node-red/Node-Red-utils-nodes
 
 
 # You should add extra nodes via your package.json file but you can also add them here:
