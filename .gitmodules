@@ -1,9 +1,0 @@
-[submodule "Open-ITDR-Workflow/Workflows/Node-Red-utils-nodes"]
-	path = Open-ITDR-Workflow/Workflows/Node-Red-utils-nodes
-	url = https://github.com/authomize/Node-Red-utils-nodes.git
-[submodule "Open-ITDR-Workflow/Workflows/Node-Red-Azure-nodes"]
-	path = Open-ITDR-Workflow/Workflows/Node-Red-Azure-nodes
-	url = https://github.com/authomize/Node-Red-Azure-nodes.git
-[submodule "Open-ITDR-Workflow/Workflows/Node-Red-Okta-nodes"]
-	path = Open-ITDR-Workflow/Workflows/Node-Red-Okta-nodes
-	url = https://github.com/authomize/Node-Red-Okta-nodes.git

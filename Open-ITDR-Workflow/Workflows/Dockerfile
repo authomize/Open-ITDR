@@ -41,20 +41,16 @@ COPY settings.js /data/settings.js
 COPY flows.json /data/flows.json
 COPY NewAWSPolicy.json /data/NewAWSPolicy.json
 
-COPY Node-Red-Azure-nodes /usr/src/node-red/Node-Red-Azure-nodes
-COPY Node-Red-Okta-nodes /usr/src/node-red/Node-Red-Okta-nodes
-COPY Node-Red-utils-nodes /usr/src/node-red/Node-Red-utils-nodes
-
 RUN chown -R node-red:node-red /data/*
 
 USER root
 RUN chown -R node-red:node-red /usr/src/node-red
 
-USER node-red
-RUN npm i /usr/src/node-red/Node-Red-Azure-nodes
-RUN npm i /usr/src/node-red/Node-Red-Okta-nodes
-RUN npm i /usr/src/node-red/Node-Red-utils-nodes
+RUN npm i node-red-utils-nodes
+RUN npm i node-red-okta-nodes
+RUN npm i node-red-azure-nodes
 
+#USER node-red
 
 # You should add extra nodes via your package.json file but you can also add them here:
 #WORKDIR /usr/src/node-red
