@@ -9,7 +9,7 @@ USER root
 RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
 RUN python3 -m ensurepip
 RUN pip3 install --no-cache --upgrade pip setuptools
-
+RUN npm install https
 # setup for files
 RUN mkdir -p /data/process/git
 RUN mkdir -p /data/workingDir
@@ -41,12 +41,17 @@ COPY settings.js /data/settings.js
 COPY flows.json /data/flows.json
 COPY NewAWSPolicy.json /data/NewAWSPolicy.json
 
+#COPY Node-Red-Azure-nodes /usr/src/node-red/Node-Red-Azure-nodes
+#COPY Node-Red-Okta-nodes /usr/src/node-red/Node-Red-Okta-nodes
+
 RUN chown -R node-red:node-red /data/*
 
 USER root
 RUN chown -R node-red:node-red /usr/src/node-red
 
-RUN npm i node-red-utils-nodes
+#RUN npm i /usr/src/node-red/Node-Red-Azure-nodes
+#RUN npm i /usr/src/node-red/Node-Red-Okta-nodes
+
 RUN npm i node-red-okta-nodes
 RUN npm i node-red-azure-nodes
 
