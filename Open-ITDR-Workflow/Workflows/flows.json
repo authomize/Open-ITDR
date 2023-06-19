@@ -2816,25 +2816,13 @@
     "z": "6d8d00a0454e2a65"
     },
     {
-    "id": "fd4c504e58b89675",
-    "name": "Create Okta group ",
-    "type": "create_okta_group",
-    "wires":
-        [
-            [
-            "c3a5e34dbd1538ba"
-            ]
-        ],
-    "x": 630,
-    "y": 220,
-    "z": "2650ec355a712558"
-    },
-    {
     "crontab": "",
     "id": "17101bc89814ae27",
     "name": "Start",
     "once": false,
     "onceDelay": 0.1,
+    "payload": "{}",
+    "payloadType": "json",
     "props":
         [
             {
@@ -2856,6 +2844,9 @@
             "p": "emails",
             "v": "[\"chenbremer@authomize.com\",\"authomize2@gmail.com\"]",
             "vt": "json"
+            },
+            {
+            "p": "payload"
             }
         ],
     "repeat": "",
@@ -2864,75 +2855,11 @@
     "wires":
         [
             [
-            "c319c65c70acca86"
+            "7cab39c9d2a83b59"
             ]
         ],
     "x": 90,
     "y": 200,
-    "z": "2650ec355a712558"
-    },
-    {
-    "id": "2f0f890eb7ce6656",
-    "name": "does group exist",
-    "type": "does_group_exist",
-    "wires":
-        [
-            [
-            "6206905061c2b032"
-            ],
-            [
-            "fd4c504e58b89675"
-            ]
-        ],
-    "x": 420,
-    "y": 200,
-    "z": "2650ec355a712558"
-    },
-    {
-    "id": "6206905061c2b032",
-    "name": "List group",
-    "type": "list_group",
-    "wires":
-        [
-            [
-            "aaf2a939d22506d4"
-            ]
-        ],
-    "x": 600,
-    "y": 180,
-    "z": "2650ec355a712558"
-    },
-    {
-    "id": "680a86211319c3ed",
-    "name": "Any split",
-    "output_field_name": "remove_user",
-    "property": "remove",
-    "type": "any_split",
-    "wires":
-        [
-            [
-            "1911ed2113d37536"
-            ]
-        ],
-    "x": 1000,
-    "y": 80,
-    "z": "2650ec355a712558"
-    },
-    {
-    "id": "aaf2a939d22506d4",
-    "listA_name": "users_id",
-    "listB_name": "okta_group_ids",
-    "name": "Custom diff",
-    "type": "custom_diff",
-    "wires":
-        [
-            [
-            "58bcdec866240952",
-            "680a86211319c3ed"
-            ]
-        ],
-    "x": 830,
-    "y": 180,
     "z": "2650ec355a712558"
     },
     {
@@ -2950,37 +2877,7 @@
     "wires":
         [
         ],
-    "x": 1470,
-    "y": 80,
-    "z": "2650ec355a712558"
-    },
-    {
-    "id": "58bcdec866240952",
-    "name": "Any split",
-    "output_field_name": "create_user",
-    "property": "create",
-    "type": "any_split",
-    "wires":
-        [
-            [
-            "b8af5e081cf4b035"
-            ]
-        ],
-    "x": 1020,
-    "y": 180,
-    "z": "2650ec355a712558"
-    },
-    {
-    "id": "b8af5e081cf4b035",
-    "name": "Add user to group",
-    "type": "add_user_to_group",
-    "wires":
-        [
-            [
-            "8dfa3df9e80dface"
-            ]
-        ],
-    "x": 1230,
+    "x": 1730,
     "y": 200,
     "z": "2650ec355a712558"
     },
@@ -2999,24 +2896,8 @@
     "wires":
         [
         ],
-    "x": 1450,
-    "y": 180,
-    "z": "2650ec355a712558"
-    },
-    {
-    "id": "c3a5e34dbd1538ba",
-    "name": "Any split",
-    "output_field_name": "create_user",
-    "property": "users_id",
-    "type": "any_split",
-    "wires":
-        [
-            [
-            "b8af5e081cf4b035"
-            ]
-        ],
-    "x": 820,
-    "y": 220,
+    "x": 1670,
+    "y": 120,
     "z": "2650ec355a712558"
     },
     {
@@ -3030,10 +2911,10 @@
     "wires":
         [
             [
-            "c319c65c70acca86"
+            "7cab39c9d2a83b59"
             ]
         ],
-    "x": 75,
+    "x": 55,
     "y": 140,
     "z": "2650ec355a712558"
     },
@@ -3044,73 +2925,124 @@
     "wires":
         [
             [
-            "2f0f890eb7ce6656"
+            "ef79fdd04f31fdb8"
             ]
         ],
-    "x": 240,
+    "x": 520,
     "y": 200,
     "z": "2650ec355a712558"
     },
     {
-    "id": "1911ed2113d37536",
-    "name": "Remove user from group",
-    "type": "remove_user_from_group",
+    "id": "03770ab43d63ccba",
+    "name": "Okta - create group",
+    "type": "okta_create_group",
+    "wires":
+        [
+            [
+            "43b983392c8bd69d"
+            ]
+        ],
+    "x": 970,
+    "y": 220,
+    "z": "2650ec355a712558"
+    },
+    {
+    "id": "ef79fdd04f31fdb8",
+    "name": "Okta - Does group exist",
+    "type": "okta_does_group_exist",
+    "wires":
+        [
+            [
+            "43b983392c8bd69d"
+            ],
+            [
+            "03770ab43d63ccba"
+            ]
+        ],
+    "x": 730,
+    "y": 200,
+    "z": "2650ec355a712558"
+    },
+    {
+    "finalize": "",
+    "func": "const group_name = msg.payload.data.policy.name;\nconst splitValues = group_name.split(' ');\nmsg.emails = [msg.payload.data.entities[0].email]\n\nif (splitValues.length >= 3) {\n    const group_name = splitValues[1];\n    msg.group_name = group_name;\n\n    const is_admin = splitValues[2].toLowerCase() === \"false\" ? false : Boolean(splitValues[2]);\n    msg.is_admin = is_admin;\n    \n\n} else {\n    node.error('The groupName value does not contain at least three values.');\n}\n\nreturn msg;",
+    "id": "7cab39c9d2a83b59",
+    "initialize": "",
+    "libs":
+        [
+        ],
+    "name": "set_groupname, isAdmin, emails",
+    "noerr": 0,
+    "outputs": 1,
+    "type": "function",
+    "wires":
+        [
+            [
+            "c319c65c70acca86"
+            ]
+        ],
+    "x": 290,
+    "y": 200,
+    "z": "2650ec355a712558"
+    },
+    {
+    "checkall": "true",
+    "id": "43b983392c8bd69d",
+    "name": "Add or remove",
+    "outputs": 2,
+    "property": "is_admin",
+    "propertyType": "msg",
+    "repair": false,
+    "rules":
+        [
+            {
+            "t": "true"
+            },
+            {
+            "t": "false"
+            }
+        ],
+    "type": "switch",
+    "wires":
+        [
+            [
+            "c8fbe9616d42cce4"
+            ],
+            [
+            "bf7fa693aae76ccc"
+            ]
+        ],
+    "x": 1200,
+    "y": 180,
+    "z": "2650ec355a712558"
+    },
+    {
+    "id": "bf7fa693aae76ccc",
+    "name": "Okta - Remove user from group",
+    "type": "okta_remove_user_from_group",
     "wires":
         [
             [
             "d1a74f217e0b6a73"
             ]
         ],
-    "x": 1230,
-    "y": 80,
+    "x": 1470,
+    "y": 200,
     "z": "2650ec355a712558"
     },
     {
-    "crontab": "",
-    "id": "7145c6a1e93b099a",
-    "name": "Start",
-    "once": false,
-    "onceDelay": 0.1,
-    "props":
-        [
-            {
-            "p": "config",
-            "v": "config.Azure",
-            "vt": "global"
-            },
-            {
-            "p": "group_name",
-            "v": "aaaa24",
-            "vt": "str"
-            },
-            {
-            "p": "group_desc",
-            "v": "dshfkjsdhf",
-            "vt": "str"
-            },
-            {
-            "p": "emails",
-            "v": "[\"chenbremer@authomize.com\",\"authomize2@gmail.com\"]",
-            "vt": "json"
-            },
-            {
-            "p": "Add",
-            "v": "false",
-            "vt": "bool"
-            }
-        ],
-    "repeat": "",
-    "topic": "",
-    "type": "inject",
+    "id": "c8fbe9616d42cce4",
+    "name": "Okta - Add user to group",
+    "type": "okta_add_user_to_group",
     "wires":
         [
             [
-            "508551b16659558d"
+            "8dfa3df9e80dface"
             ]
         ],
-    "x": 150,
-    "y": 240,
-    "z": "314ccafea268aded"
+    "x": 1450,
+    "y": 160,
+    "z": "2650ec355a712558"
     },
     {
     "id": "3fd58154aea1f085",
@@ -3252,7 +3184,7 @@
     "name": "Start",
     "once": false,
     "onceDelay": 0.1,
-    "payload": "{\"data\":{\"id\":\"114413776939\",\"createdAt\":\"2023-06-03T19:05:36.029000+00:00\",\"updatedAt\":\"2023-06-05T07:09:19.248000+00:00\",\"entities\":[{\"id\":\"735e03175f1b46a858f0d44ff9387c307473571e\",\"name\":\"Idan Rufeisen\",\"object\":\"account\",\"email\":\"cyberabota@gmail.com\",\"originId\":\"09f1ed70-e982-4e0c-852a-79e09e6cb0ef\"}],\"apps\":[],\"category\":\"Custom\",\"tactics\":[],\"compliance\":[],\"techniques\":[],\"status\":\"Open\",\"severity\":\"Low\",\"policyId\":\"111686265494\",\"policy\":{\"id\":\"111686265494\",\"name\":\"azure isadmin5 false\",\"templateId\":\"111377685423\"},\"assigneeId\":null,\"recommendation\":\"\",\"description\":\"\",\"isResolved\":false,\"url\":\"https://authomizeenv.authomize.com/incidents/114413776939\"}}",
+    "payload": "{}",
     "payloadType": "json",
     "props":
         [
@@ -3289,13 +3221,13 @@
             "508551b16659558d"
             ]
         ],
-    "x": 150,
-    "y": 300,
+    "x": 130,
+    "y": 240,
     "z": "314ccafea268aded"
     },
     {
     "finalize": "",
-    "func": "const group_name = msg.payload.data.policy.name;\nconst splitValues = group_name.split(' ');\nmsg.emails = [msg.payload.data.entities[0].email]\n\nif (splitValues.length >= 3) {\n    const group_name = splitValues[1];\n    msg.group_name = group_name;\n\n    const is_admin = splitValues[2] === \"false\" ? false : Boolean(splitValues[2]);\n    msg.is_admin = is_admin;\n    \n\n} else {\n    node.error('The groupName value does not contain at least three values.');\n}\n\nreturn msg;",
+    "func": "const group_name = msg.payload.data.policy.name;\nconst splitValues = group_name.split(' ');\nmsg.emails = [msg.payload.data.entities[0].email]\n\nif (splitValues.length >= 3) {\n    const group_name = splitValues[1];\n    msg.group_name = group_name;\n\n    const is_admin = splitValues[2].toLowerCase() === \"false\" ? false : Boolean(splitValues[2]);\n    msg.is_admin = is_admin;\n    \n\n} else {\n    node.error('The groupName value does not contain at least three values.');\n}\n\nreturn msg;",
     "id": "abd6b32da15e2561",
     "initialize": "",
     "libs":
