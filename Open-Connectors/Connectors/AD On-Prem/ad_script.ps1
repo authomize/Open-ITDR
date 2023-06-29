@@ -52,7 +52,7 @@ $identitiesEndpoint = "/identities"
 $groupsEndpoint = "/access/grouping"
 $accountAssociationEndpoint = "/association/accounts"
 $groupingAssociationEndpoint = "/association/groupings"
-$deleteEndpoint = "/$appId/data?=modifiedBefore="
+$deleteEndpoint = "/$appId/data?modifiedBefore="
 $headers = @{
     "Authorization" = $authtoken
 }
