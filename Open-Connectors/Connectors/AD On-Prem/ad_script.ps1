@@ -10,7 +10,7 @@ $excludedOU = ".*OU=exampleOU.*" # REGEX match - The .* in this variable serves 
 $baseDirectory = $PSScriptRoot # Get the base directory of the script
 $logFilePath = "$baseDirectory\ad_script.log" # Log file
 
- # Decrypt Token function
+# Decrypt Token function
  function Convert-SecureStringToPlainText {
     param($secureString)
 
@@ -305,12 +305,13 @@ PostDataInChunks $groupsUrl $groupsJsonData $authToken $logFilePath
 PostDataInChunks $accountAssociationUrl $userGroupAssociationsJsonData $authToken $logFilePath
 PostDataInChunks $groupingAssociationUrl $groupGroupAssociationsJsonData $authToken $logFilePath
 
-#save first POST accepted timestamp
+#save and format first POST accepted timestamp
 $firstposttimestamp = $timestamps[0]
+$date = Get-Date $firstposttimestamp
+$formattedDate = $date.ToString("yyyy-MM-ddTHH:mm:ss.ffffff")
 
 # Delete data older than the first POST
-$Response = Invoke-RestMethod -Method Delete -Uri $apiBase$deleteEndpoint$firstposttimestamp -ContentType "application/json" -Headers $headers
+$Response = Invoke-RestMethod -Method Delete -Uri $apiBase$deleteEndpoint$formattedDate -ContentType "application/json" -Headers $headers
 
 # Write response to log file
-Add-Content -Path $logFilePath -Value ("`n" + (Get-Date -Format "yyyy-MM-dd HH:mm:ss") + " - Delete data for $apiBase$deleteEndpoint$firstposttimestamp Response: $($Response | ConvertTo-Json -Compress)") 
- 
+Add-Content -Path $logFilePath -Value ("`n" + (Get-Date -Format "yyyy-MM-dd HH:mm:ss") + " - Delete data for $apiBase$deleteEndpoint$formattedDate Response: $($Response | ConvertTo-Json -Compress)")
