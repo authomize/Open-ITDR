@@ -12,7 +12,7 @@ def heart_beat(number_of_minutes):
 
 def setup_timer(number_of_minutes):
     if number_of_minutes < 5:
-        logging.error("NumberOfMinutes should be at least 5")
+        logging.error("Number of minutes should be at least 5")
         return False
     
     # Task scheduling
