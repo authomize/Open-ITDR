@@ -10,7 +10,7 @@
     - ```DateFileCFG = processdate.cfg```
 4. Copy ```Azure-Sentinel\Solutions\Authomize\Data Connectors``` to a working directory ```<YourLocalWorkingDirectory>\Authomize\Data Connectors\```
 5. Update the ```config.cfg``` file within the ```<YourLocalWorkingDirectory>\Authomize\Data Connectors\``` with the data you collected from points 1 and 2 above and save the file.
-6. Create your your Ubuntu VM with Dokcer Engine
+6. Create your your Ubuntu VM with Docker Engine
     
 ## Deploy an Ubuntu VM with Docker Engine
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fapplication-workloads%2Fdocker%2Fdocker-simple-on-ubuntu%2Fazuredeploy.json" data-linktype="external"><img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true" alt="Deploy To Azure" data-linktype="external"></a>
