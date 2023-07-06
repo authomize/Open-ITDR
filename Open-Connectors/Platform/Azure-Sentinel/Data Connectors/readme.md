@@ -21,7 +21,7 @@ Following are the basic setup instructions to start the container:
 
 7. Copy the ```<Data Connectors>``` directory to your Ubuntu VM with Docker Engine
 8. Go to the ```<workingdirectory>\Data Connectors\``` directory you just copied to your Ubuntu VM with Docker Engine.
-9. By default the scheduler will run every 2 hours looking for incidents. If you want to change that value then open the file authomizescheduler.py find the variable at the top of the file called ```NumberOfMinutes``` and change from ```120```. This default can be left as is unless you have a very busy environment. Do not go below ```30``` minutes.
+9. By default the scheduler will run every 2 hours looking for incidents. If you want to change that value then open the file ```config.cfg```, find the variable at the bottom of the file called ```number_of_minutes``` and change from ```120```. This default can be left as is unless you have a very busy environment. Do not go below ```5``` minutes else you will see an error in your ```scheduler.log``` and the task will not process.
     - ***NOTE:*** When the image starts it will initiate contact with your tenant and collect all currently open events immediatley. Once complete it will check for new events every 120 minutes.
                   Also be aware that by default a log file is created in the running directory called ```scheduler.log``` , an example of the log contents follows:
       ```
