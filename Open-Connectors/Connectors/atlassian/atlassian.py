@@ -326,18 +326,14 @@ if __name__ == '__main__':
         post_authomize_data(authomize_privileges_url, authomize_permissions)
         post_authomize_data(authomize_access_permissions_url, authomize_access_permissions)
         
-        # Assuming accepted_timestamps is a list of timestamp strings
+        # Take first timestamp from list
         timestamp = accepted_timestamps[0]
-        dt = datetime.fromisoformat(timestamp)
         
-        # Subtract one second
-        dt_minus_one_second = dt - timedelta(seconds=1)
-        
-        # Update the first element of the list
-        timestamp = dt_minus_one_second.isoformat()
+        # remove time zone from timestamp
+        timestamp = timestamp[:-6]
         
         # Send the DELETE request using the first user's timestamp
-        delete_url = f'https://api.authomize.com/v2/apps/{AUTHOMIZE_ATLASSIAN_CONN_APP_ID}/data?=modifiedBefore={timestamp}'
+        delete_url = f'https://api.authomize.com/v2/apps/{AUTHOMIZE_ATLASSIAN_CONN_APP_ID}/data?modifiedBefore={timestamp}'
         delete_response = requests.delete(delete_url, headers=authomize_headers)
         logging.info("Authomize Delete Response for: %s: %s", delete_url, delete_response.text)
     logging.info("Starting atlassian.py execution.")
