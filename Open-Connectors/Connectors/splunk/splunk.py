@@ -1,6 +1,6 @@
 import requests
 import json
-from datetime import datetime #, timedelta
+from datetime import datetime
 import logging
 import os
 from dotenv import load_dotenv
@@ -211,15 +211,11 @@ post_authomize_data(permission_url, permission_dicts)
 
 # extract first Accepted_timestamps of a list of timestamp strings
 timestamp = accepted_timestamps[0]
-#dt = datetime.fromisoformat(timestamp)
 
-# Subtract one second
-#dt_minus_one_second = dt - timedelta(seconds=1)
-
-# Update the first element of the list
-#timestamp = dt_minus_one_second.isoformat()
+#remove time zone from timestamp
+timestamp = timestamp[:-6]
 
 # Send the DELETE request using the first user's timestamp
-delete_url = f'https://api.authomize.com/v2/apps/{appId}/data?=modifiedBefore={timestamp}'
+delete_url = f'https://api.authomize.com/v2/apps/{appId}/data?modifiedBefore={timestamp}'
 delete_response = requests.delete(delete_url, headers=authomize_headers)
 logging.info("Authomize Delete Response for: %s: %s", delete_url, delete_response.text)
