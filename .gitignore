@@ -2,4 +2,5 @@
 *.log
 .env
 /Open-Connectors/Connectors/splunk/*.json
+/Open-Connectors/Connectors/datadog/*.json
 /Open-Connectors/Connectors/Authomize_Docker_Image/docker-compose.dev.yml
