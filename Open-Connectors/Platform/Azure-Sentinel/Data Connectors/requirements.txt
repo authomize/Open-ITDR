@@ -92,7 +92,7 @@ stack-data==0.6.1
 tenacity==8.1.0
 terminado==0.17.0
 tinycss2==1.2.1
-tornado==6.3.2
+tornado==6.3.3
 traitlets==5.5.0
 typeguard==2.13.3
 typing_extensions==4.2.0
