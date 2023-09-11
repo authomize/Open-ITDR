@@ -299,8 +299,8 @@ $groupGroupAssociationsjson = $groupGroupAssociationsJsonData | ConvertTo-Json
 Set-Content -Path "$baseDirectory\groupGroupAssociations.json" -Value $groupGroupAssociationsjson
 
 # POST data to the API endpoints in chunks 
-$timestamps = PostDataInChunks $accountsUsersUrl $accountsJsonData $authToken $logFilePath
-PostDataInChunks $identitiesUrl $identitiesJsonData $authToken $logFilePath
+$timestamps = PostDataInChunks $identitiesUrl $identitiesJsonData $authToken $logFilePath
+PostDataInChunks $accountsUsersUrl $accountsJsonData $authToken $logFilePath
 PostDataInChunks $groupsUrl $groupsJsonData $authToken $logFilePath
 PostDataInChunks $accountAssociationUrl $userGroupAssociationsJsonData $authToken $logFilePath
 PostDataInChunks $groupingAssociationUrl $groupGroupAssociationsJsonData $authToken $logFilePath
