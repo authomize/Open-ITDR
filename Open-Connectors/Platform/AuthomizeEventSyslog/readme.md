@@ -1,3 +1,4 @@
+## Install and Configuration Instructions for Quick Deployment of Script - Syslog-NG config - Syslog Splunk Config
 ## Instructions for Quick Deployment
 1. Get an Authomize Token from your tenant
      - ```authomizeToken``` - this is the Token generated in your Authomize tenant. Go to the configurations page, click API Tokens and select a Platform Token. Insert that token into the ```config.cfg``` file.
