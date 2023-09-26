@@ -9,9 +9,10 @@ $excludeOUs = $true # Set this variable to $true if you want to exclude a specif
 $excludedOU = ".*OU=exampleOU.*" # REGEX match - The .* in this variable serves as wildcards, allowing any characters to appear before or after the OU=TST,OU=Tier 2 pattern. Use the regex | to list multiple OUs. Irrelevant if $excludeOUs = $false. 
 $baseDirectory = $PSScriptRoot # Get the base directory of the script
 $logFilePath = "$baseDirectory\ad_script.log" # Log file
+$VerbosePreference = 'SilentlyContinue' # 'SilentlyContinue' is Default. 'Continue' Enables verbose terminal output
 
 # Decrypt Token function
- function Convert-SecureStringToPlainText {
+function Convert-SecureStringToPlainText {
     param($secureString)
 
     $BSTR = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($secureString)
@@ -67,7 +68,7 @@ $newContent = "#Log File"
 Set-Content -Path $logFilePath -Value $newContent
 
 # Get all AD users
-$adUsers = Get-ADUser -Filter {objectClass -eq 'user'} -SearchBase $ou -Properties ObjectGUID, Name, Mail, Title, GivenName, Surname, Enabled, Description, Manager, LastLogonDate, City, Country, Department, EmployeeNumber
+$adUsers = Get-ADUser -Filter {objectClass -eq 'user'} -SearchBase $ou -Properties ObjectGUID, DistinguishedName, Name, Mail, Title, GivenName, Surname, Enabled, Description, Manager, LastLogonDate, City, Country, Department, EmployeeNumber
 
 # Filter out excluded OUs if $excludeOUs is set to $true
 if ($excludeOUs) {
@@ -75,7 +76,7 @@ if ($excludeOUs) {
 }
 
 # Get all AD groups
-$adGroups = Get-ADGroup -Filter * -SearchBase $ou -Properties ObjectGUID, Name, GroupCategory, ManagedBy
+$adGroups = Get-ADGroup -Filter * -SearchBase $ou -Properties ObjectGUID, DistinguishedName, Name, GroupCategory, ManagedBy
 
 # Filter out excluded OUs if $excludeOUs is set to $true
 if ($excludeOUs) {
@@ -144,10 +145,14 @@ foreach ($adUser in $adUsers) {
 
     $accountsUserData += $accountsUserObject
     $identitiesUserData += $identitiesUserObject
- 
 
     # Get the groups the current user is a member of
-    $userGroups = Get-ADPrincipalGroupMembership -Identity $adUser | Where-Object { $_.DistinguishedName -like "*$ou" }
+    try {
+        $userGroups = Get-ADPrincipalGroupMembership -Identity $adUser.DistinguishedName | Where-Object { $_.DistinguishedName -like "*$ou" }
+    } catch {
+        Add-Content -Path $logFilePath -Value "Error encountered on Get-ADPrincipalGroupMembership for User: $adUser.DistinguishedName Error: $_"
+    }
+    
 
     # Filter out excluded OUs if $excludeOUs is set to $true
     if ($excludeOUs) {
@@ -194,7 +199,12 @@ foreach ($adGroup in $adGroups) {
     $groupsData += $groupObject
 
     # Get the groups the current group is a member of
-    $groupMemberships = Get-ADPrincipalGroupMembership -Identity $adGroup | Where-Object { $_.DistinguishedName -like "*$ou" } | Where-Object { $_.ObjectClass -eq 'Group' }
+    try {
+        $groupMemberships = Get-ADPrincipalGroupMembership -Identity $adGroup.DistinguishedName | Where-Object { $_.DistinguishedName -like "*$ou" } | Where-Object { $_.ObjectClass -eq 'Group' }
+    } catch {
+        Add-Content -Path $logFilePath -Value "Error encountered on Get-ADPrincipalGroupMembership for Group: $adGroup.DistinguishedName Error: $_"
+    }
+    
 
     # Filter out excluded OUs if $excludeOUs is set to $true
     if ($excludeOUs) {
@@ -306,9 +316,15 @@ PostDataInChunks $accountAssociationUrl $userGroupAssociationsJsonData $authToke
 PostDataInChunks $groupingAssociationUrl $groupGroupAssociationsJsonData $authToken $logFilePath
 
 #save and format first POST accepted timestamp
-$firstposttimestamp = $timestamps[0]
-$date = Get-Date $firstposttimestamp
-$formattedDate = $date.ToString("yyyy-MM-ddTHH:mm:ss.ffffff")
+
+try {
+    $firstposttimestamp = $timestamps[0]
+    $date = Get-Date $firstposttimestamp
+    $formattedDate = $date.ToString("yyyy-MM-ddTHH:mm:ss.ffffff")
+} catch {
+    Write-Error "Failed to retrieve the first response timestamp. Likely an Empty Data POST. Error: $_"
+    Add-Content -Path $logFilePath -Value "`nFailed to retrieve the first response timestamp. Likely an Empty Data POST. Error: $_"
+}
 
 # Delete data older than the first POST
 $Response = Invoke-RestMethod -Method Delete -Uri $apiBase$deleteEndpoint$formattedDate -ContentType "application/json" -Headers $headers

@@ -1,4 +1,4 @@
-#### Authomize Active Directory Connector (Release - .9.3)
+#### Authomize Active Directory Connector (Release - .9.4)
 
 ### Getting Started
 
