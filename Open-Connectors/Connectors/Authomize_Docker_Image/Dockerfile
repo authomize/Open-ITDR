@@ -23,9 +23,10 @@ COPY requirements.txt ./
 
 # Install gcc, python3-dev, and the required packages from requirements.txt
 RUN apt-get update && \
-    apt-get install -y gcc python3-dev && \
+    apt-get install -y gcc g++ python3-dev && \
+    pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt && \
-    apt-get remove -y gcc python3-dev && \
+    apt-get remove -y gcc g++ python3-dev && \
     apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
