@@ -13,7 +13,7 @@
 
 ## Required Permissions and Actions: 
 - Active Directory permissions: The script needs permissions to query WinRM [WMI] remote interface on each server. This usually is an administrative account on the Server.
-- Filesystem permissions: The script writes logs to a file ($logFilePath). The account running the script should have permission to create and write to the specified log file.
+- Filesystem permissions: The script writes logs to a file and creates a subdirectory. The account running the script should have permission to create and write to the specified powershell script location.
 - PowerShell execution policy: To run the script, the PowerShell execution policy on the machine should be configured to allow running scripts. 
 - The easiest way to enable remote execution: On the remote server start a powershell script using the run as administrator command. From within the power shell script run the cmdlet `Enable-PSRemoting -Force` . See [ENable-PSRemoting](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/enable-psremoting?view=powershell-7.3) for more details.
 
