@@ -6,3 +6,4 @@ They are on there way, soon we will have extra items here for customers and peop
 ----delete: Delete Connector data <br>
 ----json_to_dataframe: turn JSON into a Dataframe  <br>
 -remove-whitespace: Easily remove whitespace from Excel sheets <br>
+-SvrGroupUser-Util: Collect Administrator group and user information from servers
