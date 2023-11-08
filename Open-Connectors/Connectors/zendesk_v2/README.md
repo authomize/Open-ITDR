@@ -18,6 +18,7 @@ authomize_api_key = 'atm.........'   <br>
 - This script does NOT utilize the Zendesk Python client.
 - For ZenDesk specific API questions refer to the ZenDesk API documentation here: https://developer.zendesk.com/api-reference
 - For Authomize specific API questions refer to the Authomize API documentation here: https://api.authomize.com/documentation
+- See the Zendesk API Token for more information https://developer.zendesk.com/api-reference/introduction/security-and-auth/#api-token
 
 ## Data Collected
 - Users
