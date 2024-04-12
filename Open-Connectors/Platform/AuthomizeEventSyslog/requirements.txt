@@ -27,7 +27,7 @@ executing==1.2.0
 fastjsonschema==2.16.2
 Flask==2.3.2
 Flask-Session==0.4.0
-idna==3.3
+idna==3.7
 ipykernel==6.17.1
 ipython==8.10.0
 ipython-genutils==0.2.0
