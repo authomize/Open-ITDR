@@ -204,28 +204,28 @@ def post_authomize_data(url, data):
             logging.error("Data causing the issue: %s", batch)  # Add this line to log the problematic data
 
 # Post user_dicts and write to file for troubleshooting
-with open('/app/zendesk_v2/accounts.json', 'w') as file:
-    file.write(json.dumps(account_data))
+# with open('/app/zendesk_v2/accounts.json', 'w') as file:
+#     file.write(json.dumps(account_data))
 post_authomize_data(accounts_url, account_data)
 
 # Post role_dicts and write to file for troubleshooting
-with open('/app/zendesk_v2/groups.json', 'w') as file:
-    file.write(json.dumps(groups_data))
+# with open('/app/zendesk_v2/groups.json', 'w') as file:
+#    file.write(json.dumps(groups_data))
 post_authomize_data(grouping_url, groups_data)
 
 # Post use to role and write to file for troubleshooting
-with open('/app/zendesk_v2/account_to_group.json', 'w') as file:
-    file.write(json.dumps(account_to_group_data))
+# with open('/app/zendesk_v2/account_to_group.json', 'w') as file:
+#    file.write(json.dumps(account_to_group_data))
 post_authomize_data(accounts_to_groups_url, account_to_group_data)
 
 # Post privilege_dict and write to file for troubleshooting
-with open('/app/zendesk_v2/privileges.json', 'w') as file:
-    file.write(json.dumps(privileges_data))
+# with open('/app/zendesk_v2/privileges.json', 'w') as file:
+#    file.write(json.dumps(privileges_data))
 post_authomize_data(privileges_url, privileges_data)
 
 # Post role_association_dict and write to file for troubleshooting
-with open('/app/zendesk_v2/permissions.json', 'w') as file:
-    file.write(json.dumps(permissions_data))
+# with open('/app/zendesk_v2/permissions.json', 'w') as file:
+#    file.write(json.dumps(permissions_data))
 post_authomize_data(permission_url, permissions_data)
 
 # extract first Accepted_timestamps of a list of timestamp strings
